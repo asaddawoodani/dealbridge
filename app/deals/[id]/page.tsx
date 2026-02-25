@@ -237,7 +237,7 @@ export default async function DealDetailPage({
               {/* Sidebar */}
               <aside className="space-y-5 lg:sticky lg:top-24 h-fit">
                 {/* Invest CTA */}
-                {userRole === "investor" || userRole === null ? (
+                {userRole !== "operator" ? (
                   <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5">
                     <InvestButton
                       dealId={deal.id}
