@@ -85,6 +85,7 @@ export async function POST(req: Request) {
         operator_id: isOperator ? user.id : null,
         timeline: body.timeline ?? null,
         tags: body.tags ?? null,
+        target_raise: body.target_raise ? parseFloat(body.target_raise) : null,
       })
       .select("*")
       .single();

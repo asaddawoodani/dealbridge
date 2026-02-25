@@ -50,6 +50,7 @@ export default function AdminDealsPage() {
     category: "real-estate",
     min_check: "",
     location: "",
+    target_raise: "",
     status: "active",
   });
 
@@ -120,6 +121,7 @@ export default function AdminDealsPage() {
         category: form.category || null,
         min_check: form.min_check.trim() || null,
         location: form.location.trim() || null,
+        target_raise: parseFloat(form.target_raise) || null,
         status: form.status,
       }),
     });
@@ -139,6 +141,7 @@ export default function AdminDealsPage() {
       description: "",
       min_check: "",
       location: "",
+      target_raise: "",
       status: "active",
     }));
     await loadDeals();
@@ -326,6 +329,16 @@ export default function AdminDealsPage() {
                 onChange={(e) => setForm((p) => ({ ...p, location: e.target.value }))}
                 className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
                 placeholder='e.g., "Rensselaer, NY"'
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-[--text-secondary]">Target Raise ($)</label>
+              <input
+                value={form.target_raise}
+                onChange={(e) => setForm((p) => ({ ...p, target_raise: e.target.value }))}
+                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                placeholder='e.g., "500000"'
               />
             </div>
 

@@ -107,7 +107,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Quick Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <Link
             href="/deals"
             className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
@@ -118,6 +118,20 @@ export default function DashboardPage() {
             <div>
               <div className="font-semibold text-sm">Browse Deals</div>
               <div className="text-xs text-[--text-muted]">Find opportunities</div>
+            </div>
+            <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
+          </Link>
+
+          <Link
+            href="/portfolio"
+            className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
+          >
+            <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+              <Wallet className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="font-semibold text-sm">My Portfolio</div>
+              <div className="text-xs text-[--text-muted]">Track investments</div>
             </div>
             <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
           </Link>

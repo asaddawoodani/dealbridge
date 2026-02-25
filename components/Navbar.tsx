@@ -39,6 +39,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
       { href: "/admin/analytics", label: "Analytics" },
       { href: "/admin/verifications", label: "Verifications" },
       { href: "/admin/compliance", label: "Compliance" },
+      { href: "/admin/investments", label: "Investments" },
       { href: "/deals", label: "Deals" },
     ];
   }
@@ -60,6 +61,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
   const links: NavLink[] = [
     { href: "/deals", label: "Deals" },
     { href: "/dashboard", label: "Dashboard" },
+    { href: "/portfolio", label: "Portfolio" },
   ];
   if (needsVerify) {
     links.push({ href: "/verify", label: "Verify", highlight: true });

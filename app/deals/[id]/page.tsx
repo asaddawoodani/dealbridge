@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import RequestIntro from "./RequestIntro";
 import DealDocuments from "./DealDocuments";
 import KycBanner from "@/components/KycBanner";
+import FundingProgress from "@/components/FundingProgress";
+import InvestButton from "@/components/InvestButton";
 import { parseCheckToNumber } from "@/lib/email";
 import {
   ArrowLeft,
@@ -26,6 +28,8 @@ type Deal = {
   min_check: string | null;
   location: string | null;
   status: string | null;
+  target_raise: number | null;
+  total_committed: number;
 };
 
 function fmtDateTime(iso: string) {
@@ -52,14 +56,17 @@ function prettyCategory(v: string | null | undefined) {
   return v.replaceAll("-", " ");
 }
 
-async function getDeal(id: string): Promise<Deal | null> {
+async function getDeal(id: string): Promise<{ deal: Deal | null; investorCount: number }> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const res = await fetch(`${base}/api/deals/${id}`, { cache: "no-store" });
-  if (!res.ok) return null;
+  if (!res.ok) return { deal: null, investorCount: 0 };
 
   const json = await res.json().catch(() => null);
-  return (json?.deal ?? null) as Deal | null;
+  return {
+    deal: (json?.deal ?? null) as Deal | null,
+    investorCount: (json?.investor_count ?? 0) as number,
+  };
 }
 
 export default async function DealDetailPage({
@@ -69,7 +76,7 @@ export default async function DealDetailPage({
 }) {
   const { id } = await Promise.resolve(params);
 
-  const deal = await getDeal(id);
+  const { deal, investorCount } = await getDeal(id);
   if (!deal) return notFound();
 
   // Fetch user's verification status, role, and KYC status
@@ -181,6 +188,13 @@ export default async function DealDetailPage({
               </div>
             </div>
 
+            {/* Funding progress */}
+            <FundingProgress
+              targetRaise={deal.target_raise}
+              totalCommitted={deal.total_committed}
+              investorCount={investorCount}
+            />
+
             {/* KYC Banner for high-value deals */}
             {needsKyc && <KycBanner kycStatus={kycStatus ?? "none"} />}
 
@@ -211,6 +225,18 @@ export default async function DealDetailPage({
 
               {/* Sidebar */}
               <aside className="space-y-5 lg:sticky lg:top-24 h-fit">
+                {/* Invest CTA */}
+                {userRole === "investor" || userRole === null ? (
+                  <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5">
+                    <InvestButton
+                      dealId={deal.id}
+                      dealMinCheck={deal.min_check}
+                      verificationStatus={verificationStatus}
+                      kycStatus={kycStatus}
+                    />
+                  </div>
+                ) : null}
+
                 {/* Premium CTA */}
                 <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5">
                   <div className="flex items-center justify-between">

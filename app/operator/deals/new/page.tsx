@@ -47,6 +47,7 @@ export default function NewDealPage() {
     description: "",
     location: "",
     min_check: "",
+    target_raise: "",
     timeline: "",
   });
   const [tags, setTags] = useState<string[]>([]);
@@ -94,6 +95,7 @@ export default function NewDealPage() {
         location: form.location.trim() || null,
         timeline: form.timeline.trim() || null,
         tags: tags.length > 0 ? tags : null,
+        target_raise: parseFloat(form.target_raise) || null,
       }),
     });
 
@@ -221,7 +223,7 @@ export default function NewDealPage() {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="text-sm text-[--text-secondary]">Location</label>
               <input
@@ -243,6 +245,18 @@ export default function NewDealPage() {
                 }
                 className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
                 placeholder='e.g., "50k", "100k-500k"'
+              />
+            </div>
+
+            <div>
+              <label className="text-sm text-[--text-secondary]">Target Raise ($)</label>
+              <input
+                value={form.target_raise}
+                onChange={(e) =>
+                  setForm((p) => ({ ...p, target_raise: e.target.value }))
+                }
+                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                placeholder='e.g., "500000"'
               />
             </div>
           </div>

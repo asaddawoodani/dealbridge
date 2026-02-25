@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Search, SlidersHorizontal, X, Sparkles, ArrowRight } from "lucide-react";
+import FundingProgress from "@/components/FundingProgress";
 
 type Deal = {
   id: string;
@@ -15,6 +16,8 @@ type Deal = {
   min_check: string | null;
   location: string | null;
   status: string | null;
+  target_raise: number | null;
+  total_committed: number;
 };
 
 type InvestorProfile = {
@@ -559,6 +562,12 @@ function DealsContent() {
               {d.description && (
                 <p className="text-sm text-[--text-secondary] mt-3 line-clamp-3">{d.description}</p>
               )}
+
+              <FundingProgress
+                targetRaise={d.target_raise}
+                totalCommitted={d.total_committed ?? 0}
+                compact
+              />
 
               <div className="mt-4 flex items-center justify-between text-xs text-[--text-muted]">
                 <span>Posted {fmtDate(d.created_at)}</span>

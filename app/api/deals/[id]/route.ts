@@ -19,7 +19,14 @@ export async function GET(_req: Request, ctx: Ctx) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  return NextResponse.json({ deal: data });
+  // Get investor count for this deal
+  const { count: investorCount } = await admin
+    .from("investment_commitments")
+    .select("id", { count: "exact", head: true })
+    .eq("deal_id", id)
+    .in("status", ["committed", "funded", "completed"]);
+
+  return NextResponse.json({ deal: data, investor_count: investorCount ?? 0 });
 }
 
 async function requireAuth() {

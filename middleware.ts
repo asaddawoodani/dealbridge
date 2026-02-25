@@ -63,6 +63,15 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Portfolio and invest: investor or admin only
+  if (pathname.startsWith("/portfolio") || pathname.startsWith("/invest")) {
+    if (role !== "investor" && role !== "admin") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/operator/dashboard";
+      return NextResponse.redirect(url);
+    }
+  }
+
   // Dashboard and onboarding: investor or admin
   if (pathname.startsWith("/dashboard") || pathname.startsWith("/onboarding")) {
     if (role !== "investor" && role !== "admin") {
