@@ -1,9 +1,35 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createServerClient } from "@supabase/ssr";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-export async function GET() {
-  const supabase = await createClient();
+function createClientFromRequest(req: Request) {
+  const cookieHeader = req.headers.get("cookie") || "";
+  const cookies = cookieHeader
+    .split(";")
+    .map((c) => c.trim())
+    .filter(Boolean)
+    .map((c) => {
+      const idx = c.indexOf("=");
+      if (idx === -1) return { name: c, value: "" };
+      return { name: c.slice(0, idx), value: c.slice(idx + 1) };
+    });
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookies;
+        },
+        setAll() {},
+      },
+    }
+  );
+}
+
+export async function GET(req: Request) {
+  const supabase = createClientFromRequest(req);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -57,19 +83,23 @@ export async function GET() {
     }
 
     for (const i of interests) {
-      recentActivity.push({
-        type: "intro",
-        description: `Intro requested for ${dealMap.get(i.deal_id) ?? "a deal"}`,
-        created_at: i.created_at,
-      });
+      if (i.created_at) {
+        recentActivity.push({
+          type: "intro",
+          description: `Intro requested for ${dealMap.get(i.deal_id) ?? "a deal"}`,
+          created_at: i.created_at,
+        });
+      }
     }
 
     for (const c of conversations) {
-      recentActivity.push({
-        type: "conversation",
-        description: `Conversation started`,
-        created_at: c.created_at,
-      });
+      if (c.created_at) {
+        recentActivity.push({
+          type: "conversation",
+          description: `Conversation started`,
+          created_at: c.created_at,
+        });
+      }
     }
 
     recentActivity.sort(

@@ -1,9 +1,35 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createServerClient } from "@supabase/ssr";
 import { createAdminClient } from "@/lib/supabase/admin";
 
-export async function GET() {
-  const supabase = await createClient();
+function createClientFromRequest(req: Request) {
+  const cookieHeader = req.headers.get("cookie") || "";
+  const cookies = cookieHeader
+    .split(";")
+    .map((c) => c.trim())
+    .filter(Boolean)
+    .map((c) => {
+      const idx = c.indexOf("=");
+      if (idx === -1) return { name: c, value: "" };
+      return { name: c.slice(0, idx), value: c.slice(idx + 1) };
+    });
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookies;
+        },
+        setAll() {},
+      },
+    }
+  );
+}
+
+export async function GET(req: Request) {
+  const supabase = createClientFromRequest(req);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -12,7 +38,9 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient();
+
+  const { data: profile } = await admin
     .from("profiles")
     .select("role")
     .eq("id", user.id)
@@ -21,8 +49,6 @@ export async function GET() {
   if (profile?.role !== "operator" && profile?.role !== "admin") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-
-  const admin = createAdminClient();
 
   try {
     // Get operator's deals
@@ -44,24 +70,23 @@ export async function GET() {
       });
     }
 
-    // Fetch interests, conversations, messages for those deals
-    const [interestsRes, conversationsRes, messagesRes] = await Promise.all([
+    // Get conversations for this operator first
+    const { data: convos } = await admin
+      .from("conversations")
+      .select("id, deal_id")
+      .eq("operator_id", user.id);
+    const conversations = convos ?? [];
+    const convoIds = conversations.map((c) => c.id);
+
+    // Fetch interests and messages
+    const [interestsRes, messagesRes] = await Promise.all([
       admin.from("deal_interests").select("id, deal_id").in("deal_id", dealIds),
-      admin.from("conversations").select("id, deal_id").eq("operator_id", user.id),
-      admin
-        .from("messages")
-        .select("id, conversation_id")
-        .in(
-          "conversation_id",
-          // We'll filter after
-          (
-            await admin.from("conversations").select("id").eq("operator_id", user.id)
-          ).data?.map((c) => c.id) ?? []
-        ),
+      convoIds.length > 0
+        ? admin.from("messages").select("id, conversation_id").in("conversation_id", convoIds)
+        : Promise.resolve({ data: [], error: null }),
     ]);
 
     const interests = interestsRes.data ?? [];
-    const conversations = conversationsRes.data ?? [];
     const messages = messagesRes.data ?? [];
 
     // Build per-deal stats

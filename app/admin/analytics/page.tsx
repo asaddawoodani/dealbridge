@@ -45,18 +45,61 @@ type AnalyticsData = {
   recentActivity: { type: string; description: string; created_at: string }[];
 };
 
+const EMPTY_DATA: AnalyticsData = {
+  overview: { totalUsers: 0, totalDeals: 0, activeDeals: 0, pendingDeals: 0, totalConversations: 0, totalIntros: 0 },
+  userGrowth: [],
+  dealActivity: [],
+  verificationStats: { pending: 0, verified: 0, rejected: 0 },
+  topDeals: [],
+  categoryBreakdown: [],
+  recentActivity: [],
+};
+
 export default function AdminAnalyticsPage() {
-  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [data, setData] = useState<AnalyticsData>(EMPTY_DATA);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("[analytics page] fetching /api/admin/analytics");
     fetch("/api/admin/analytics")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.overview) setData(d);
+      .then(async (r) => {
+        console.log("[analytics page] response status:", r.status, r.statusText);
+        const contentType = r.headers.get("content-type") || "";
+        console.log("[analytics page] content-type:", contentType);
+
+        if (!contentType.includes("application/json")) {
+          const text = await r.text();
+          console.error("[analytics page] non-JSON response:", text.slice(0, 500));
+          setError(`Server returned ${r.status} with non-JSON response`);
+          setLoading(false);
+          return;
+        }
+
+        const d = await r.json();
+        console.log("[analytics page] response body keys:", Object.keys(d));
+
+        if (d.error) {
+          console.error("[analytics page] API error:", d.error);
+          setError(d.error);
+          setLoading(false);
+          return;
+        }
+
+        if (d.overview) {
+          console.log("[analytics page] loaded successfully, overview:", d.overview);
+          setData(d);
+        } else {
+          console.error("[analytics page] response missing overview:", d);
+          setError("Unexpected response format");
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        console.error("[analytics page] fetch error:", err);
+        setError(err.message || "Network error");
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
@@ -69,11 +112,15 @@ export default function AdminAnalyticsPage() {
     );
   }
 
-  if (!data) {
+  if (error) {
     return (
       <div className="px-6 py-10">
         <div className="mx-auto max-w-7xl">
-          <div className="text-red-400">Failed to load analytics.</div>
+          <div className="rounded-2xl border border-red-900/50 bg-red-950/20 p-6">
+            <div className="font-semibold text-red-400 mb-2">Failed to load analytics</div>
+            <div className="text-sm text-red-200">{error}</div>
+            <div className="text-xs text-[--text-muted] mt-3">Check the browser console and terminal for details.</div>
+          </div>
         </div>
       </div>
     );
