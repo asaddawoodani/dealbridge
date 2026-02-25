@@ -63,62 +63,137 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    // Look up deal title for emails
+    // Look up deal for emails and conversation creation
     const appUrl = new URL(req.url).origin;
     const investorEmail = email ?? user.email!;
     const investorName = name ?? "An investor";
 
-    Promise.resolve(
-      admin
+    // Create conversation + first message
+    let conversationId: string | null = null;
+    try {
+      const { data: deal } = await admin
         .from("deals")
-        .select("id, title")
+        .select("id, title, operator_id")
         .eq("id", deal_id)
-        .single()
-    )
-      .then(({ data: deal }) => {
-        const dealTitle = deal?.title ?? "a deal";
-        const dealUrl = `${appUrl}/deals/${deal_id}`;
+        .single();
 
-        // Trigger 3: confirmation to investor
-        sendEmail({
-          to: investorEmail,
-          subject: "Your intro request was sent",
-          html: emailTemplate({
-            title: "Intro Request Sent",
-            body: `Your request for an introduction on <strong>${dealTitle}</strong> has been submitted. We'll be in touch soon.`,
-            ctaText: "View Deal",
-            ctaUrl: dealUrl,
-          }),
-        }).catch((err: unknown) =>
-          console.error("[email] interest confirmation failed:", err)
-        );
+      const dealTitle = deal?.title ?? "a deal";
+      const dealUrl = `${appUrl}/deals/${deal_id}`;
 
-        // Trigger 4: admin notification
-        sendEmail({
-          to: ADMIN_EMAIL,
-          subject: `New intro request: ${dealTitle}`,
-          html: emailTemplate({
-            title: "New Intro Request",
-            body: [
-              `<strong>Investor:</strong> ${investorName}`,
-              `<strong>Email:</strong> ${investorEmail}`,
-              `<strong>Deal:</strong> ${dealTitle}`,
-              message ? `<strong>Message:</strong> ${message}` : "",
-            ]
-              .filter(Boolean)
-              .join("<br/>"),
-            ctaText: "View Deal",
-            ctaUrl: dealUrl,
-          }),
-        }).catch((err: unknown) =>
-          console.error("[email] admin notification failed:", err)
-        );
-      })
-      .catch((err: unknown) =>
-        console.error("[email] deal lookup failed:", err)
+      if (deal?.operator_id && deal.operator_id !== user.id) {
+        // Check for existing conversation
+        const { data: existing } = await admin
+          .from("conversations")
+          .select("id")
+          .eq("deal_id", deal_id)
+          .eq("investor_id", user.id)
+          .maybeSingle();
+
+        if (existing) {
+          conversationId = existing.id;
+        } else {
+          const { data: convo } = await admin
+            .from("conversations")
+            .insert({
+              deal_id,
+              investor_id: user.id,
+              operator_id: deal.operator_id,
+              last_message_at: new Date().toISOString(),
+            })
+            .select("id")
+            .single();
+          conversationId = convo?.id ?? null;
+        }
+
+        // Insert intro message into conversation
+        if (conversationId) {
+          const introContent = [
+            `Hi, I'm interested in ${dealTitle}.`,
+            message || "",
+          ]
+            .filter(Boolean)
+            .join("\n\n");
+
+          await admin.from("messages").insert({
+            conversation_id: conversationId,
+            sender_id: user.id,
+            content: introContent,
+          });
+
+          // Update last_message_at
+          await admin
+            .from("conversations")
+            .update({ last_message_at: new Date().toISOString() })
+            .eq("id", conversationId);
+        }
+
+        // Email operator about new conversation
+        if (conversationId) {
+          const { data: operatorProfile } = await admin
+            .from("profiles")
+            .select("email")
+            .eq("id", deal.operator_id)
+            .single();
+
+          if (operatorProfile?.email) {
+            sendEmail({
+              to: operatorProfile.email,
+              subject: `New message from ${investorName} about ${dealTitle}`,
+              html: emailTemplate({
+                title: "New Investor Introduction",
+                body: [
+                  `<strong>${investorName}</strong> is interested in <strong>${dealTitle}</strong>.`,
+                  message ? `<br/><br/>"${message.slice(0, 300)}${message.length > 300 ? "..." : ""}"` : "",
+                ].filter(Boolean).join(""),
+                ctaText: "View Conversation",
+                ctaUrl: `${appUrl}/messages/${conversationId}`,
+              }),
+            }).catch((err: unknown) =>
+              console.error("[email] operator conversation notification failed:", err)
+            );
+          }
+        }
+      }
+
+      // Confirmation to investor
+      sendEmail({
+        to: investorEmail,
+        subject: "Your intro request was sent",
+        html: emailTemplate({
+          title: "Intro Request Sent",
+          body: `Your request for an introduction on <strong>${dealTitle}</strong> has been submitted.${conversationId ? " You can now message the operator directly." : " We'll be in touch soon."}`,
+          ctaText: conversationId ? "View Conversation" : "View Deal",
+          ctaUrl: conversationId ? `${appUrl}/messages/${conversationId}` : dealUrl,
+        }),
+      }).catch((err: unknown) =>
+        console.error("[email] interest confirmation failed:", err)
       );
 
-    return NextResponse.json({ ok: true, interest: data });
+      // Admin notification
+      sendEmail({
+        to: ADMIN_EMAIL,
+        subject: `New intro request: ${dealTitle}`,
+        html: emailTemplate({
+          title: "New Intro Request",
+          body: [
+            `<strong>Investor:</strong> ${investorName}`,
+            `<strong>Email:</strong> ${investorEmail}`,
+            `<strong>Deal:</strong> ${dealTitle}`,
+            message ? `<strong>Message:</strong> ${message}` : "",
+          ]
+            .filter(Boolean)
+            .join("<br/>"),
+          ctaText: "View Deal",
+          ctaUrl: dealUrl,
+        }),
+      }).catch((err: unknown) =>
+        console.error("[email] admin notification failed:", err)
+      );
+    } catch (err: unknown) {
+      console.error("[messaging] conversation creation failed:", err);
+    }
+
+    return NextResponse.json({ ok: true, interest: data, conversationId });
   } catch (e: unknown) {
     const message = e instanceof Error ? e.message : "Server error";
     return NextResponse.json({ error: message }, { status: 500 });

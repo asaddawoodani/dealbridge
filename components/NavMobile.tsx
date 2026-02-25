@@ -6,7 +6,13 @@ import { Menu, X } from "lucide-react";
 
 type NavLink = { href: string; label: string; highlight?: boolean };
 
-export default function NavMobile({ links }: { links: NavLink[] }) {
+export default function NavMobile({
+  links,
+  showMessages,
+}: {
+  links: NavLink[];
+  showMessages?: boolean;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,6 +41,15 @@ export default function NavMobile({ links }: { links: NavLink[] }) {
               {l.label}
             </Link>
           ))}
+          {showMessages && (
+            <Link
+              href="/messages"
+              onClick={() => setOpen(false)}
+              className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+            >
+              Messages
+            </Link>
+          )}
           {links.length === 0 && (
             <>
               <Link

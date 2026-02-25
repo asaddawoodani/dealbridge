@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import UserMenu from "./UserMenu";
 import NavMobile from "./NavMobile";
+import MessageNavLink from "./MessageNavLink";
 
 async function getNavData() {
   try {
@@ -97,6 +98,7 @@ export default async function Navbar() {
               {l.label}
             </Link>
           ))}
+          {role && <MessageNavLink />}
         </div>
 
         {/* Right side */}
@@ -106,7 +108,7 @@ export default async function Navbar() {
               <div className="hidden md:block">
                 <UserMenu />
               </div>
-              <NavMobile links={links} />
+              <NavMobile links={links} showMessages />
             </>
           ) : (
             <>

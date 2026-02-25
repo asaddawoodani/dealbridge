@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Send, Shield, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 
-type Msg = { type: "ok" | "err"; text: string } | null;
+type Msg = { type: "ok" | "err"; text: string; conversationId?: string } | null;
 
 export default function RequestIntro({
   dealId,
@@ -71,12 +71,16 @@ export default function RequestIntro({
         body: JSON.stringify(payload),
       });
 
+      const j = await res.json().catch(() => null);
       if (!res.ok) {
-        const j = await res.json().catch(() => null);
         throw new Error(j?.error ?? "Something went wrong.");
       }
 
-      setMsg({ type: "ok", text: "Request sent! We'll follow up shortly." });
+      setMsg({
+        type: "ok",
+        text: "Request sent! We'll follow up shortly.",
+        conversationId: j?.conversationId ?? undefined,
+      });
       setName("");
       setEmail("");
       setLinkedin("");
@@ -220,6 +224,14 @@ export default function RequestIntro({
           ].join(" ")}
         >
           {msg.text}
+          {msg.type === "ok" && msg.conversationId && (
+            <Link
+              href={`/messages/${msg.conversationId}`}
+              className="block mt-2 font-medium text-emerald-300 hover:text-emerald-200 transition"
+            >
+              Go to conversation &rarr;
+            </Link>
+          )}
         </div>
       )}
 
