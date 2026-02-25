@@ -19,7 +19,7 @@ export default function NavMobile({
     <div className="md:hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="p-2 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+        className="p-2.5 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>

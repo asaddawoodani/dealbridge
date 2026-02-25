@@ -103,10 +103,10 @@ function LoginForm() {
         </button>
 
         <div className="flex items-center justify-between text-sm">
-          <a href="/auth/forgot-password" className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
+          <a href="/auth/forgot-password" className="py-2 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
             Forgot password?
           </a>
-          <a href="/auth/signup" className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
+          <a href="/auth/signup" className="py-2 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
             Create account
           </a>
         </div>

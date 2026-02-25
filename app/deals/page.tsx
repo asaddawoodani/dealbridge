@@ -407,7 +407,7 @@ function DealsContent() {
             </div>
             <button
               onClick={clearFilters}
-              className="text-sm text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1 transition"
+              className="text-sm text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1 transition py-1 px-2 -mr-2"
             >
               <X className="h-3.5 w-3.5" />
               Clear filters
@@ -419,7 +419,7 @@ function DealsContent() {
       {/* Recommended: No profile prompt */}
       {!loading && !profileLoading && !investorProfile && (
         <section className="rounded-2xl border border-teal-500/20 bg-gradient-to-r from-teal-500/5 to-transparent p-6 mb-8">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
             <div>
               <h2 className="text-xl font-semibold flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-teal-400" />

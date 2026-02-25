@@ -12,26 +12,26 @@ export default function Footer() {
             <span className="text-sm font-semibold text-[--text-secondary]">Dealbridge</span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-[--text-muted]">
-            <Link href="/deals" className="hover:text-[--text-primary] transition">
+          <div className="flex items-center gap-4 sm:gap-6 text-sm text-[--text-muted]">
+            <Link href="/deals" className="py-1 hover:text-[--text-primary] transition">
               Deals
             </Link>
-            <Link href="/auth/login" className="hover:text-[--text-primary] transition">
+            <Link href="/auth/login" className="py-1 hover:text-[--text-primary] transition">
               Sign in
             </Link>
-            <Link href="/auth/signup" className="hover:text-[--text-primary] transition">
+            <Link href="/auth/signup" className="py-1 hover:text-[--text-primary] transition">
               Get Started
             </Link>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-[--text-muted]">
-            <Link href="/terms" className="hover:text-[--text-primary] transition">
+          <div className="flex items-center gap-3 sm:gap-4 text-xs text-[--text-muted]">
+            <Link href="/terms" className="py-1 hover:text-[--text-primary] transition">
               Terms
             </Link>
-            <Link href="/privacy" className="hover:text-[--text-primary] transition">
+            <Link href="/privacy" className="py-1 hover:text-[--text-primary] transition">
               Privacy
             </Link>
-            <Link href="/disclaimer" className="hover:text-[--text-primary] transition">
+            <Link href="/disclaimer" className="py-1 hover:text-[--text-primary] transition">
               Disclaimer
             </Link>
             <span>&copy; {new Date().getFullYear()} Dealbridge</span>
