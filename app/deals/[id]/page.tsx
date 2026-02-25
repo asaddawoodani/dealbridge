@@ -116,7 +116,7 @@ export default async function DealDetailPage({
   const needsKyc = minCheckNum !== null && minCheckNum >= 100_000 && kycStatus !== "approved" && userRole === "investor";
 
   return (
-    <div className="px-6 py-10">
+    <div className="px-4 sm:px-6 py-10">
       <div className="mx-auto max-w-6xl">
         {/* Top nav */}
         <div className="flex items-center justify-between gap-4 mb-8">
@@ -141,12 +141,12 @@ export default async function DealDetailPage({
         </div>
 
         {/* Hero container */}
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 shadow-lg">
+        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-4 sm:p-8 shadow-lg">
           <div className="flex flex-col gap-6">
             {/* Title block */}
             <div>
               <div className="text-xs text-[--text-muted] uppercase tracking-wider font-medium">Deal Details</div>
-              <h1 className="text-4xl font-bold tracking-tight mt-2">
+              <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mt-2">
                 {deal.title}
               </h1>
 

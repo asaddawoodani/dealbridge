@@ -37,7 +37,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-teal-500/5 via-transparent to-transparent pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-6 pt-24 pb-20 text-center relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 text-center relative">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 px-4 py-1.5 text-sm text-teal-400 mb-8">
             <Shield className="h-4 w-4" />
             Private deal flow for qualified investors
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-24">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold">How it works</h2>
           <p className="text-[--text-secondary] mt-3 max-w-xl mx-auto">
@@ -104,8 +104,8 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 pb-24">
-        <div className="rounded-2xl border border-[--border] bg-gradient-to-br from-teal-500/10 via-[--bg-card] to-[--bg-card] p-12 text-center">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-12 sm:pb-24">
+        <div className="rounded-2xl border border-[--border] bg-gradient-to-br from-teal-500/10 via-[--bg-card] to-[--bg-card] p-6 sm:p-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">Ready to find your next deal?</h2>
           <p className="text-[--text-secondary] mt-3 max-w-xl mx-auto">
             Join qualified investors and vetted operators who use Dealbridge to close deals faster.

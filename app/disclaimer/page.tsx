@@ -6,7 +6,7 @@ export default function DisclaimerPage() {
         <p className="text-sm text-[--text-muted] mb-8">Last updated: February 2026</p>
 
         <div className="prose-custom space-y-8 text-[--text-secondary] text-sm leading-relaxed">
-          <section className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6">
+          <section className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 sm:p-6">
             <p className="text-amber-200 font-medium">
               Dealbridge is not a registered broker-dealer, investment adviser, or funding portal. The Platform does not
               provide investment advice, recommendations, or endorsements of any kind.

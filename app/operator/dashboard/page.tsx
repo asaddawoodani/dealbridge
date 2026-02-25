@@ -105,7 +105,7 @@ export default function OperatorDashboard() {
     <div className="px-6 py-10">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold">My Deals</h1>
             {userName && (
@@ -116,7 +116,7 @@ export default function OperatorDashboard() {
           {verificationStatus === "verified" ? (
             <Link
               href="/operator/deals/new"
-              className="rounded-xl bg-teal-500 text-white px-5 py-3 font-semibold hover:bg-teal-600 transition-all text-sm flex items-center gap-2"
+              className="rounded-xl bg-teal-500 text-white px-5 py-3 font-semibold hover:bg-teal-600 transition-all text-sm flex items-center gap-2 shrink-0"
             >
               <Plus className="h-4 w-4" />
               Submit New Deal
@@ -124,7 +124,7 @@ export default function OperatorDashboard() {
           ) : (
             <Link
               href="/operator/verify"
-              className="rounded-xl bg-amber-500 text-white px-5 py-3 font-semibold hover:bg-amber-600 transition-all text-sm flex items-center gap-2"
+              className="rounded-xl bg-amber-500 text-white px-5 py-3 font-semibold hover:bg-amber-600 transition-all text-sm flex items-center gap-2 shrink-0"
             >
               <ShieldAlert className="h-4 w-4" />
               {verificationStatus === "pending" ? "Verification Pending" : "Verify to Submit"}
@@ -133,7 +133,7 @@ export default function OperatorDashboard() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[
             { label: "Total Deals", value: stats.total, icon: BarChart3, color: "text-teal-400" },
             { label: "Pending Review", value: stats.pending, icon: Clock, color: "text-amber-400" },
@@ -154,7 +154,7 @@ export default function OperatorDashboard() {
 
         {/* Engagement stats */}
         {analytics && (
-          <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {[
               { label: "Intro Requests", value: analytics.totalInterests, icon: Handshake, color: "text-pink-400" },
               { label: "Conversations", value: analytics.totalConversations, icon: MessageSquare, color: "text-purple-400" },
@@ -184,7 +184,7 @@ export default function OperatorDashboard() {
                 const pct = Math.round((d.interestCount / maxInterest) * 100);
                 return (
                   <div key={d.id} className="flex items-center gap-4">
-                    <div className="min-w-0 w-40 shrink-0">
+                    <div className="min-w-0 w-28 sm:w-40 shrink-0">
                       <div className="text-sm font-medium truncate">{d.title}</div>
                       <div className="text-xs text-[--text-muted]">
                         {d.interestCount} intros &middot; {d.conversationCount} convos
@@ -294,7 +294,7 @@ export default function OperatorDashboard() {
         {toast && (
           <div
             className={[
-              "fixed bottom-6 right-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
+              "fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
               toast.type === "success"
                 ? "bg-emerald-600 text-white"
                 : "bg-red-600 text-white",

@@ -289,7 +289,7 @@ export default function AdminAnalyticsPage() {
                     dataKey="category"
                     tick={{ fill: "#94A3B8", fontSize: 11 }}
                     axisLine={{ stroke: "#1E293B" }}
-                    width={120}
+                    width={100}
                   />
                   <Tooltip
                     contentStyle={{
@@ -311,7 +311,7 @@ export default function AdminAnalyticsPage() {
               <ShieldCheck className="h-4 w-4 text-amber-400" />
               <h2 className="font-semibold">Verification Status</h2>
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-5 text-center">
                 <ShieldAlert className="h-6 w-6 text-amber-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-amber-400">

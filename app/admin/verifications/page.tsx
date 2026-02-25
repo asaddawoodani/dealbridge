@@ -151,7 +151,7 @@ export default function AdminVerificationsPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[
             { label: "Total Requests", value: verifications.length, icon: BarChart3, color: "text-teal-400" },
             { label: "Pending Review", value: pendingCount, icon: Clock, color: "text-amber-400" },
@@ -312,7 +312,7 @@ export default function AdminVerificationsPage() {
         {toast && (
           <div
             className={[
-              "fixed bottom-6 right-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
+              "fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
               toast.type === "success"
                 ? "bg-emerald-600 text-white"
                 : "bg-red-600 text-white",

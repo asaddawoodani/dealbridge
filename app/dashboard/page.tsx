@@ -168,7 +168,7 @@ export default function DashboardPage() {
         {/* Activity Stats */}
         {analytics && (
           <div className="space-y-6 mb-8">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { label: "Intros Sent", value: analytics.introsSent, icon: Handshake, color: "text-teal-400" },
                 { label: "Active Conversations", value: analytics.activeConversations, icon: MessageSquare, color: "text-purple-400" },

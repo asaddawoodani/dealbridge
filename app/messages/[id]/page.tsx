@@ -183,7 +183,7 @@ export default function ConversationPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       {/* Header */}
-      <div className="border-b border-[--border] bg-[--bg-card] px-6 py-4 flex items-center gap-4 shrink-0">
+      <div className="border-b border-[--border] bg-[--bg-card] px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 shrink-0">
         <button
           onClick={() => router.push("/messages")}
           className="text-[--text-muted] hover:text-[--text-primary] transition"
@@ -208,7 +208,7 @@ export default function ConversationPage() {
       {/* Messages */}
       <div
         ref={scrollAreaRef}
-        className="flex-1 overflow-y-auto px-6 py-4 space-y-1"
+        className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-1"
       >
         {messages.map((msg, i) => {
           const isMine = msg.sender_id === userId;
@@ -259,7 +259,7 @@ export default function ConversationPage() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-[--border] bg-[--bg-card] px-6 py-4 shrink-0">
+      <div className="border-t border-[--border] bg-[--bg-card] px-4 sm:px-6 py-3 sm:py-4 shrink-0">
         <div className="flex items-end gap-3">
           <textarea
             value={input}

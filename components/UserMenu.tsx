@@ -93,7 +93,7 @@ export default function UserMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[--border] bg-[--bg-card] shadow-xl z-50">
+        <div className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-[--border] bg-[--bg-card] shadow-xl z-50">
           <div className="p-3 border-b border-[--border]">
             <div className="text-sm font-medium truncate">{profile.full_name ?? "User"}</div>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">

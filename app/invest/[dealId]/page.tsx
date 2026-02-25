@@ -210,7 +210,7 @@ export default function InvestPage() {
   }
 
   return (
-    <div className="px-6 py-10">
+    <div className="px-4 sm:px-6 py-10">
       <div className="mx-auto max-w-2xl">
         {/* Back link */}
         <Link

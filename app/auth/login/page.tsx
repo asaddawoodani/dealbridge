@@ -117,7 +117,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="flex items-center justify-center px-6 py-20">
+    <div className="flex items-center justify-center px-4 sm:px-6 py-10 sm:py-20">
       <Suspense fallback={<div className="text-[--text-muted]">Loading...</div>}>
         <LoginForm />
       </Suspense>

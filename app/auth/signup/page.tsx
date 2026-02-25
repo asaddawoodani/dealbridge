@@ -55,7 +55,7 @@ export default function SignUpPage() {
 
   if (success) {
     return (
-      <div className="flex items-center justify-center px-6 py-20">
+      <div className="flex items-center justify-center px-4 sm:px-6 py-10 sm:py-20">
         <div className="w-full max-w-md text-center">
           <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-8">
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-teal-500/10 text-teal-400 mb-4">
@@ -78,7 +78,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex items-center justify-center px-6 py-20">
+    <div className="flex items-center justify-center px-4 sm:px-6 py-10 sm:py-20">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-teal-500/10 text-teal-400 mb-4">

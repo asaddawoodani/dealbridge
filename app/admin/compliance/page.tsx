@@ -384,7 +384,7 @@ export default function AdminCompliancePage() {
         {toast && (
           <div
             className={[
-              "fixed bottom-6 right-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
+              "fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50",
               toast.type === "success"
                 ? "bg-emerald-600 text-white"
                 : "bg-red-600 text-white",
