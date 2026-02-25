@@ -13,7 +13,12 @@ function createClientFromRequest(req: Request) {
     .map((c) => {
       const idx = c.indexOf("=");
       if (idx === -1) return { name: c, value: "" };
-      return { name: c.slice(0, idx), value: c.slice(idx + 1) };
+      const raw = c.slice(idx + 1);
+      try {
+        return { name: c.slice(0, idx), value: decodeURIComponent(raw) };
+      } catch {
+        return { name: c.slice(0, idx), value: raw };
+      }
     });
 
   return createServerClient(
