@@ -29,7 +29,7 @@ export async function GET(req: Request) {
 
     let query = admin
       .from("kyc_submissions")
-      .select("*, profiles(full_name, email, role)")
+      .select("*")
       .order("created_at", { ascending: false });
 
     if (statusFilter && ["pending", "approved", "rejected", "expired"].includes(statusFilter)) {
@@ -42,8 +42,18 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    // Fetch profiles separately (user_id FKs to auth.users, not profiles)
+    const userIds = [...new Set((submissions ?? []).map((s) => s.user_id))];
+    const { data: profiles } = userIds.length > 0
+      ? await admin.from("profiles").select("id, full_name, email, role").in("id", userIds)
+      : { data: [] };
+    const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+
     // Compute stats
-    const all = submissions ?? [];
+    const all = (submissions ?? []).map((s) => ({
+      ...s,
+      profiles: profileMap[s.user_id] ?? null,
+    }));
     const stats = {
       pending: all.filter((s) => s.status === "pending").length,
       approved: all.filter((s) => s.status === "approved").length,

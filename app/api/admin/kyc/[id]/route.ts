@@ -44,13 +44,20 @@ export async function PATCH(
     // Fetch the KYC submission
     const { data: submission, error: fetchError } = await admin
       .from("kyc_submissions")
-      .select("*, profiles(email, full_name)")
+      .select("*")
       .eq("id", id)
       .single();
 
     if (fetchError || !submission) {
       return NextResponse.json({ error: "KYC submission not found" }, { status: 404 });
     }
+
+    // Fetch profile separately (user_id FKs to auth.users, not profiles)
+    const { data: userProfile } = await admin
+      .from("profiles")
+      .select("email, full_name")
+      .eq("id", submission.user_id)
+      .single();
 
     const newStatus = action === "approve" ? "approved" : "rejected";
     const rejectionReason =
@@ -97,8 +104,8 @@ export async function PATCH(
 
     // Email user
     const appUrl = new URL(req.url).origin;
-    const userEmail = (submission.profiles as { email: string; full_name: string | null })?.email;
-    const userName = (submission.profiles as { email: string; full_name: string | null })?.full_name ?? "there";
+    const userEmail = userProfile?.email;
+    const userName = userProfile?.full_name ?? "there";
 
     if (userEmail) {
       if (action === "approve") {
