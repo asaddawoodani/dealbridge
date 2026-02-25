@@ -249,11 +249,16 @@ export async function GET(req: Request) {
   }
 
   if (role === "admin") {
+    // By default return only the admin's own commitments (for portfolio).
+    // Use ?all=true to get every commitment (admin oversight).
+    const showAll = searchParams.get("all") === "true";
+
     let query = admin
       .from("investment_commitments")
       .select("*, deals(id, title, category, min_check, target_raise, total_committed), profiles:investor_id(full_name, email)")
       .order("created_at", { ascending: false });
 
+    if (!showAll) query = query.eq("investor_id", user.id);
     if (dealId) query = query.eq("deal_id", dealId);
     if (status) query = query.eq("status", status);
 
