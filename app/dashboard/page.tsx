@@ -11,6 +11,10 @@ import {
   Search,
   ArrowRight,
   Tag,
+  Handshake,
+  MessageSquare,
+  Mail,
+  Activity,
 } from "lucide-react";
 
 type InvestorProfile = {
@@ -25,6 +29,13 @@ type InvestorProfile = {
   verified_only: boolean;
 };
 
+type InvestorAnalytics = {
+  introsSent: number;
+  activeConversations: number;
+  unreadMessages: number;
+  recentActivity: { type: string; description: string; created_at: string }[];
+};
+
 export default function DashboardPage() {
   const supabase = createClient();
 
@@ -32,6 +43,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [profile, setProfile] = useState<InvestorProfile | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [analytics, setAnalytics] = useState<InvestorAnalytics | null>(null);
 
   useEffect(() => {
     const run = async () => {
@@ -70,6 +82,12 @@ export default function DashboardPage() {
 
       setProfile(data ?? null);
       setLoading(false);
+
+      // Fetch analytics
+      fetch("/api/investor/analytics")
+        .then((r) => r.json())
+        .then((d) => { if (d.introsSent !== undefined) setAnalytics(d); })
+        .catch(() => {});
     };
 
     run();
@@ -132,6 +150,62 @@ export default function DashboardPage() {
             <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
           </Link>
         </div>
+
+        {/* Activity Stats */}
+        {analytics && (
+          <div className="space-y-6 mb-8">
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { label: "Intros Sent", value: analytics.introsSent, icon: Handshake, color: "text-teal-400" },
+                { label: "Active Conversations", value: analytics.activeConversations, icon: MessageSquare, color: "text-purple-400" },
+                { label: "Unread Messages", value: analytics.unreadMessages, icon: Mail, color: "text-amber-400" },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+                >
+                  <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+                    <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
+                    {s.label}
+                  </div>
+                  <div className="text-2xl font-bold">{s.value}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Recent Activity */}
+            {analytics.recentActivity.length > 0 && (
+              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Activity className="h-4 w-4 text-purple-400" />
+                  <h2 className="font-semibold text-sm">Recent Activity</h2>
+                </div>
+                <div className="space-y-3">
+                  {analytics.recentActivity.map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] p-3"
+                    >
+                      <div className="mt-0.5">
+                        {item.type === "intro" ? (
+                          <Handshake className="h-3.5 w-3.5 text-teal-400" />
+                        ) : (
+                          <MessageSquare className="h-3.5 w-3.5 text-purple-400" />
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm">{item.description}</div>
+                        <div className="text-xs text-[--text-muted] mt-1">
+                          {new Date(item.created_at).toLocaleString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {loading && (
           <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-[--text-secondary]">

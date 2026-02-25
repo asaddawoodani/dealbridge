@@ -11,6 +11,9 @@ import {
   Eye,
   Pencil,
   ShieldAlert,
+  Handshake,
+  MessageSquare,
+  Mail,
 } from "lucide-react";
 
 type Deal = {
@@ -22,6 +25,14 @@ type Deal = {
   min_check: string | null;
   location: string | null;
   status: string | null;
+};
+
+type OperatorAnalytics = {
+  totalInterests: number;
+  totalConversations: number;
+  totalMessages: number;
+  dealPerformance: { id: string; title: string; status: string; interestCount: number; conversationCount: number }[];
+  statusBreakdown: { active: number; pending: number; inactive: number };
 };
 
 type Toast = { type: "success" | "error"; message: string } | null;
@@ -38,6 +49,7 @@ export default function OperatorDashboard() {
   const [userName, setUserName] = useState("");
   const [verificationStatus, setVerificationStatus] = useState<string>("unverified");
   const [toast, setToast] = useState<Toast>(null);
+  const [analytics, setAnalytics] = useState<OperatorAnalytics | null>(null);
 
   useEffect(() => {
     if (!toast) return;
@@ -71,6 +83,12 @@ export default function OperatorDashboard() {
       const json = await res.json().catch(() => null);
       setDeals(json?.deals ?? []);
       setLoading(false);
+
+      // Fetch analytics
+      fetch("/api/operator/analytics")
+        .then((r) => r.json())
+        .then((d) => { if (d.totalInterests !== undefined) setAnalytics(d); })
+        .catch(() => {});
     })();
   }, []);
 
@@ -130,6 +148,57 @@ export default function OperatorDashboard() {
             </div>
           ))}
         </div>
+
+        {/* Engagement stats */}
+        {analytics && (
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            {[
+              { label: "Intro Requests", value: analytics.totalInterests, icon: Handshake, color: "text-pink-400" },
+              { label: "Conversations", value: analytics.totalConversations, icon: MessageSquare, color: "text-purple-400" },
+              { label: "Messages Received", value: analytics.totalMessages, icon: Mail, color: "text-blue-400" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              >
+                <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+                  <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
+                  {s.label}
+                </div>
+                <div className="text-2xl font-bold">{s.value}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Deal Performance */}
+        {analytics && analytics.dealPerformance.length > 0 && (
+          <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-8">
+            <div className="text-lg font-semibold mb-4">Deal Performance</div>
+            <div className="space-y-3">
+              {analytics.dealPerformance.map((d) => {
+                const maxInterest = Math.max(...analytics.dealPerformance.map((dp) => dp.interestCount), 1);
+                const pct = Math.round((d.interestCount / maxInterest) * 100);
+                return (
+                  <div key={d.id} className="flex items-center gap-4">
+                    <div className="min-w-0 w-40 shrink-0">
+                      <div className="text-sm font-medium truncate">{d.title}</div>
+                      <div className="text-xs text-[--text-muted]">
+                        {d.interestCount} intros &middot; {d.conversationCount} convos
+                      </div>
+                    </div>
+                    <div className="flex-1 h-5 rounded-full bg-[--bg-input] overflow-hidden">
+                      <div
+                        className="h-full rounded-full bg-teal-500/60"
+                        style={{ width: `${pct}%`, minWidth: d.interestCount > 0 ? "8px" : "0" }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
         {/* Deal list */}
         <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">

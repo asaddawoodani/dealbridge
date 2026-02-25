@@ -36,6 +36,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
   if (role === "admin") {
     return [
       { href: "/admin/deals", label: "Admin" },
+      { href: "/admin/analytics", label: "Analytics" },
       { href: "/admin/verifications", label: "Verifications" },
       { href: "/deals", label: "Deals" },
     ];
