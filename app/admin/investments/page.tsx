@@ -13,6 +13,7 @@ import {
   Flag,
   XCircle,
 } from "lucide-react";
+import AdminEscrowPanel from "@/components/payments/AdminEscrowPanel";
 
 type Commitment = {
   id: string;
@@ -338,6 +339,11 @@ export default function AdminInvestmentsPage() {
               })}
             </div>
           )}
+        </section>
+
+        {/* Escrow Transactions */}
+        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mt-8">
+          <AdminEscrowPanel />
         </section>
 
         {/* Toast */}

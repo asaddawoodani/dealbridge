@@ -11,12 +11,14 @@ import {
   DollarSign,
   Search,
 } from "lucide-react";
+import FundCommitmentButton from "@/components/payments/FundCommitmentButton";
 
 type Commitment = {
   id: string;
   deal_id: string;
   amount: number;
   status: string;
+  funding_status: string | null;
   commitment_date: string;
   funded_date: string | null;
   notes: string | null;
@@ -243,8 +245,16 @@ export default function PortfolioPage() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 shrink-0">
+                  <div className="flex flex-col gap-2 shrink-0 items-end">
                     <div className="text-lg font-bold text-right">{formatCurrency(c.amount)}</div>
+                    {c.status === "committed" && (
+                      <FundCommitmentButton
+                        commitmentId={c.id}
+                        amount={c.amount}
+                        fundingStatus={c.funding_status}
+                        onFunded={loadCommitments}
+                      />
+                    )}
                     {c.status === "committed" && (
                       <button
                         onClick={() => cancelCommitment(c.id)}
