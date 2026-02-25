@@ -27,14 +27,24 @@ export async function GET() {
 
   const { data: commitments, error } = await admin
     .from("investment_commitments")
-    .select("*, deals(id, title, category), profiles:investor_id(full_name, email)")
+    .select("*, deals(id, title, category)")
     .order("created_at", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const all = commitments ?? [];
+  // Fetch investor profiles separately (FK points to auth.users, not profiles)
+  const investorIds = [...new Set((commitments ?? []).map((c) => c.investor_id))];
+  const { data: profiles } = investorIds.length > 0
+    ? await admin.from("profiles").select("id, full_name, email").in("id", investorIds)
+    : { data: [] };
+  const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+
+  const all = (commitments ?? []).map((c) => ({
+    ...c,
+    profiles: profileMap[c.investor_id] ?? null,
+  }));
 
   const stats = {
     total: all.length,

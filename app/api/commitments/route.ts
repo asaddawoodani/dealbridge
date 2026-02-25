@@ -236,7 +236,7 @@ export async function GET(req: Request) {
 
     let query = admin
       .from("investment_commitments")
-      .select("*, deals(id, title, category, min_check, target_raise, total_committed), profiles:investor_id(full_name, email)")
+      .select("*, deals(id, title, category, min_check, target_raise, total_committed)")
       .in("deal_id", dealIds)
       .order("created_at", { ascending: false });
 
@@ -245,7 +245,19 @@ export async function GET(req: Request) {
 
     const { data, error } = await query;
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json({ commitments: data ?? [] });
+
+    // Fetch investor profiles separately (FK points to auth.users, not profiles)
+    const investorIds = [...new Set((data ?? []).map((c) => c.investor_id))];
+    const { data: profiles } = investorIds.length > 0
+      ? await admin.from("profiles").select("id, full_name, email").in("id", investorIds)
+      : { data: [] };
+    const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+    const enriched = (data ?? []).map((c) => ({
+      ...c,
+      profiles: profileMap[c.investor_id] ?? null,
+    }));
+
+    return NextResponse.json({ commitments: enriched });
   }
 
   if (role === "admin") {
@@ -255,7 +267,7 @@ export async function GET(req: Request) {
 
     let query = admin
       .from("investment_commitments")
-      .select("*, deals(id, title, category, min_check, target_raise, total_committed), profiles:investor_id(full_name, email)")
+      .select("*, deals(id, title, category, min_check, target_raise, total_committed)")
       .order("created_at", { ascending: false });
 
     if (!showAll) query = query.eq("investor_id", user.id);
@@ -264,6 +276,21 @@ export async function GET(req: Request) {
 
     const { data, error } = await query;
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+    // For oversight view, fetch investor profiles separately
+    if (showAll) {
+      const investorIds = [...new Set((data ?? []).map((c) => c.investor_id))];
+      const { data: profiles } = investorIds.length > 0
+        ? await admin.from("profiles").select("id, full_name, email").in("id", investorIds)
+        : { data: [] };
+      const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+      const enriched = (data ?? []).map((c) => ({
+        ...c,
+        profiles: profileMap[c.investor_id] ?? null,
+      }));
+      return NextResponse.json({ commitments: enriched });
+    }
+
     return NextResponse.json({ commitments: data ?? [] });
   }
 

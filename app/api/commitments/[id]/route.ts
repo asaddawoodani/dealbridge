@@ -28,7 +28,7 @@ export async function GET(_req: Request, ctx: Ctx) {
 
   const { data: commitment, error } = await admin
     .from("investment_commitments")
-    .select("*, deals(id, title, category, min_check, target_raise, total_committed, operator_id), profiles:investor_id(full_name, email)")
+    .select("*, deals(id, title, category, min_check, target_raise, total_committed, operator_id)")
     .eq("id", id)
     .single();
 
@@ -48,7 +48,14 @@ export async function GET(_req: Request, ctx: Ctx) {
     }
   }
 
-  return NextResponse.json({ commitment });
+  // Fetch investor profile separately (FK points to auth.users, not profiles)
+  const { data: investorProfile } = await admin
+    .from("profiles")
+    .select("full_name, email")
+    .eq("id", commitment.investor_id)
+    .single();
+
+  return NextResponse.json({ commitment: { ...commitment, profiles: investorProfile } });
 }
 
 // PATCH — Update commitment status
