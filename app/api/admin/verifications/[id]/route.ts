@@ -44,13 +44,20 @@ export async function PATCH(
     // Fetch the verification request
     const { data: verification, error: fetchError } = await admin
       .from("verification_requests")
-      .select("*, profiles(email, full_name)")
+      .select("*")
       .eq("id", id)
       .single();
 
     if (fetchError || !verification) {
       return NextResponse.json({ error: "Verification not found" }, { status: 404 });
     }
+
+    // Fetch profile separately (user_id FKs to auth.users, not profiles)
+    const { data: userProfile } = await admin
+      .from("profiles")
+      .select("email, full_name")
+      .eq("id", verification.user_id)
+      .single();
 
     const newStatus = action === "approve" ? "approved" : "rejected";
     const rejectionReason = action === "reject" ? String(body.rejection_reason ?? "").trim() || null : null;
@@ -79,8 +86,8 @@ export async function PATCH(
 
     // Email user
     const appUrl = new URL(req.url).origin;
-    const userEmail = (verification.profiles as { email: string; full_name: string | null })?.email;
-    const userName = (verification.profiles as { email: string; full_name: string | null })?.full_name ?? "there";
+    const userEmail = userProfile?.email;
+    const userName = userProfile?.full_name ?? "there";
 
     if (userEmail) {
       if (action === "approve") {

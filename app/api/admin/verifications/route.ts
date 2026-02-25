@@ -29,7 +29,7 @@ export async function GET(req: Request) {
 
   let query = admin
     .from("verification_requests")
-    .select("*, profiles(email, full_name, role)")
+    .select("*")
     .order("created_at", { ascending: false });
 
   if (status !== "all") {
@@ -42,5 +42,17 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ verifications: data ?? [] });
+  // Fetch profiles separately (verification_requests.user_id FKs to auth.users, not profiles)
+  const userIds = [...new Set((data ?? []).map((v) => v.user_id))];
+  const { data: profiles } = userIds.length > 0
+    ? await admin.from("profiles").select("id, email, full_name, role").in("id", userIds)
+    : { data: [] };
+  const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p]));
+
+  const verifications = (data ?? []).map((v) => ({
+    ...v,
+    profiles: profileMap[v.user_id] ?? null,
+  }));
+
+  return NextResponse.json({ verifications });
 }
