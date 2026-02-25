@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import RequestIntro from "./RequestIntro";
 import DealDocuments from "./DealDocuments";
 import KycBanner from "@/components/KycBanner";
@@ -57,15 +58,25 @@ function prettyCategory(v: string | null | undefined) {
 }
 
 async function getDeal(id: string): Promise<{ deal: Deal | null; investorCount: number }> {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const admin = createAdminClient();
 
-  const res = await fetch(`${base}/api/deals/${id}`, { cache: "no-store" });
-  if (!res.ok) return { deal: null, investorCount: 0 };
+  const { data, error } = await admin
+    .from("deals")
+    .select("*")
+    .eq("id", id)
+    .single();
 
-  const json = await res.json().catch(() => null);
+  if (error || !data) return { deal: null, investorCount: 0 };
+
+  const { count } = await admin
+    .from("investment_commitments")
+    .select("id", { count: "exact", head: true })
+    .eq("deal_id", id)
+    .in("status", ["committed", "funded", "completed"]);
+
   return {
-    deal: (json?.deal ?? null) as Deal | null,
-    investorCount: (json?.investor_count ?? 0) as number,
+    deal: data as Deal,
+    investorCount: count ?? 0,
   };
 }
 
