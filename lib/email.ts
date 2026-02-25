@@ -86,7 +86,7 @@ export const CATEGORY_SNAKE_TO_KEBAB: Record<string, string> = {
   services: "services",
 };
 
-function parseCheckToNumber(raw: string | null): number | null {
+export function parseCheckToNumber(raw: string | null): number | null {
   if (!raw) return null;
   const cleaned = raw.replace(/[$,\s]/g, "").toLowerCase();
   const match = cleaned.match(/^(\d+(?:\.\d+)?)(k|m)?/);

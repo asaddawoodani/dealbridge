@@ -13,6 +13,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState<"investor" | "operator">("investor");
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -174,9 +175,24 @@ export default function SignUpPage() {
             </div>
           </div>
 
+          <label className="flex items-start gap-3 select-none cursor-pointer">
+            <input
+              type="checkbox"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              className="h-4 w-4 accent-teal-500 mt-0.5"
+            />
+            <span className="text-sm text-[--text-secondary]">
+              I agree to the{" "}
+              <a href="/terms" target="_blank" className="text-teal-400 underline underline-offset-2">Terms of Service</a>{" "}
+              and{" "}
+              <a href="/privacy" target="_blank" className="text-teal-400 underline underline-offset-2">Privacy Policy</a>.
+            </span>
+          </label>
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !termsAccepted}
             className="w-full rounded-xl bg-teal-500 text-white px-4 py-3 font-semibold hover:bg-teal-600 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Creating account..." : "Sign up"}

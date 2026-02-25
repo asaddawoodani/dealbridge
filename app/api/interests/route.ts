@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { sendEmail, emailTemplate, ADMIN_EMAIL } from "@/lib/email";
+import { sendEmail, emailTemplate, ADMIN_EMAIL, parseCheckToNumber } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -29,6 +29,33 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json().catch(() => ({}));
+
+    // KYC check for high-value deals (>= $100K min check)
+    const deal_id_for_kyc = String(body?.deal_id ?? "").trim();
+    if (deal_id_for_kyc) {
+      const admin = createAdminClient();
+      const { data: dealForKyc } = await admin
+        .from("deals")
+        .select("min_check")
+        .eq("id", deal_id_for_kyc)
+        .single();
+
+      const minCheck = parseCheckToNumber(dealForKyc?.min_check ?? null);
+      if (minCheck !== null && minCheck >= 100_000) {
+        const { data: kycProfile } = await admin
+          .from("profiles")
+          .select("kyc_status")
+          .eq("id", user.id)
+          .single();
+
+        if (kycProfile?.kyc_status !== "approved") {
+          return NextResponse.json(
+            { error: "KYC verification required for deals with minimum check sizes of $100K or more." },
+            { status: 403 }
+          );
+        }
+      }
+    }
 
     const deal_id = String(body?.deal_id ?? "").trim();
     const name = body?.name ? String(body.name).trim() : null;

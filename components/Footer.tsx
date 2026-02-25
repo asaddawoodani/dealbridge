@@ -24,8 +24,17 @@ export default function Footer() {
             </Link>
           </div>
 
-          <div className="text-xs text-[--text-muted]">
-            &copy; {new Date().getFullYear()} Dealbridge
+          <div className="flex items-center gap-4 text-xs text-[--text-muted]">
+            <Link href="/terms" className="hover:text-[--text-primary] transition">
+              Terms
+            </Link>
+            <Link href="/privacy" className="hover:text-[--text-primary] transition">
+              Privacy
+            </Link>
+            <Link href="/disclaimer" className="hover:text-[--text-primary] transition">
+              Disclaimer
+            </Link>
+            <span>&copy; {new Date().getFullYear()} Dealbridge</span>
           </div>
         </div>
       </div>

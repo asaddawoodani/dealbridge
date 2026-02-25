@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { parseCheckToNumber } from "@/lib/email";
 
 type Ctx = { params: Promise<{ id: string; docId: string }> };
 
@@ -48,7 +49,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   // Fetch deal
   const { data: deal } = await adminClient
     .from("deals")
-    .select("operator_id, status")
+    .select("operator_id, status, min_check")
     .eq("id", id)
     .single();
 
@@ -64,6 +65,25 @@ export async function GET(_req: Request, ctx: Ctx) {
 
   if (!isAdmin && !isOwner && !isVerifiedInvestor) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  // KYC check for high-value deals (>= $100K min check)
+  if (!isAdmin && !isOwner && isVerifiedInvestor) {
+    const minCheck = parseCheckToNumber(deal.min_check ?? null);
+    if (minCheck !== null && minCheck >= 100_000) {
+      const { data: kycProfile } = await adminClient
+        .from("profiles")
+        .select("kyc_status")
+        .eq("id", auth.user.id)
+        .single();
+
+      if (kycProfile?.kyc_status !== "approved") {
+        return NextResponse.json(
+          { error: "KYC verification required to access documents for this deal." },
+          { status: 403 }
+        );
+      }
+    }
   }
 
   // Generate signed URL (5 minutes)

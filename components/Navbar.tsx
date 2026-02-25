@@ -38,6 +38,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
       { href: "/admin/deals", label: "Admin" },
       { href: "/admin/analytics", label: "Analytics" },
       { href: "/admin/verifications", label: "Verifications" },
+      { href: "/admin/compliance", label: "Compliance" },
       { href: "/deals", label: "Deals" },
     ];
   }

@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import RequestIntro from "./RequestIntro";
 import DealDocuments from "./DealDocuments";
+import KycBanner from "@/components/KycBanner";
+import { parseCheckToNumber } from "@/lib/email";
 import {
   ArrowLeft,
   MapPin,
@@ -70,24 +72,30 @@ export default async function DealDetailPage({
   const deal = await getDeal(id);
   if (!deal) return notFound();
 
-  // Fetch user's verification status and role
+  // Fetch user's verification status, role, and KYC status
   let verificationStatus: string | null = null;
   let userRole: string | null = null;
+  let kycStatus: string | null = null;
   try {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("verification_status, role")
+        .select("verification_status, role, kyc_status")
         .eq("id", user.id)
         .single();
       verificationStatus = profile?.verification_status ?? null;
       userRole = profile?.role ?? null;
+      kycStatus = profile?.kyc_status ?? null;
     }
   } catch {
     // not logged in — leave null
   }
+
+  // Determine if this is a high-value deal that requires KYC
+  const minCheckNum = parseCheckToNumber(deal.min_check);
+  const needsKyc = minCheckNum !== null && minCheckNum >= 100_000 && kycStatus !== "approved" && userRole === "investor";
 
   return (
     <div className="px-6 py-10">
@@ -172,6 +180,9 @@ export default async function DealDetailPage({
                 </div>
               </div>
             </div>
+
+            {/* KYC Banner for high-value deals */}
+            {needsKyc && <KycBanner kycStatus={kycStatus ?? "none"} />}
 
             {/* Body grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
