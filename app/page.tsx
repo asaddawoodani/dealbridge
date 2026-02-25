@@ -1,20 +1,11 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BarChart3,
   Shield,
   Zap,
-  TrendingUp,
   Users,
   Building2,
 } from "lucide-react";
-
-const STATS = [
-  { value: "500+", label: "Active Deals", icon: TrendingUp },
-  { value: "1,200+", label: "Verified Investors", icon: Users },
-  { value: "$2.4B", label: "Capital Deployed", icon: BarChart3 },
-  { value: "98%", label: "Match Accuracy", icon: Zap },
-];
 
 const STEPS = [
   {
@@ -78,21 +69,6 @@ export default function Home() {
             >
               Browse Deals
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-y border-[--border] bg-[--bg-card]/50">
-        <div className="mx-auto max-w-7xl px-6 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {STATS.map((s) => (
-              <div key={s.label} className="text-center">
-                <s.icon className="h-5 w-5 text-teal-500 mx-auto mb-2" />
-                <div className="text-3xl font-bold">{s.value}</div>
-                <div className="text-sm text-[--text-muted] mt-1">{s.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
