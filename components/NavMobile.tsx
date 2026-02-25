@@ -25,7 +25,7 @@ export default function NavMobile({
       </button>
 
       {open && (
-        <div className="absolute top-16 left-0 right-0 border-b border-[--border] bg-[--bg-page]/95 backdrop-blur-xl p-4 space-y-1 z-50">
+        <div className="absolute top-16 left-0 right-0 border-b border-[--border] bg-[--bg-page] shadow-lg p-4 space-y-1 z-50">
           {links.map((l) => (
             <Link
               key={l.href}
