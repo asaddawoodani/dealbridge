@@ -6,11 +6,8 @@ const PUBLIC_ROUTES = new Set(["/", "/auth/login", "/auth/signup", "/auth/forgot
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow public API routes
-  if (
-    pathname.startsWith("/api/deals") && request.method === "GET" ||
-    pathname === "/api/operator-application"
-  ) {
+  // Let API routes handle their own auth (return JSON errors, not redirects)
+  if (pathname.startsWith("/api/")) {
     const { supabaseResponse } = await updateSession(request);
     return supabaseResponse;
   }

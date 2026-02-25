@@ -46,6 +46,20 @@ export async function GET() {
       admin.from("deals").select("id, status, created_at").gte("created_at", thirtyDaysAgo),
     ]);
 
+    // Check for query errors
+    const queryErrors: string[] = [];
+    if (profilesRes.error) queryErrors.push(`profiles: ${profilesRes.error.message}`);
+    if (dealsRes.error) queryErrors.push(`deals: ${dealsRes.error.message}`);
+    if (conversationsRes.error) queryErrors.push(`conversations: ${conversationsRes.error.message}`);
+    if (interestsRes.error) queryErrors.push(`interests: ${interestsRes.error.message}`);
+    if (verificationsRes.error) queryErrors.push(`verifications: ${verificationsRes.error.message}`);
+    if (recentProfilesRes.error) queryErrors.push(`recentProfiles: ${recentProfilesRes.error.message}`);
+    if (recentDealsRes.error) queryErrors.push(`recentDeals: ${recentDealsRes.error.message}`);
+
+    if (queryErrors.length > 0) {
+      return NextResponse.json({ error: queryErrors.join("; ") }, { status: 500 });
+    }
+
     const profiles = profilesRes.data ?? [];
     const deals = dealsRes.data ?? [];
     const conversations = conversationsRes.data ?? [];
@@ -101,7 +115,7 @@ export async function GET() {
     // Verification stats
     const verificationStats = {
       pending: verifications.filter((v) => v.status === "pending").length,
-      verified: verifications.filter((v) => v.status === "verified").length,
+      verified: verifications.filter((v) => v.status === "approved").length,
       rejected: verifications.filter((v) => v.status === "rejected").length,
     };
 

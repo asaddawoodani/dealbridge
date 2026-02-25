@@ -53,7 +53,7 @@ export default function AdminAnalyticsPage() {
     fetch("/api/admin/analytics")
       .then((r) => r.json())
       .then((d) => {
-        setData(d);
+        if (d.overview) setData(d);
         setLoading(false);
       })
       .catch(() => setLoading(false));
