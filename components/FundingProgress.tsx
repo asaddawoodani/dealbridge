@@ -1,6 +1,6 @@
 "use client";
 
-import { formatCurrency, formatCompact } from "@/lib/email";
+import { formatCurrency, formatCompact } from "@/lib/format";
 
 export default function FundingProgress({
   targetRaise,
