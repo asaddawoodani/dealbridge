@@ -1,16 +1,19 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Send, Shield } from "lucide-react";
+import { Send, Shield, ShieldAlert } from "lucide-react";
+import Link from "next/link";
 
 type Msg = { type: "ok" | "err"; text: string } | null;
 
 export default function RequestIntro({
   dealId,
   dealTitle,
+  verificationStatus,
 }: {
   dealId: string;
   dealTitle: string;
+  verificationStatus: string | null;
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -86,6 +89,43 @@ export default function RequestIntro({
       setLoading(false);
     }
   };
+
+  // Gate: not verified
+  if (verificationStatus !== "verified") {
+    const isLoggedIn = verificationStatus !== null;
+    const isPending = verificationStatus === "pending";
+    const isRejected = verificationStatus === "rejected";
+
+    return (
+      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 text-center space-y-3">
+        <ShieldAlert className="h-8 w-8 text-amber-400 mx-auto" />
+        <div className="text-sm font-semibold text-[--text-primary]">
+          {isPending
+            ? "Verification Pending"
+            : isRejected
+            ? "Verification Rejected"
+            : "Verification Required"}
+        </div>
+        <div className="text-xs text-[--text-secondary]">
+          {isPending
+            ? "Your verification is being reviewed. You'll be able to request introductions once approved."
+            : isRejected
+            ? "Your verification was not approved. Please resubmit to request introductions."
+            : isLoggedIn
+            ? "You need to verify your account before requesting deal introductions."
+            : "Log in and verify your account to request deal introductions."}
+        </div>
+        {!isPending && (
+          <Link
+            href={isLoggedIn ? "/verify" : "/auth/login"}
+            className="inline-block rounded-xl bg-amber-500 text-white px-4 py-2.5 text-sm font-semibold hover:bg-amber-600 transition-all"
+          >
+            {isLoggedIn ? (isRejected ? "Resubmit Verification" : "Verify Account") : "Log In"}
+          </Link>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">

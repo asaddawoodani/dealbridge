@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import RequestIntro from "./RequestIntro";
 import {
   ArrowLeft,
@@ -67,6 +68,23 @@ export default async function DealDetailPage({
 
   const deal = await getDeal(id);
   if (!deal) return notFound();
+
+  // Fetch user's verification status
+  let verificationStatus: string | null = null;
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("verification_status")
+        .eq("id", user.id)
+        .single();
+      verificationStatus = profile?.verification_status ?? null;
+    }
+  } catch {
+    // not logged in — leave null
+  }
 
   return (
     <div className="px-6 py-10">
@@ -203,7 +221,7 @@ export default async function DealDetailPage({
                   </ul>
 
                   <div className="mt-5">
-                    <RequestIntro dealId={deal.id} dealTitle={deal.title} />
+                    <RequestIntro dealId={deal.id} dealTitle={deal.title} verificationStatus={verificationStatus} />
                   </div>
 
                   <div className="text-[11px] text-[--text-muted] mt-3">

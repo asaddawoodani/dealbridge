@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Eye,
   Pencil,
+  ShieldAlert,
 } from "lucide-react";
 
 type Deal = {
@@ -35,6 +36,7 @@ export default function OperatorDashboard() {
   const [loading, setLoading] = useState(true);
   const [deals, setDeals] = useState<Deal[]>([]);
   const [userName, setUserName] = useState("");
+  const [verificationStatus, setVerificationStatus] = useState<string>("unverified");
   const [toast, setToast] = useState<Toast>(null);
 
   useEffect(() => {
@@ -55,11 +57,12 @@ export default function OperatorDashboard() {
       // Fetch name
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name")
+        .select("full_name, verification_status")
         .eq("id", user.id)
         .single();
 
       setUserName(profile?.full_name ?? "");
+      setVerificationStatus(profile?.verification_status ?? "unverified");
 
       // Fetch operator's deals
       const res = await fetch(
@@ -89,13 +92,23 @@ export default function OperatorDashboard() {
             )}
           </div>
 
-          <Link
-            href="/operator/deals/new"
-            className="rounded-xl bg-teal-500 text-white px-5 py-3 font-semibold hover:bg-teal-600 transition-all text-sm flex items-center gap-2"
-          >
-            <Plus className="h-4 w-4" />
-            Submit New Deal
-          </Link>
+          {verificationStatus === "verified" ? (
+            <Link
+              href="/operator/deals/new"
+              className="rounded-xl bg-teal-500 text-white px-5 py-3 font-semibold hover:bg-teal-600 transition-all text-sm flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Submit New Deal
+            </Link>
+          ) : (
+            <Link
+              href="/operator/verify"
+              className="rounded-xl bg-amber-500 text-white px-5 py-3 font-semibold hover:bg-amber-600 transition-all text-sm flex items-center gap-2"
+            >
+              <ShieldAlert className="h-4 w-4" />
+              {verificationStatus === "pending" ? "Verification Pending" : "Verify to Submit"}
+            </Link>
+          )}
         </div>
 
         {/* Stats */}

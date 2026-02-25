@@ -2,17 +2,25 @@
 
 import { useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { LogOut, User, ChevronDown } from "lucide-react";
+import { LogOut, User, ChevronDown, ShieldCheck, ShieldAlert, Clock, Shield } from "lucide-react";
 
 type Profile = {
   full_name: string | null;
   role: string;
+  verification_status: string;
 };
 
 const ROLE_COLORS: Record<string, string> = {
   admin: "bg-amber-500/15 text-amber-400 border-amber-500/30",
   operator: "bg-purple-500/15 text-purple-400 border-purple-500/30",
   investor: "bg-teal-500/15 text-teal-400 border-teal-500/30",
+};
+
+const VERIFICATION_BADGE: Record<string, { label: string; className: string; icon: typeof ShieldCheck }> = {
+  verified: { label: "Verified", className: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30", icon: ShieldCheck },
+  pending: { label: "Pending", className: "bg-amber-500/15 text-amber-400 border-amber-500/30", icon: Clock },
+  rejected: { label: "Rejected", className: "bg-red-500/15 text-red-400 border-red-500/30", icon: ShieldAlert },
+  unverified: { label: "Unverified", className: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30", icon: Shield },
 };
 
 export default function UserMenu() {
@@ -30,7 +38,7 @@ export default function UserMenu() {
 
       const { data } = await supabase
         .from("profiles")
-        .select("full_name, role")
+        .select("full_name, role, verification_status")
         .eq("id", user.id)
         .single();
 
@@ -64,6 +72,11 @@ export default function UserMenu() {
     .toUpperCase()
     .slice(0, 2);
 
+  const vBadge = VERIFICATION_BADGE[profile.verification_status] ?? VERIFICATION_BADGE.unverified;
+  const isVerified = profile.verification_status === "verified";
+  const isAdmin = profile.role === "admin";
+  const verifyHref = profile.role === "operator" ? "/operator/verify" : "/verify";
+
   return (
     <div ref={ref} className="relative">
       <button
@@ -83,13 +96,22 @@ export default function UserMenu() {
         <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[--border] bg-[--bg-card] shadow-xl z-50">
           <div className="p-3 border-b border-[--border]">
             <div className="text-sm font-medium truncate">{profile.full_name ?? "User"}</div>
-            <span
-              className={`inline-block mt-1.5 text-[11px] px-2 py-0.5 rounded-full border font-medium ${
-                ROLE_COLORS[profile.role] ?? ROLE_COLORS.investor
-              }`}
-            >
-              {profile.role}
-            </span>
+            <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
+              <span
+                className={`inline-block text-[11px] px-2 py-0.5 rounded-full border font-medium ${
+                  ROLE_COLORS[profile.role] ?? ROLE_COLORS.investor
+                }`}
+              >
+                {profile.role}
+              </span>
+              {!isAdmin && (
+                <span
+                  className={`inline-block text-[11px] px-2 py-0.5 rounded-full border font-medium ${vBadge.className}`}
+                >
+                  {vBadge.label}
+                </span>
+              )}
+            </div>
           </div>
           <div className="p-1.5">
             <a
@@ -99,6 +121,15 @@ export default function UserMenu() {
               <User className="h-4 w-4" />
               Dashboard
             </a>
+            {!isAdmin && !isVerified && (
+              <a
+                href={verifyHref}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated]"
+              >
+                <ShieldAlert className="h-4 w-4" />
+                Verify Account
+              </a>
+            )}
             <button
               onClick={handleLogout}
               className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] w-full text-left"

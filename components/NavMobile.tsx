@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-type NavLink = { href: string; label: string };
+type NavLink = { href: string; label: string; highlight?: boolean };
 
 export default function NavMobile({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false);
@@ -25,7 +25,12 @@ export default function NavMobile({ links }: { links: NavLink[] }) {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+              className={[
+                "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-[--bg-elevated]",
+                l.highlight
+                  ? "text-amber-400 hover:text-amber-300"
+                  : "text-[--text-secondary] hover:text-[--text-primary]",
+              ].join(" ")}
             >
               {l.label}
             </Link>

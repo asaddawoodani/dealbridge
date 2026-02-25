@@ -10,49 +10,63 @@ async function getNavData() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return { role: null };
+    if (!user) return { role: null, verificationStatus: null };
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("role")
+      .select("role, verification_status")
       .eq("id", user.id)
       .single();
 
-    return { role: profile?.role ?? "investor" };
+    return {
+      role: profile?.role ?? "investor",
+      verificationStatus: profile?.verification_status ?? "unverified",
+    };
   } catch {
-    return { role: null };
+    return { role: null, verificationStatus: null };
   }
 }
 
-type NavLink = { href: string; label: string };
+type NavLink = { href: string; label: string; highlight?: boolean };
 
-function getLinks(role: string | null): NavLink[] {
+function getLinks(role: string | null, verificationStatus: string | null): NavLink[] {
   if (!role) return [];
 
   if (role === "admin") {
     return [
       { href: "/admin/deals", label: "Admin" },
+      { href: "/admin/verifications", label: "Verifications" },
       { href: "/deals", label: "Deals" },
     ];
   }
 
+  const needsVerify = verificationStatus !== "verified" && verificationStatus !== "pending";
+
   if (role === "operator") {
-    return [
+    const links: NavLink[] = [
       { href: "/operator/dashboard", label: "My Deals" },
       { href: "/deals", label: "Browse Deals" },
     ];
+    if (needsVerify) {
+      links.push({ href: "/operator/verify", label: "Verify", highlight: true });
+    }
+    return links;
   }
 
   // investor
-  return [
+  const links: NavLink[] = [
     { href: "/deals", label: "Deals" },
     { href: "/dashboard", label: "Dashboard" },
   ];
+  if (needsVerify) {
+    links.push({ href: "/verify", label: "Verify", highlight: true });
+  }
+  return links;
 }
 
 export default async function Navbar() {
-  const { role } = await getNavData();
-  const links = getLinks(role);
+  const { role, verificationStatus } = await getNavData();
+  const links = getLinks(role, verificationStatus);
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[--border] bg-[--bg-page]/80 backdrop-blur-xl">
@@ -73,7 +87,12 @@ export default async function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] transition-all"
+              className={[
+                "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                l.highlight
+                  ? "text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
+                  : "text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]",
+              ].join(" ")}
             >
               {l.label}
             </Link>

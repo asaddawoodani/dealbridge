@@ -50,7 +50,7 @@ export async function POST(req: Request) {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, verification_status")
     .eq("id", user.id)
     .single();
 
@@ -58,6 +58,14 @@ export async function POST(req: Request) {
 
   if (role !== "admin" && role !== "operator") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Operators must be verified to submit deals
+  if (role === "operator" && profile?.verification_status !== "verified") {
+    return NextResponse.json(
+      { error: "Business verification required before submitting deals." },
+      { status: 403 }
+    );
   }
 
   try {

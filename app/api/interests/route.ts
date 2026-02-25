@@ -14,6 +14,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Enforce verification
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("verification_status")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.verification_status !== "verified") {
+      return NextResponse.json(
+        { error: "Account verification required before requesting introductions." },
+        { status: 403 }
+      );
+    }
+
     const body = await req.json().catch(() => ({}));
 
     const deal_id = String(body?.deal_id ?? "").trim();

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Plus, X } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import { ArrowLeft, Plus, X, ShieldAlert } from "lucide-react";
+import Link from "next/link";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -17,6 +19,26 @@ const CATEGORIES = [
 
 export default function NewDealPage() {
   const router = useRouter();
+  const [verificationStatus, setVerificationStatus] = useState<string | null>(null);
+  const [checkingVerification, setCheckingVerification] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/auth/login");
+        return;
+      }
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("verification_status")
+        .eq("id", user.id)
+        .single();
+      setVerificationStatus(profile?.verification_status ?? "unverified");
+      setCheckingVerification(false);
+    })();
+  }, [router]);
 
   const [form, setForm] = useState({
     title: "",
@@ -83,6 +105,42 @@ export default function NewDealPage() {
 
     router.push("/operator/dashboard");
   };
+
+  if (checkingVerification) {
+    return (
+      <div className="px-6 py-10">
+        <div className="mx-auto max-w-2xl text-[--text-secondary]">Loading...</div>
+      </div>
+    );
+  }
+
+  if (verificationStatus !== "verified") {
+    return (
+      <div className="px-6 py-10">
+        <div className="mx-auto max-w-2xl">
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8 text-center space-y-4">
+            <ShieldAlert className="h-12 w-12 text-amber-400 mx-auto" />
+            <h1 className="text-2xl font-bold">Verification Required</h1>
+            <p className="text-[--text-secondary]">
+              {verificationStatus === "pending"
+                ? "Your verification is being reviewed. You'll be able to submit deals once approved."
+                : verificationStatus === "rejected"
+                ? "Your verification was not approved. Please resubmit to start submitting deals."
+                : "You need to verify your business before submitting deals on the platform."}
+            </p>
+            {verificationStatus !== "pending" && (
+              <Link
+                href="/operator/verify"
+                className="inline-block rounded-xl bg-amber-500 text-white px-5 py-3 font-semibold hover:bg-amber-600 transition-all text-sm"
+              >
+                {verificationStatus === "rejected" ? "Resubmit Verification" : "Verify Business"}
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="px-6 py-10">
