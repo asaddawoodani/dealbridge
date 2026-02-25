@@ -57,11 +57,25 @@ export default function PortfolioPage() {
     return () => clearTimeout(t);
   }, [toast]);
 
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
   const loadCommitments = async () => {
     setLoading(true);
-    const res = await fetch("/api/commitments");
-    const json = await res.json().catch(() => null);
-    setCommitments(json?.commitments ?? []);
+    setFetchError(null);
+    try {
+      const res = await fetch("/api/commitments");
+      const json = await res.json().catch(() => null);
+      if (!res.ok) {
+        setFetchError(`API error ${res.status}: ${json?.error ?? "Unknown error"}`);
+        setCommitments([]);
+        setLoading(false);
+        return;
+      }
+      setCommitments(json?.commitments ?? []);
+    } catch (err) {
+      setFetchError(`Network error: ${err instanceof Error ? err.message : "Failed to fetch"}`);
+      setCommitments([]);
+    }
     setLoading(false);
   };
 
@@ -114,6 +128,14 @@ export default function PortfolioPage() {
             Track your investment commitments across all deals.
           </p>
         </div>
+
+        {/* Error banner */}
+        {fetchError && (
+          <div className="mb-6 rounded-xl border border-red-500/30 bg-red-500/10 px-5 py-4 text-sm text-red-400">
+            <div className="font-semibold mb-1">Failed to load portfolio</div>
+            {fetchError}
+          </div>
+        )}
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
