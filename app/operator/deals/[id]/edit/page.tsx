@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ArrowLeft, Plus, X } from "lucide-react";
+import FileUpload, { type UploadedDoc } from "@/components/FileUpload";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -33,6 +34,7 @@ export default function EditDealPage() {
   });
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
+  const [existingDocs, setExistingDocs] = useState<UploadedDoc[]>([]);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<Toast>(null);
 
@@ -67,6 +69,14 @@ export default function EditDealPage() {
         timeline: deal.timeline ?? "",
       });
       setTags(deal.tags ?? []);
+
+      // Fetch existing documents
+      const docsRes = await fetch(`/api/deals/${id}/documents`);
+      const docsJson = await docsRes.json().catch(() => null);
+      if (docsRes.ok && docsJson?.documents) {
+        setExistingDocs(docsJson.documents);
+      }
+
       setLoading(false);
     })();
   }, [id, router]);
@@ -283,6 +293,13 @@ export default function EditDealPage() {
               </button>
             </div>
           </div>
+
+          {/* Documents */}
+          <FileUpload
+            dealId={id}
+            existingDocuments={existingDocs}
+            onDocumentsChange={setExistingDocs}
+          />
 
           {/* Submit */}
           <div className="flex items-center justify-end pt-2">

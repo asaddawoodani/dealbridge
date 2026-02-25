@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ArrowLeft, Plus, X, ShieldAlert } from "lucide-react";
 import Link from "next/link";
+import FileUpload, { type QueuedFile } from "@/components/FileUpload";
 
 type Toast = { type: "success" | "error"; message: string } | null;
 
@@ -50,6 +51,7 @@ export default function NewDealPage() {
   });
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
+  const [queuedFiles, setQueuedFiles] = useState<QueuedFile[]>([]);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<Toast>(null);
 
@@ -96,13 +98,28 @@ export default function NewDealPage() {
     });
 
     const json = await res.json().catch(() => null);
-    setSaving(false);
 
     if (!res.ok) {
+      setSaving(false);
       setToast({ type: "error", message: json?.error ?? "Submission failed." });
       return;
     }
 
+    // Upload queued files
+    const newDealId = json?.deal?.id;
+    if (newDealId && queuedFiles.length > 0) {
+      for (const qf of queuedFiles) {
+        const fd = new FormData();
+        fd.append("file", qf.file);
+        fd.append("file_label", qf.label);
+        await fetch(`/api/deals/${newDealId}/documents`, {
+          method: "POST",
+          body: fd,
+        });
+      }
+    }
+
+    setSaving(false);
     router.push("/operator/dashboard");
   };
 
@@ -279,6 +296,9 @@ export default function NewDealPage() {
               </button>
             </div>
           </div>
+
+          {/* Documents */}
+          <FileUpload onQueueChange={setQueuedFiles} />
 
           {/* Submit */}
           <div className="flex items-center justify-end pt-2">

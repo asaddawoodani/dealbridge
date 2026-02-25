@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import RequestIntro from "./RequestIntro";
+import DealDocuments from "./DealDocuments";
 import {
   ArrowLeft,
   MapPin,
@@ -69,18 +70,20 @@ export default async function DealDetailPage({
   const deal = await getDeal(id);
   if (!deal) return notFound();
 
-  // Fetch user's verification status
+  // Fetch user's verification status and role
   let verificationStatus: string | null = null;
+  let userRole: string | null = null;
   try {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("verification_status")
+        .select("verification_status, role")
         .eq("id", user.id)
         .single();
       verificationStatus = profile?.verification_status ?? null;
+      userRole = profile?.role ?? null;
     }
   } catch {
     // not logged in — leave null
@@ -173,19 +176,27 @@ export default async function DealDetailPage({
             {/* Body grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main */}
-              <section className="lg:col-span-2 rounded-xl border border-[--border] bg-[--bg-input] p-6">
-                <div className="text-sm font-semibold flex items-center gap-1.5">
-                  <FileText className="h-4 w-4 text-teal-400" />
-                  Overview
-                </div>
-                {deal.description ? (
-                  <div className="text-[--text-secondary] mt-3 whitespace-pre-wrap leading-relaxed">
-                    {deal.description}
+              <div className="lg:col-span-2 space-y-6">
+                <section className="rounded-xl border border-[--border] bg-[--bg-input] p-6">
+                  <div className="text-sm font-semibold flex items-center gap-1.5">
+                    <FileText className="h-4 w-4 text-teal-400" />
+                    Overview
                   </div>
-                ) : (
-                  <div className="text-[--text-muted] mt-3">No description provided.</div>
-                )}
-              </section>
+                  {deal.description ? (
+                    <div className="text-[--text-secondary] mt-3 whitespace-pre-wrap leading-relaxed">
+                      {deal.description}
+                    </div>
+                  ) : (
+                    <div className="text-[--text-muted] mt-3">No description provided.</div>
+                  )}
+                </section>
+
+                <DealDocuments
+                  dealId={deal.id}
+                  verificationStatus={verificationStatus}
+                  userRole={userRole}
+                />
+              </div>
 
               {/* Sidebar */}
               <aside className="space-y-5 lg:sticky lg:top-24 h-fit">
