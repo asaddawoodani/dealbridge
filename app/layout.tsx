@@ -17,7 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dealbridge — Private Deal Flow for Investors",
+  title: "DealBridge — Private Deal Flow for Investors",
   description:
     "Connect with vetted businesses and qualified operators offering investment opportunities that match your interests. Private deal flow, smart matching.",
 };

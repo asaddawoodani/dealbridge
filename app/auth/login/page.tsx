@@ -60,7 +60,7 @@ function LoginForm() {
           <LogIn className="h-6 w-6" />
         </div>
         <h1 className="text-3xl font-bold">Sign in</h1>
-        <p className="text-[--text-secondary] mt-2">Welcome back to Dealbridge</p>
+        <p className="text-[--text-secondary] mt-2">Welcome back to DealBridge</p>
       </div>
 
       <form onSubmit={handleLogin} className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">

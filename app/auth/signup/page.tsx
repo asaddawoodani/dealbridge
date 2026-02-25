@@ -85,7 +85,7 @@ export default function SignUpPage() {
             <UserPlus className="h-6 w-6" />
           </div>
           <h1 className="text-3xl font-bold">Create account</h1>
-          <p className="text-[--text-secondary] mt-2">Join Dealbridge</p>
+          <p className="text-[--text-secondary] mt-2">Join DealBridge</p>
         </div>
 
         <form onSubmit={handleSignUp} className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">

@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="h-6 w-6 rounded-md bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold text-[10px]">
               D
             </div>
-            <span className="text-sm font-semibold text-[--text-secondary]">Dealbridge</span>
+            <span className="text-sm font-semibold text-[--text-secondary]">DealBridge</span>
           </div>
 
           <div className="flex items-center gap-4 sm:gap-6 text-sm text-[--text-muted]">
@@ -34,7 +34,7 @@ export default function Footer() {
             <Link href="/disclaimer" className="py-1 hover:text-[--text-primary] transition">
               Disclaimer
             </Link>
-            <span>&copy; {new Date().getFullYear()} Dealbridge</span>
+            <span>&copy; {new Date().getFullYear()} DealBridge</span>
           </div>
         </div>
       </div>

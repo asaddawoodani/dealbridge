@@ -4,7 +4,7 @@
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
 export const ADMIN_EMAIL = "asadd1993@gmail.com";
-export const FROM_EMAIL = "Dealbridge <onboarding@resend.dev>";
+export const FROM_EMAIL = "DealBridge <onboarding@resend.dev>";
 
 // ---- send helper ----------------------------------------------------------
 
@@ -68,7 +68,7 @@ export function emailTemplate({
           ${ctaBlock}
         </td></tr>
       </table>
-      <p style="margin-top:24px;font-size:12px;color:#52525b;">Dealbridge &mdash; Private deal flow for investors</p>
+      <p style="margin-top:24px;font-size:12px;color:#52525b;">DealBridge &mdash; Private deal flow for investors</p>
     </td></tr>
   </table>
 </body>

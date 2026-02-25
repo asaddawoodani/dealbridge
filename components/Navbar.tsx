@@ -82,7 +82,7 @@ export default async function Navbar() {
             D
           </div>
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
-            Dealbridge
+            DealBridge
           </span>
         </Link>
 

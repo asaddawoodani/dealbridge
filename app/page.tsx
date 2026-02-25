@@ -108,7 +108,7 @@ export default function Home() {
         <div className="rounded-2xl border border-[--border] bg-gradient-to-br from-teal-500/10 via-[--bg-card] to-[--bg-card] p-6 sm:p-12 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold">Ready to find your next deal?</h2>
           <p className="text-[--text-secondary] mt-3 max-w-xl mx-auto">
-            Join qualified investors and vetted operators who use Dealbridge to close deals faster.
+            Join qualified investors and vetted operators who use DealBridge to close deals faster.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <Link

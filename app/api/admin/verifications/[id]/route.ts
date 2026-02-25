@@ -93,11 +93,11 @@ export async function PATCH(
       if (action === "approve") {
         sendEmail({
           to: userEmail,
-          subject: "Your Dealbridge account has been verified",
+          subject: "Your DealBridge account has been verified",
           html: emailTemplate({
             title: "Account Verified",
             body: `Congratulations ${userName}! Your account has been verified. You now have full access to the platform.`,
-            ctaText: "Go to Dealbridge",
+            ctaText: "Go to DealBridge",
             ctaUrl: appUrl,
           }),
         }).catch((err: unknown) =>
@@ -106,7 +106,7 @@ export async function PATCH(
       } else {
         sendEmail({
           to: userEmail,
-          subject: "Your Dealbridge verification was not approved",
+          subject: "Your DealBridge verification was not approved",
           html: emailTemplate({
             title: "Verification Not Approved",
             body: [

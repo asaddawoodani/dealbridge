@@ -47,10 +47,10 @@ export async function GET(request: Request) {
 
         sendEmail({
           to: user.email!,
-          subject: "Welcome to Dealbridge",
+          subject: "Welcome to DealBridge",
           html: emailTemplate({
             title: `Welcome, ${name}!`,
-            body: "Thanks for joining Dealbridge. We connect investors with curated private deal flow. Get started below.",
+            body: "Thanks for joining DealBridge. We connect investors with curated private deal flow. Get started below.",
             ctaText: ctaLabel,
             ctaUrl,
           }),

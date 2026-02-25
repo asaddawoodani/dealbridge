@@ -9,7 +9,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-[--text-primary] mb-3">1. Platform Overview</h2>
             <p>
-              Dealbridge (&ldquo;Platform&rdquo;) is a private deal-flow marketplace that connects accredited investors with vetted operators
+              DealBridge (&ldquo;Platform&rdquo;) is a private deal-flow marketplace that connects accredited investors with vetted operators
               and business opportunities. The Platform facilitates introductions and information sharing but does not provide
               investment advice, broker-dealer services, or act as a fiduciary.
             </p>
@@ -47,7 +47,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-[--text-primary] mb-3">5. Intellectual Property</h2>
             <p>
-              All content, trademarks, and materials on the Platform are owned by or licensed to Dealbridge. You may not
+              All content, trademarks, and materials on the Platform are owned by or licensed to DealBridge. You may not
               reproduce, distribute, or create derivative works without prior written consent.
             </p>
           </section>
@@ -63,7 +63,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-[--text-primary] mb-3">7. Limitation of Liability</h2>
             <p>
-              To the maximum extent permitted by law, Dealbridge and its affiliates shall not be liable for any indirect,
+              To the maximum extent permitted by law, DealBridge and its affiliates shall not be liable for any indirect,
               incidental, special, consequential, or punitive damages arising from your use of the Platform or any investment
               decisions made based on information obtained through the Platform.
             </p>

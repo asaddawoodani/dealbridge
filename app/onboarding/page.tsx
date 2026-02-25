@@ -244,7 +244,7 @@ export default function OnboardingPage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Investor Onboarding</h1>
           <p className="text-[--text-secondary] mt-2">
-            Tell Dealbridge what you&apos;re interested in so we can match you with the right deals.
+            Tell DealBridge what you&apos;re interested in so we can match you with the right deals.
           </p>
         </div>
 

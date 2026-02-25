@@ -8,7 +8,7 @@ export default function DisclaimerPage() {
         <div className="prose-custom space-y-8 text-[--text-secondary] text-sm leading-relaxed">
           <section className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 sm:p-6">
             <p className="text-amber-200 font-medium">
-              Dealbridge is not a registered broker-dealer, investment adviser, or funding portal. The Platform does not
+              DealBridge is not a registered broker-dealer, investment adviser, or funding portal. The Platform does not
               provide investment advice, recommendations, or endorsements of any kind.
             </p>
           </section>
@@ -16,8 +16,8 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-lg font-semibold text-[--text-primary] mb-3">Not Investment Advice</h2>
             <p>
-              Nothing on the Dealbridge platform constitutes investment advice, financial advice, trading advice,
-              or any other sort of advice. You should not treat any of the platform&apos;s content as such. Dealbridge
+              Nothing on the DealBridge platform constitutes investment advice, financial advice, trading advice,
+              or any other sort of advice. You should not treat any of the platform&apos;s content as such. DealBridge
               does not recommend that any investment be bought, sold, or held by you. You should conduct your own
               due diligence and consult with a qualified financial professional before making any investment decision.
             </p>
@@ -38,9 +38,9 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-lg font-semibold text-[--text-primary] mb-3">No Guarantees</h2>
             <p>
-              Dealbridge makes no representations or warranties about the accuracy, completeness, or reliability of
+              DealBridge makes no representations or warranties about the accuracy, completeness, or reliability of
               any information provided by operators or listed on the Platform. Deal listings, financial projections,
-              and operator claims have not been independently verified by Dealbridge unless explicitly stated.
+              and operator claims have not been independently verified by DealBridge unless explicitly stated.
               Past performance of any deal, operator, or investment strategy is not indicative of future results.
             </p>
           </section>
@@ -54,7 +54,7 @@ export default function DisclaimerPage() {
               Regulation D under the Securities Act.
             </p>
             <p className="mt-3">
-              Dealbridge performs KYC (Know Your Customer) and identity verification as part of its compliance
+              DealBridge performs KYC (Know Your Customer) and identity verification as part of its compliance
               obligations. However, KYC verification does not constitute an endorsement of any investor&apos;s
               financial suitability for any particular investment.
             </p>
