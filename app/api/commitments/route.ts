@@ -26,8 +26,8 @@ export async function POST(req: Request) {
     .eq("id", user.id)
     .single();
 
-  if (profile?.role !== "investor") {
-    return NextResponse.json({ error: "Investor role required" }, { status: 403 });
+  if (profile?.role !== "investor" && profile?.role !== "admin") {
+    return NextResponse.json({ error: "Investor or admin role required" }, { status: 403 });
   }
 
   if (profile.verification_status !== "verified") {

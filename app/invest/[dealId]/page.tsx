@@ -70,7 +70,7 @@ export default function InvestPage() {
         .eq("id", user.id)
         .single();
 
-      if (profile?.role !== "investor") {
+      if (profile?.role !== "investor" && profile?.role !== "admin") {
         setGate("role");
         setLoading(false);
         return;
