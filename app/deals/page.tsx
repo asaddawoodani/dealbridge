@@ -585,7 +585,7 @@ function DealsContent() {
 
 export default function DealsPage() {
   return (
-    <div className="px-6 py-10">
+    <div className="px-4 sm:px-6 py-10">
       <Suspense fallback={<div className="mx-auto max-w-6xl text-[--text-muted]">Loading...</div>}>
         <DealsContent />
       </Suspense>
