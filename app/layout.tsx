@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: "DealBridge — Private Deal Flow for Investors",
   description:
     "Connect with vetted businesses and qualified operators offering investment opportunities that match your interests. Private deal flow, smart matching.",
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

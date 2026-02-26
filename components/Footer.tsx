@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,9 +7,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded-md bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold text-[10px]">
-              D
-            </div>
+            <Image src="/logo.svg" alt="DealBridge" width={24} height={24} />
             <span className="text-sm font-semibold text-[--text-secondary]">DealBridge</span>
           </div>
 

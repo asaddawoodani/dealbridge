@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+  <!-- Left tower -->
+  <rect x="28" y="15" width="5" height="55" rx="1.5" fill="url(#tealGrad)" />
+  <!-- Right tower -->
+  <rect x="67" y="15" width="5" height="55" rx="1.5" fill="url(#tealGrad)" />
+  <!-- Bridge deck -->
+  <rect x="10" y="62" width="80" height="4" rx="2" fill="#14b8a6" />
+  <!-- Left tower cables - left fan -->
+  <line x1="30.5" y1="20" x2="12" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.6" />
+  <line x1="30.5" y1="20" x2="18" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.5" />
+  <line x1="30.5" y1="20" x2="24" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.4" />
+  <!-- Left tower cables - right fan -->
+  <line x1="30.5" y1="20" x2="37" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.4" />
+  <line x1="30.5" y1="20" x2="43" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.5" />
+  <line x1="30.5" y1="20" x2="48" y2="62" stroke="#14b8a6" stroke-width="1.2" opacity="0.6" />
+  <!-- Right tower cables - left fan -->
+  <line x1="69.5" y1="20" x2="52" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+  <line x1="69.5" y1="20" x2="57" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.5" />
+  <line x1="69.5" y1="20" x2="63" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.4" />
+  <!-- Right tower cables - right fan -->
+  <line x1="69.5" y1="20" x2="76" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.4" />
+  <line x1="69.5" y1="20" x2="82" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.5" />
+  <line x1="69.5" y1="20" x2="88" y2="62" stroke="#10b981" stroke-width="1.2" opacity="0.6" />
+  <!-- Tower caps -->
+  <circle cx="30.5" cy="15" r="3" fill="#14b8a6" />
+  <circle cx="69.5" cy="15" r="3" fill="#10b981" />
+</svg>

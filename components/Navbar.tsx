@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import UserMenu from "./UserMenu";
 import NavMobile from "./NavMobile";
@@ -78,9 +79,7 @@ export default async function Navbar() {
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold text-sm">
-            D
-          </div>
+          <Image src="/logo.svg" alt="DealBridge" width={32} height={32} priority />
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
             DealBridge
           </span>
