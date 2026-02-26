@@ -83,6 +83,9 @@ export default async function Navbar() {
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
             DealBridge
           </span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider bg-teal-500/15 text-teal-400 border border-teal-500/30 px-1.5 py-0.5 rounded-full">
+            Beta
+          </span>
         </Link>
 
         {/* Desktop links */}
