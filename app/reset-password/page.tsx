@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { KeyRound } from "lucide-react";
 
 export default function ResetPasswordPage() {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -41,8 +39,8 @@ export default function ResetPasswordPage() {
     setSuccess(true);
     setLoading(false);
 
-    // Redirect to login after a short delay
-    setTimeout(() => router.push("/auth/login"), 3000);
+    // Full page reload to login so the server Navbar re-renders
+    setTimeout(() => (window.location.href = "/auth/login"), 3000);
   };
 
   if (success) {

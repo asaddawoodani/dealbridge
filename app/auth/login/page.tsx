@@ -40,16 +40,16 @@ function LoginForm() {
 
       const role = profile?.role ?? "investor";
       if (redirectTo !== "/dashboard") {
-        router.push(redirectTo);
+        window.location.href = redirectTo;
       } else if (role === "admin") {
-        router.push("/admin/deals");
+        window.location.href = "/admin/deals";
       } else if (role === "operator") {
-        router.push("/deals");
+        window.location.href = "/deals";
       } else {
-        router.push("/dashboard");
+        window.location.href = "/dashboard";
       }
     } else {
-      router.push(redirectTo);
+      window.location.href = redirectTo;
     }
   };
 
