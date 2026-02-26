@@ -113,10 +113,10 @@ export default function UserMenu() {
               )}
             </div>
           </div>
-          <div className="p-1.5 space-y-0.5">
+          <div className="py-1">
             <a
               href="/dashboard"
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
             >
               <User className="h-4 w-4" />
               Dashboard
@@ -124,18 +124,18 @@ export default function UserMenu() {
             {!isAdmin && !isVerified && (
               <a
                 href={verifyHref}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated]"
+                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated]"
               >
                 <ShieldAlert className="h-4 w-4" />
                 Verify Account
               </a>
             )}
           </div>
-          <div className="border-t border-[--border] mx-1.5" />
-          <div className="p-1.5">
+          <div className="border-t border-[--border]" />
+          <div className="py-1">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left"
             >
               <LogOut className="h-4 w-4" />
               Sign out
