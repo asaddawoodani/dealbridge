@@ -81,7 +81,7 @@ export default function UserMenu() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2.5 rounded-xl border border-[--border] px-3 py-2 hover:border-[--border-hover] transition-all"
+        className="flex items-center gap-2.5 rounded-xl border border-[--border] px-3 py-2 hover:border-[--border-hover] transition-all outline-none"
       >
         <div className="h-8 w-8 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold">
           {initials}
@@ -116,7 +116,7 @@ export default function UserMenu() {
           <div className="py-1">
             <a
               href="/dashboard"
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] outline-none"
             >
               <User className="h-4 w-4" />
               Dashboard
@@ -124,7 +124,7 @@ export default function UserMenu() {
             {!isAdmin && !isVerified && (
               <a
                 href={verifyHref}
-                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated]"
+                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated] outline-none"
               >
                 <ShieldAlert className="h-4 w-4" />
                 Verify Account
@@ -135,7 +135,7 @@ export default function UserMenu() {
           <div className="py-1">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left outline-none"
             >
               <LogOut className="h-4 w-4" />
               Sign out
