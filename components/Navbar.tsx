@@ -81,7 +81,7 @@ export default async function Navbar() {
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <Image src="/logo.svg" alt="DealBridge" width={38} height={38} priority />
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
-            DealBridge
+            Deal<span className="text-teal-400">Bridge</span>
           </span>
           <span className="text-[10px] font-semibold uppercase tracking-wider bg-teal-500/15 text-teal-400 border border-teal-500/30 px-1.5 py-0.5 rounded-full">
             Beta
