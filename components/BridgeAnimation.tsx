@@ -2,11 +2,11 @@
 
 export default function BridgeAnimation() {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden scale-[1.35]" aria-hidden="true">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center" aria-hidden="true">
       <svg
         viewBox="0 0 1200 500"
-        preserveAspectRatio="xMidYMax slice"
-        className="absolute inset-0 w-full h-full opacity-[0.4]"
+        preserveAspectRatio="xMidYMid meet"
+        className="w-full h-full max-w-[1400px] opacity-[0.35]"
         xmlns="http://www.w3.org/2000/svg"
       >
         <style>{`
