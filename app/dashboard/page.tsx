@@ -270,7 +270,7 @@ export default function DashboardPage() {
                   <Clock className="h-3.5 w-3.5" />
                   Timeline
                 </div>
-                <div className="font-bold text-lg">{profile.timeline ?? "---"}</div>
+                <div className="font-bold text-lg">{profile.timeline?.replace(/_/g, " ") ?? "---"}</div>
               </div>
 
               <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
@@ -278,7 +278,7 @@ export default function DashboardPage() {
                   <Settings className="h-3.5 w-3.5" />
                   Involvement
                 </div>
-                <div className="font-bold text-lg capitalize">{profile.involvement ?? "---"}</div>
+                <div className="font-bold text-lg capitalize">{profile.involvement?.replace(/_/g, " ") ?? "---"}</div>
               </div>
 
               <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
