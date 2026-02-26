@@ -116,9 +116,9 @@ export default function AdminAnalyticsPage() {
     return (
       <div className="px-6 py-10">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-2xl border border-red-900/50 bg-red-950/20 p-6">
+          <div className="rounded-2xl border border-[--border-error] bg-[--bg-error] p-6">
             <div className="font-semibold text-red-400 mb-2">Failed to load analytics</div>
-            <div className="text-sm text-red-200">{error}</div>
+            <div className="text-sm text-[--text-error]">{error}</div>
             <div className="text-xs text-[--text-muted] mt-3">Check the browser console and terminal for details.</div>
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function AdminAnalyticsPage() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data.userGrowth}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis
                     dataKey="date"
                     tickFormatter={formatDate}
@@ -236,7 +236,7 @@ export default function AdminAnalyticsPage() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.dealActivity}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis
                     dataKey="date"
                     tickFormatter={formatDate}
@@ -277,7 +277,7 @@ export default function AdminAnalyticsPage() {
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.categoryBreakdown} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis
                     type="number"
                     tick={{ fill: "#94A3B8", fontSize: 11 }}

@@ -228,9 +228,9 @@ export default function DashboardPage() {
         )}
 
         {!loading && error && (
-          <div className="rounded-2xl border border-red-900/50 bg-red-950/20 p-6">
+          <div className="rounded-2xl border border-[--border-error] bg-[--bg-error] p-6">
             <div className="font-semibold mb-2">Couldn&apos;t load profile</div>
-            <div className="text-sm text-red-200">{error}</div>
+            <div className="text-sm text-[--text-error]">{error}</div>
           </div>
         )}
 

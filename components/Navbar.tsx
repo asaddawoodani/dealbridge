@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import UserMenu from "./UserMenu";
 import NavMobile from "./NavMobile";
 import MessageNavLink from "./MessageNavLink";
+import ThemeToggle from "./ThemeToggle";
 
 async function getNavData() {
   try {
@@ -109,6 +110,7 @@ export default async function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           {role ? (
             <>
               <div className="hidden md:block">

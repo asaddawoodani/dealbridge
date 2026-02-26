@@ -9,15 +9,28 @@ import {
 } from "@stripe/react-stripe-js";
 import type { Appearance } from "@stripe/stripe-js";
 import { getStripe } from "@/lib/stripe-client";
+import { useTheme } from "next-themes";
 import { CheckCircle, Loader2 } from "lucide-react";
 
-const appearance: Appearance = {
+const darkAppearance: Appearance = {
   theme: "night",
   variables: {
     colorPrimary: "#14b8a6",
     colorBackground: "#1e293b",
     colorText: "#f1f5f9",
     colorDanger: "#ef4444",
+    fontFamily: "inherit",
+    borderRadius: "8px",
+  },
+};
+
+const lightAppearance: Appearance = {
+  theme: "stripe",
+  variables: {
+    colorPrimary: "#0d9488",
+    colorBackground: "#ffffff",
+    colorText: "#0f172a",
+    colorDanger: "#dc2626",
     fontFamily: "inherit",
     borderRadius: "8px",
   },
@@ -115,8 +128,12 @@ export default function PaymentForm({
   amount: number;
   onSuccess: () => void;
 }) {
+  const { resolvedTheme } = useTheme();
+  const appearance = resolvedTheme === "light" ? lightAppearance : darkAppearance;
+
   return (
     <Elements
+      key={resolvedTheme}
       stripe={getStripe()}
       options={{ clientSecret, appearance }}
     >

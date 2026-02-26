@@ -29,22 +29,22 @@ export default function NavMobile({
         <>
           {/* Backdrop — covers everything below nav */}
           <div
-            className="fixed inset-0 top-16 bg-slate-900 z-50"
+            className="fixed inset-0 top-16 bg-[--bg-page] z-50"
             onClick={() => setOpen(false)}
           />
 
           {/* Menu */}
-          <div className="fixed top-16 left-0 right-0 bg-slate-900 border-b border-slate-700 p-4 space-y-1 z-50">
+          <div className="fixed top-16 left-0 right-0 bg-[--bg-card] border-b border-[--border] p-4 space-y-1 z-50">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className={[
-                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800",
+                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-[--bg-elevated]",
                   l.highlight
                     ? "text-amber-400 hover:text-amber-300"
-                    : "text-slate-300 hover:text-white",
+                    : "text-[--text-secondary] hover:text-[--text-primary]",
                 ].join(" ")}
               >
                 {l.label}
@@ -54,14 +54,14 @@ export default function NavMobile({
               <Link
                 href="/messages"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+                className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
               >
                 Messages
               </Link>
             )}
             {links.length > 0 && (
               <>
-                <div className="border-t border-slate-700 my-2" />
+                <div className="border-t border-[--border] my-2" />
                 <button
                   onClick={async () => {
                     const supabase = createClient();
@@ -69,7 +69,7 @@ export default function NavMobile({
                     setOpen(false);
                     window.location.href = "/auth/login";
                   }}
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-slate-800"
+                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-[--bg-elevated]"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -81,14 +81,14 @@ export default function NavMobile({
                 <Link
                   href="/auth/login"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
                 >
                   Log in
                 </Link>
                 <Link
                   href="/auth/signup"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-slate-800"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-[--bg-elevated]"
                 >
                   Get Started
                 </Link>

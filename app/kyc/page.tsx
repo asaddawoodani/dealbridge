@@ -280,7 +280,7 @@ export default function KycPage() {
         </div>
 
         {error && (
-          <div className="rounded-xl bg-red-950/40 border border-red-900/50 px-4 py-3 text-sm text-red-200 mb-6">
+          <div className="rounded-xl bg-[--bg-error] border border-[--border-error] px-4 py-3 text-sm text-[--text-error] mb-6">
             {error}
           </div>
         )}
