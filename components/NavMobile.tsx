@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 type NavLink = { href: string; label: string; highlight?: boolean };
 
@@ -57,6 +58,23 @@ export default function NavMobile({
               >
                 Messages
               </Link>
+            )}
+            {links.length > 0 && (
+              <>
+                <div className="border-t border-slate-700 my-2" />
+                <button
+                  onClick={async () => {
+                    const supabase = createClient();
+                    await supabase.auth.signOut();
+                    setOpen(false);
+                    window.location.href = "/auth/login";
+                  }}
+                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-slate-800"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign out
+                </button>
+              </>
             )}
             {links.length === 0 && (
               <>
