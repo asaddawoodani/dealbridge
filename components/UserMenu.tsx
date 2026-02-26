@@ -93,8 +93,8 @@ export default function UserMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-[--border] bg-[--bg-card] shadow-xl z-50">
-          <div className="p-3 border-b border-[--border]">
+        <div className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-slate-700 bg-slate-900 shadow-xl z-50">
+          <div className="p-3 border-b border-slate-700">
             <div className="text-sm font-medium truncate">{profile.full_name ?? "User"}</div>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span
@@ -116,7 +116,7 @@ export default function UserMenu() {
           <div className="py-1">
             <a
               href="/dashboard"
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] outline-none"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-slate-800 outline-none"
             >
               <User className="h-4 w-4" />
               Dashboard
@@ -124,18 +124,18 @@ export default function UserMenu() {
             {!isAdmin && !isVerified && (
               <a
                 href={verifyHref}
-                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated] outline-none"
+                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-slate-800 outline-none"
               >
                 <ShieldAlert className="h-4 w-4" />
                 Verify Account
               </a>
             )}
           </div>
-          <div className="border-t border-[--border]" />
+          <div className="border-t border-slate-700" />
           <div className="py-1">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left outline-none"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-slate-800 w-full text-left outline-none"
             >
               <LogOut className="h-4 w-4" />
               Sign out
