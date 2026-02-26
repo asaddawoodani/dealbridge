@@ -11,16 +11,16 @@ type Profile = {
 };
 
 const ROLE_COLORS: Record<string, string> = {
-  admin: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  operator: "bg-purple-500/15 text-purple-400 border-purple-500/30",
-  investor: "bg-teal-500/15 text-teal-400 border-teal-500/30",
+  admin: "bg-amber-500/15 text-amber-400",
+  operator: "bg-purple-500/15 text-purple-400",
+  investor: "bg-teal-500/15 text-teal-400",
 };
 
 const VERIFICATION_BADGE: Record<string, { label: string; className: string; icon: typeof ShieldCheck }> = {
-  verified: { label: "Verified", className: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30", icon: ShieldCheck },
-  pending: { label: "Pending", className: "bg-amber-500/15 text-amber-400 border-amber-500/30", icon: Clock },
-  rejected: { label: "Rejected", className: "bg-red-500/15 text-red-400 border-red-500/30", icon: ShieldAlert },
-  unverified: { label: "Unverified", className: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30", icon: Shield },
+  verified: { label: "Verified", className: "bg-emerald-500/15 text-emerald-400", icon: ShieldCheck },
+  pending: { label: "Pending", className: "bg-amber-500/15 text-amber-400", icon: Clock },
+  rejected: { label: "Rejected", className: "bg-red-500/15 text-red-400", icon: ShieldAlert },
+  unverified: { label: "Unverified", className: "bg-zinc-500/15 text-zinc-400", icon: Shield },
 };
 
 export default function UserMenu() {
@@ -98,7 +98,7 @@ export default function UserMenu() {
             <div className="text-sm font-medium truncate">{profile.full_name ?? "User"}</div>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span
-                className={`inline-block text-[11px] px-2 py-0.5 rounded-full border font-medium ${
+                className={`inline-block text-[11px] px-2 py-0.5 rounded-full font-medium ${
                   ROLE_COLORS[profile.role] ?? ROLE_COLORS.investor
                 }`}
               >
@@ -106,14 +106,14 @@ export default function UserMenu() {
               </span>
               {!isAdmin && (
                 <span
-                  className={`inline-block text-[11px] px-2 py-0.5 rounded-full border font-medium ${vBadge.className}`}
+                  className={`inline-block text-[11px] px-2 py-0.5 rounded-full font-medium ${vBadge.className}`}
                 >
                   {vBadge.label}
                 </span>
               )}
             </div>
           </div>
-          <div className="p-1.5">
+          <div className="p-1.5 space-y-0.5">
             <a
               href="/dashboard"
               className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
@@ -130,9 +130,12 @@ export default function UserMenu() {
                 Verify Account
               </a>
             )}
+          </div>
+          <div className="border-t border-[--border] mx-1.5" />
+          <div className="p-1.5">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] w-full text-left"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-red-400 hover:text-red-300 hover:bg-[--bg-elevated] w-full text-left"
             >
               <LogOut className="h-4 w-4" />
               Sign out
