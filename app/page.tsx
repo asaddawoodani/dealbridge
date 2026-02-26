@@ -6,6 +6,7 @@ import {
   Users,
   Building2,
 } from "lucide-react";
+import BridgeAnimation from "@/components/BridgeAnimation";
 
 const STEPS = [
   {
@@ -36,8 +37,9 @@ export default function Home() {
     <div className="text-[--text-primary]">
       {/* Hero */}
       <section className="relative overflow-hidden">
+        <BridgeAnimation />
         <div className="absolute inset-0 bg-gradient-to-b from-teal-500/5 via-transparent to-transparent pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 text-center relative">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-20 text-center relative z-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 px-4 py-1.5 text-sm text-teal-400 mb-8">
             <Shield className="h-4 w-4" />
             Private deal flow for qualified investors
