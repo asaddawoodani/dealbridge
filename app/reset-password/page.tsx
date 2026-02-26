@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { KeyRound } from "lucide-react";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -27,11 +27,22 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.updateUser({ password });
+    const res = await fetch("/api/auth/update-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
 
-    if (error) {
-      setError(error.message);
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (data.error === "reused") {
+        setError(
+          "You cannot reuse your last 3 passwords. Please choose a different one."
+        );
+      } else {
+        setError(data.error || "Something went wrong.");
+      }
       setLoading(false);
       return;
     }
@@ -87,24 +98,21 @@ export default function ResetPasswordPage() {
 
           <div>
             <label className="text-sm text-[--text-secondary]">New password</label>
-            <input
-              type="password"
+            <PasswordInput
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
               placeholder="Min 6 characters"
+              showStrength
             />
           </div>
 
           <div>
             <label className="text-sm text-[--text-secondary]">Confirm new password</label>
-            <input
-              type="password"
+            <PasswordInput
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
               placeholder="Repeat new password"
             />
           </div>
