@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate, ADMIN_EMAIL, parseCheckToNumber } from "@/lib/email";
+import { sendNotification, sendAdminNotification } from "@/lib/notifications";
 
 export async function POST(req: Request) {
   try {
@@ -216,6 +217,25 @@ export async function POST(req: Request) {
       }).catch((err: unknown) =>
         console.error("[email] admin notification failed:", err)
       );
+
+      // In-app notification: notify operator about new intro
+      if (deal?.operator_id && deal.operator_id !== user.id) {
+        sendNotification({
+          userId: deal.operator_id,
+          type: "deal_match",
+          title: "New investor introduction",
+          message: `${investorName} is interested in "${dealTitle}".`,
+          link: conversationId ? `/messages/${conversationId}` : `/deals/${deal_id}`,
+        }).catch(() => {});
+      }
+
+      // In-app notification: notify admins about new application
+      sendAdminNotification({
+        type: "admin_new_application",
+        title: "New intro request",
+        message: `${investorName} requested an intro on "${dealTitle}".`,
+        link: `/admin/deals`,
+      }).catch(() => {});
     } catch (err: unknown) {
       console.error("[messaging] conversation creation failed:", err);
     }
