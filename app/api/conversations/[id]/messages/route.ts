@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate } from "@/lib/email";
-import { sendNotification } from "@/lib/notifications";
+import { sendNotification, sendAdminNotification } from "@/lib/notifications";
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -133,8 +133,9 @@ export async function POST(req: Request, ctx: Ctx) {
 
   const isParticipant =
     convo.investor_id === auth.user.id || convo.operator_id === auth.user.id;
+  const isAdmin = auth.role === "admin";
 
-  if (!isParticipant) {
+  if (!isParticipant && !isAdmin) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -167,48 +168,62 @@ export async function POST(req: Request, ctx: Ctx) {
       .update({ last_message_at: new Date().toISOString() })
       .eq("id", id);
 
-    // Send email notification to the other party
-    const recipientId =
-      convo.investor_id === auth.user.id ? convo.operator_id : convo.investor_id;
+    // Determine recipients — notify all other parties in the conversation
+    const recipientIds: string[] = [];
+    if (convo.investor_id !== auth.user.id) recipientIds.push(convo.investor_id);
+    if (convo.operator_id !== auth.user.id) recipientIds.push(convo.operator_id);
 
-    const { data: recipientProfile } = await admin
-      .from("profiles")
-      .select("email, full_name")
-      .eq("id", recipientId)
+    const senderName = auth.fullName || auth.email;
+    const appUrl = new URL(req.url).origin;
+
+    const { data: deal } = await admin
+      .from("deals")
+      .select("title")
+      .eq("id", convo.deal_id)
       .single();
 
-    if (recipientProfile?.email) {
-      const senderName = auth.fullName || auth.email;
-      const appUrl = new URL(req.url).origin;
-
-      const { data: deal } = await admin
-        .from("deals")
-        .select("title")
-        .eq("id", convo.deal_id)
+    // Send email + in-app notification to each recipient
+    for (const recipientId of recipientIds) {
+      const { data: recipientProfile } = await admin
+        .from("profiles")
+        .select("email, full_name")
+        .eq("id", recipientId)
         .single();
 
-      sendEmail({
-        to: recipientProfile.email,
-        subject: `New message from ${senderName}`,
-        html: emailTemplate({
-          title: "New Message",
-          body: `<strong>${senderName}</strong> sent you a message${deal?.title ? ` about <strong>${deal.title}</strong>` : ""}.<br/><br/>"${content.slice(0, 200)}${content.length > 200 ? "..." : ""}"`,
-          ctaText: "View Conversation",
-          ctaUrl: `${appUrl}/messages/${id}`,
-        }),
-      }).catch((err: unknown) =>
-        console.error("[email] message notification failed:", err)
-      );
+      if (recipientProfile?.email) {
+        sendEmail({
+          to: recipientProfile.email,
+          subject: `New message from ${senderName}`,
+          html: emailTemplate({
+            title: "New Message",
+            body: `<strong>${senderName}</strong> sent you a message${deal?.title ? ` about <strong>${deal.title}</strong>` : ""}.<br/><br/>"${content.slice(0, 200)}${content.length > 200 ? "..." : ""}"`,
+            ctaText: "View Conversation",
+            ctaUrl: `${appUrl}/messages/${id}`,
+          }),
+        }).catch((err: unknown) =>
+          console.error("[email] message notification failed:", err)
+        );
+      }
+
+      // In-app notification: message received
+      sendNotification({
+        userId: recipientId,
+        type: "message_received",
+        title: `New message from ${senderName}`,
+        message: content.slice(0, 200) + (content.length > 200 ? "..." : ""),
+        link: `/messages/${id}`,
+      }).catch(() => {});
     }
 
-    // In-app notification: message received
-    sendNotification({
-      userId: recipientId,
-      type: "message_received",
-      title: `New message from ${auth.fullName || auth.email}`,
-      message: content.slice(0, 200) + (content.length > 200 ? "..." : ""),
-      link: `/messages/${id}`,
-    }).catch(() => {});
+    // Also notify admins (unless sender is admin) so they have oversight
+    if (!isAdmin) {
+      sendAdminNotification({
+        type: "message_received",
+        title: `New message from ${senderName}`,
+        message: `${senderName} sent a message${deal?.title ? ` about "${deal.title}"` : ""}: ${content.slice(0, 100)}${content.length > 100 ? "..." : ""}`,
+        link: `/messages/${id}`,
+      }).catch(() => {});
+    }
 
     return NextResponse.json({ message: msg }, { status: 201 });
   } catch (e: unknown) {
