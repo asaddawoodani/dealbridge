@@ -87,7 +87,10 @@ export default function FundCommitmentButton({
       {/* Payment modal */}
       {showPayment && clientSecret && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="relative w-full max-w-md mx-4 rounded-2xl border border-[--border] bg-[--bg-card] p-6 shadow-xl">
+          <div
+            className="relative w-full max-w-md mx-4 rounded-2xl border border-slate-700 p-6 shadow-xl"
+            style={{ backgroundColor: '#0f172a' }}
+          >
             <button
               onClick={() => setShowPayment(false)}
               className="absolute top-4 right-4 text-[--text-muted] hover:text-[--text-primary] transition"

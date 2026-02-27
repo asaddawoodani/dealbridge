@@ -33,7 +33,8 @@ export default function NotificationDropdown({
 
   return (
     <div
-      className="absolute right-0 mt-2 w-80 sm:w-96 rounded-xl border border-[--border] shadow-xl z-50 max-h-[28rem] flex flex-col bg-[--bg-card]"
+      className="absolute right-0 mt-2 w-80 sm:w-96 rounded-xl border border-slate-700 shadow-xl z-50 max-h-[28rem] flex flex-col"
+      style={{ backgroundColor: '#0f172a' }}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 shrink-0">
