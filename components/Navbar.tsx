@@ -65,6 +65,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
     { href: "/deals", label: "Deals" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/portfolio", label: "Portfolio" },
+    { href: "/profile", label: "Profile" },
   ];
   if (needsVerify) {
     links.push({ href: "/verify", label: "Verify", highlight: true });

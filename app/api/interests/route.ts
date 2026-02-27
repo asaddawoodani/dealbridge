@@ -225,7 +225,7 @@ export async function POST(req: Request) {
           type: "deal_match",
           title: "New investor introduction",
           message: `${investorName} is interested in "${dealTitle}".`,
-          link: conversationId ? `/messages/${conversationId}` : `/deals/${deal_id}`,
+          link: `/investors/${user.id}`,
         }).catch(() => {});
       }
 

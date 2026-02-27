@@ -12,6 +12,7 @@ import {
   FileCheck,
   FileX,
   AlertCircle,
+  Handshake,
 } from "lucide-react";
 
 export type Notification = {
@@ -37,6 +38,7 @@ const ICON_MAP: Record<string, { icon: typeof Sparkles; color: string }> = {
   kyc_rejected: { icon: FileX, color: "text-red-400" },
   deal_approved: { icon: CheckCircle, color: "text-emerald-400" },
   deal_rejected: { icon: XCircle, color: "text-red-400" },
+  intro_accepted: { icon: Handshake, color: "text-teal-400" },
 };
 
 const ADMIN_ICON = { icon: AlertCircle, color: "text-amber-400" };

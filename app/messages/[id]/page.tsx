@@ -190,7 +190,7 @@ export default function ConversationPage() {
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="font-semibold text-sm truncate">
             {convo?.other_user.name}
           </div>
@@ -203,6 +203,14 @@ export default function ConversationPage() {
             </Link>
           )}
         </div>
+        {convo && userId && userId === convo.operator_id && (
+          <Link
+            href={`/investors/${convo.investor_id}`}
+            className="shrink-0 rounded-lg bg-[--bg-elevated] border border-[--border] px-3 py-1.5 text-xs font-medium text-[--text-secondary] hover:text-[--text-primary] hover:border-[--border-hover] transition-all hidden sm:block"
+          >
+            View Profile
+          </Link>
+        )}
       </div>
 
       {/* Messages */}
