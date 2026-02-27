@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate } from "@/lib/email";
+import { sendNotification } from "@/lib/notifications";
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -199,6 +200,15 @@ export async function POST(req: Request, ctx: Ctx) {
         console.error("[email] message notification failed:", err)
       );
     }
+
+    // In-app notification: message received
+    sendNotification({
+      userId: recipientId,
+      type: "message_received",
+      title: `New message from ${auth.fullName || auth.email}`,
+      message: content.slice(0, 200) + (content.length > 200 ? "..." : ""),
+      link: `/messages/${id}`,
+    }).catch(() => {});
 
     return NextResponse.json({ message: msg }, { status: 201 });
   } catch (e: unknown) {

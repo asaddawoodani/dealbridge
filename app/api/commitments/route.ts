@@ -8,6 +8,7 @@ import {
   parseCheckToNumber,
   formatCurrency,
 } from "@/lib/email";
+import { sendNotification, sendAdminNotification } from "@/lib/notifications";
 
 // POST — Create a new investment commitment
 export async function POST(req: Request) {
@@ -175,6 +176,25 @@ export async function POST(req: Request) {
           ctaUrl: `${appUrl}/admin/investments`,
         }),
       }).catch((err: unknown) => console.error("[email] admin large commitment flag failed:", err));
+    }
+
+    // In-app notification: admin new commitment
+    sendAdminNotification({
+      type: "admin_new_commitment",
+      title: "New investment commitment",
+      message: `${investorProfile?.full_name ?? "An investor"} committed ${formattedAmt} on "${deal.title}".`,
+      link: "/admin/investments",
+    }).catch(() => {});
+
+    // In-app notification: operator commitment update
+    if (deal.operator_id) {
+      sendNotification({
+        userId: deal.operator_id,
+        type: "commitment_update",
+        title: "New investment on your deal",
+        message: `A new commitment of ${formattedAmt} has been made on "${deal.title}".`,
+        link: `/operator/dashboard`,
+      }).catch(() => {});
     }
 
     return NextResponse.json({ ok: true, commitment });

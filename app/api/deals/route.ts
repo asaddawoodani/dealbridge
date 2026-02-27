@@ -8,6 +8,7 @@ import {
   ADMIN_EMAIL,
   type DealRow,
 } from "@/lib/email";
+import { sendAdminNotification } from "@/lib/notifications";
 
 // Public: list deals (uses admin client to bypass RLS for public listing)
 export async function GET(req: Request) {
@@ -118,6 +119,14 @@ export async function POST(req: Request) {
       }).catch((err: unknown) =>
         console.error("[email] operator deal notification failed:", err)
       );
+
+      // In-app notification: admin new deal
+      sendAdminNotification({
+        type: "admin_new_deal",
+        title: "New deal submitted",
+        message: `Operator submitted "${data.title}" for review.`,
+        link: "/admin/deals",
+      }).catch(() => {});
     }
 
     // Admin created active deal → alert matching investors

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate, formatCurrency, ADMIN_EMAIL } from "@/lib/email";
+import { sendNotification } from "@/lib/notifications";
 
 // Disable Next.js body parsing — we need the raw body for Stripe signature verification
 export const dynamic = "force-dynamic";
@@ -94,6 +95,15 @@ export async function POST(req: Request) {
                 }),
               }).catch((err: unknown) => console.error("[email] payment confirmation failed:", err));
             }
+
+            // In-app notification: payment success
+            sendNotification({
+              userId: commitment.investor_id,
+              type: "payment_success",
+              title: "Payment confirmed",
+              message: `Your payment of ${formatCurrency(commitment.amount)} for ${deal?.title ?? "a deal"} has been received.`,
+              link: "/portfolio",
+            }).catch(() => {});
           }
         }
         break;
@@ -113,6 +123,24 @@ export async function POST(req: Request) {
             .from("investment_commitments")
             .update({ funding_status: "unfunded" })
             .eq("id", commitmentId);
+
+          // In-app notification: payment failed
+          const { data: failedCommitment } = await admin
+            .from("investment_commitments")
+            .select("investor_id, amount, deals(title)")
+            .eq("id", commitmentId)
+            .single();
+
+          if (failedCommitment) {
+            const failedDeal = failedCommitment.deals as unknown as { title: string } | null;
+            sendNotification({
+              userId: failedCommitment.investor_id,
+              type: "payment_failed",
+              title: "Payment failed",
+              message: `Your payment for ${failedDeal?.title ?? "a deal"} could not be processed. Please try again.`,
+              link: "/portfolio",
+            }).catch(() => {});
+          }
         }
         break;
       }
@@ -181,6 +209,15 @@ export async function POST(req: Request) {
                   }),
                 }).catch((err: unknown) => console.error("[email] refund notification failed:", err));
               }
+
+              // In-app notification: payment refunded
+              sendNotification({
+                userId: commitment.investor_id,
+                type: "payment_refunded",
+                title: "Refund processed",
+                message: `Your payment of ${formatCurrency(commitment.amount)} for ${deal?.title ?? "a deal"} has been refunded.`,
+                link: "/portfolio",
+              }).catch(() => {});
             }
           }
         }

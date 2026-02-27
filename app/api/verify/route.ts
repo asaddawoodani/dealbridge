@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate, ADMIN_EMAIL } from "@/lib/email";
+import { sendAdminNotification } from "@/lib/notifications";
 
 export async function POST(req: Request) {
   try {
@@ -113,6 +114,14 @@ export async function POST(req: Request) {
         console.error("[email] verification notification failed:", err)
       );
 
+      // In-app notification: admin verification request
+      sendAdminNotification({
+        type: "admin_verification_request",
+        title: "New verification request",
+        message: `Investor ${fullLegalName} submitted a verification request.`,
+        link: "/admin/verifications",
+      }).catch(() => {});
+
       return NextResponse.json({ ok: true });
     }
 
@@ -181,6 +190,14 @@ export async function POST(req: Request) {
     }).catch((err: unknown) =>
       console.error("[email] verification notification failed:", err)
     );
+
+    // In-app notification: admin verification request
+    sendAdminNotification({
+      type: "admin_verification_request",
+      title: "New verification request",
+      message: `Operator ${fullLegalName} (${businessName}) submitted a verification request.`,
+      link: "/admin/verifications",
+    }).catch(() => {});
 
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {

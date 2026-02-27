@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate } from "@/lib/email";
+import { sendNotification } from "@/lib/notifications";
 
 export async function PATCH(
   req: Request,
@@ -124,6 +125,17 @@ export async function PATCH(
         );
       }
     }
+
+    // In-app notification: verification approved/rejected
+    sendNotification({
+      userId: verification.user_id,
+      type: action === "approve" ? "verification_approved" : "verification_rejected",
+      title: action === "approve" ? "Account verified" : "Verification not approved",
+      message: action === "approve"
+        ? "Congratulations! Your account has been verified. You now have full access to the platform."
+        : `Your verification request was not approved.${rejectionReason ? ` Reason: ${rejectionReason}` : ""} You can resubmit with updated information.`,
+      link: action === "approve" ? "/deals" : (verification.role === "operator" ? "/operator/verify" : "/verify"),
+    }).catch(() => {});
 
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {

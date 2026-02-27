@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate } from "@/lib/email";
+import { sendNotification } from "@/lib/notifications";
 
 export async function PATCH(
   req: Request,
@@ -142,6 +143,17 @@ export async function PATCH(
         );
       }
     }
+
+    // In-app notification: KYC approved/rejected
+    sendNotification({
+      userId: submission.user_id,
+      type: action === "approve" ? "kyc_approved" : "kyc_rejected",
+      title: action === "approve" ? "KYC approved" : "KYC not approved",
+      message: action === "approve"
+        ? "Your KYC verification has been approved. You now have full access to all deals."
+        : `Your KYC submission was not approved.${rejectionReason ? ` Reason: ${rejectionReason}` : ""} You can resubmit with updated information.`,
+      link: action === "approve" ? "/deals" : "/kyc",
+    }).catch(() => {});
 
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {

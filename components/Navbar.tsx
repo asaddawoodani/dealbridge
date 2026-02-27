@@ -5,6 +5,7 @@ import UserMenu from "./UserMenu";
 import NavMobile from "./NavMobile";
 import MessageNavLink from "./MessageNavLink";
 import ThemeToggle from "./ThemeToggle";
+import NotificationBell from "./notifications/NotificationBell";
 
 async function getNavData() {
   try {
@@ -111,6 +112,7 @@ export default async function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
+          {role && <NotificationBell />}
           {role ? (
             <>
               <div className="hidden md:block">

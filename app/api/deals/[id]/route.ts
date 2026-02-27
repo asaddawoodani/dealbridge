@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendDealAlertsToInvestors, type DealRow } from "@/lib/email";
+import { sendNotification } from "@/lib/notifications";
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -71,10 +72,31 @@ export async function PATCH(req: Request, ctx: Ctx) {
         return NextResponse.json({ error: error.message }, { status: 400 });
       }
 
-      // Admin approved a deal → send investor alerts
+      // Admin approved a deal → send investor alerts + notify operator
       if (body.status === "active" && data) {
         const appUrl = new URL(req.url).origin;
         sendDealAlertsToInvestors(data as DealRow, appUrl, adminClient);
+
+        if (data.operator_id) {
+          sendNotification({
+            userId: data.operator_id,
+            type: "deal_approved",
+            title: "Deal approved",
+            message: `Your deal "${data.title}" has been approved and is now live on the platform.`,
+            link: `/deals/${data.id}`,
+          }).catch(() => {});
+        }
+      }
+
+      // Admin rejected a deal → notify operator
+      if (body.status === "rejected" && data && data.operator_id) {
+        sendNotification({
+          userId: data.operator_id,
+          type: "deal_rejected",
+          title: "Deal not approved",
+          message: `Your deal "${data.title}" was not approved. Please review and resubmit.`,
+          link: `/operator/dashboard`,
+        }).catch(() => {});
       }
 
       return NextResponse.json({ deal: data });

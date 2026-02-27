@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail, emailTemplate, ADMIN_EMAIL } from "@/lib/email";
+import { sendAdminNotification } from "@/lib/notifications";
 import crypto from "crypto";
 
 export async function GET() {
@@ -256,6 +257,14 @@ export async function POST(req: Request) {
     }).catch((err: unknown) =>
       console.error("[email] KYC user confirmation failed:", err)
     );
+
+    // In-app notification: admin KYC submission
+    sendAdminNotification({
+      type: "admin_kyc_submission",
+      title: "New KYC submission",
+      message: `${fullLegalName} submitted KYC documents for review.`,
+      link: "/admin/compliance",
+    }).catch(() => {});
 
     return NextResponse.json({ ok: true, id: submission?.id });
   } catch (e: unknown) {
