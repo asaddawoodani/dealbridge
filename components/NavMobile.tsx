@@ -29,12 +29,16 @@ export default function NavMobile({
         <>
           {/* Backdrop — covers everything below nav */}
           <div
-            className="fixed inset-0 top-16 bg-[--bg-page] z-50"
+            className="fixed inset-0 top-16 z-50"
+            style={{ backgroundColor: '#0B1120' }}
             onClick={() => setOpen(false)}
           />
 
           {/* Menu */}
-          <div className="fixed top-16 left-0 right-0 bg-[--bg-card] border-b border-[--border] p-4 space-y-1 z-50">
+          <div
+            className="fixed top-16 left-0 right-0 border-b border-[--border] p-4 space-y-1 z-50"
+            style={{ backgroundColor: '#111827' }}
+          >
             {links.map((l) => (
               <Link
                 key={l.href}
