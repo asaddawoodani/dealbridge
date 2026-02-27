@@ -93,8 +93,11 @@ export default function UserMenu() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-[--border] bg-[--bg-card] shadow-xl z-50">
-          <div className="p-3 border-b border-[--border]">
+        <div
+          className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-slate-700 shadow-xl z-50"
+          style={{ backgroundColor: '#0f172a' }}
+        >
+          <div className="p-3">
             <div className="text-sm font-medium truncate">{profile.full_name ?? "User"}</div>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span
@@ -131,7 +134,6 @@ export default function UserMenu() {
               </a>
             )}
           </div>
-          <div className="border-t border-[--border]" />
           <div className="py-1">
             <button
               onClick={handleLogout}
