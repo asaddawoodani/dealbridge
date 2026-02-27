@@ -67,7 +67,8 @@ export default function Home() {
             </Link>
             <Link
               href="/deals"
-              className="rounded-xl border border-[--border] px-8 py-3.5 font-semibold hover:border-[--border-hover] transition-all text-base"
+              className="rounded-xl border border-slate-600 px-8 py-3.5 font-semibold hover:border-slate-400 transition-all text-base"
+              style={{ backgroundColor: 'var(--bg-input)' }}
             >
               Browse Deals
             </Link>
