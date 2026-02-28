@@ -25,10 +25,10 @@ export default function NotificationDropdown({
         body: JSON.stringify({ notificationIds: [n.id] }),
       }).catch(() => {});
     }
-    onClose();
     if (n.link) {
       router.push(n.link);
     }
+    onClose();
   };
 
   return (
