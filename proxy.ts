@@ -63,8 +63,8 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // Portfolio and invest: investor or admin only
-  if (pathname.startsWith("/portfolio") || pathname.startsWith("/invest")) {
+  // Portfolio and invest: investor or admin only (but /investors is open to all authenticated users)
+  if (pathname.startsWith("/portfolio") || (pathname.startsWith("/invest") && !pathname.startsWith("/investors"))) {
     if (role !== "investor" && role !== "admin") {
       const url = request.nextUrl.clone();
       url.pathname = "/operator/dashboard";
