@@ -74,7 +74,7 @@ export default function NotificationItem({
   return (
     <button
       onClick={onClick}
-      className="flex items-start gap-3 w-full text-left px-4 py-3 hover:bg-[--bg-elevated] transition-all rounded-lg"
+      className="flex items-start gap-3 w-full text-left px-4 py-3 hover:bg-slate-800/60 transition-all rounded-lg"
     >
       {!notification.read && (
         <div className="mt-2 h-1.5 w-1.5 rounded-full bg-teal-500 shrink-0" />
@@ -84,13 +84,13 @@ export default function NotificationItem({
         <Icon className="h-4 w-4" />
       </div>
       <div className="min-w-0 flex-1">
-        <div className={`text-sm font-medium ${notification.read ? "text-[--text-secondary]" : "text-[--text-primary]"}`}>
+        <div className={`text-sm font-medium ${notification.read ? "text-slate-400" : "text-slate-100"}`}>
           {notification.title}
         </div>
-        <div className="text-xs text-[--text-muted] mt-0.5 line-clamp-2">
+        <div className="text-xs text-slate-400 mt-0.5 line-clamp-2">
           {notification.message}
         </div>
-        <div className="text-xs text-[--text-muted] mt-1">
+        <div className="text-xs text-slate-500 mt-1">
           {timeAgo(notification.created_at)}
         </div>
       </div>

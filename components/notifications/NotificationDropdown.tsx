@@ -38,7 +38,7 @@ export default function NotificationDropdown({
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 shrink-0">
-        <h3 className="text-sm font-semibold text-[--text-primary]">Notifications</h3>
+        <h3 className="text-sm font-semibold text-slate-100">Notifications</h3>
         {hasUnread && (
           <button
             onClick={onMarkAllRead}
@@ -53,7 +53,7 @@ export default function NotificationDropdown({
       {/* List */}
       <div className="overflow-y-auto flex-1 px-1">
         {notifications.length === 0 ? (
-          <div className="px-4 py-8 text-center text-sm text-[--text-muted]">
+          <div className="px-4 py-8 text-center text-sm text-slate-500">
             No notifications yet
           </div>
         ) : (
