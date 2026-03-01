@@ -7,7 +7,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Image src="/logo.svg" alt="DealBridge" width={28} height={28} />
+            <div className="h-8 w-8 rounded-full border border-teal-500/30 bg-teal-500/10 flex items-center justify-center">
+              <Image src="/logo.svg" alt="DealBridge" width={18} height={18} />
+            </div>
             <span className="text-sm font-semibold text-[--text-secondary]">DealBridge</span>
           </div>
 

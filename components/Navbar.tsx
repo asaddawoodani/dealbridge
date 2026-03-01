@@ -82,7 +82,9 @@ export default async function Navbar() {
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Image src="/logo.svg" alt="DealBridge" width={38} height={38} priority />
+          <div className="h-9 w-9 rounded-full border border-teal-500/30 bg-teal-500/10 flex items-center justify-center">
+            <Image src="/logo.svg" alt="DealBridge" width={22} height={22} priority />
+          </div>
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
             Deal<span className="text-teal-400">Bridge</span>
           </span>
