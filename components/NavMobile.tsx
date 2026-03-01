@@ -36,7 +36,7 @@ export default function NavMobile({
 
           {/* Menu */}
           <div
-            className="fixed top-16 left-0 right-0 border-b border-[--border] p-4 space-y-1 z-50"
+            className="fixed top-16 left-0 right-0 border-b border-slate-700 p-4 space-y-1 z-50"
             style={{ backgroundColor: '#111827' }}
           >
             {links.map((l) => (
@@ -45,10 +45,10 @@ export default function NavMobile({
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className={[
-                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-[--bg-elevated]",
+                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-slate-800/60",
                   l.highlight
                     ? "text-amber-400 hover:text-amber-300"
-                    : "text-[--text-secondary] hover:text-[--text-primary]",
+                    : "text-slate-300 hover:text-slate-100",
                 ].join(" ")}
               >
                 {l.label}
@@ -58,14 +58,14 @@ export default function NavMobile({
               <Link
                 href="/messages"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+                className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-slate-100 hover:bg-slate-800/60"
               >
                 Messages
               </Link>
             )}
             {links.length > 0 && (
               <>
-                <div className="border-t border-[--border] my-2" />
+                <div className="border-t border-slate-700 my-2" />
                 <button
                   onClick={async () => {
                     const supabase = createClient();
@@ -73,7 +73,7 @@ export default function NavMobile({
                     setOpen(false);
                     window.location.href = "/auth/login";
                   }}
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-[--bg-elevated]"
+                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-slate-800/60"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -85,14 +85,14 @@ export default function NavMobile({
                 <Link
                   href="/auth/login"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-slate-100 hover:bg-slate-800/60"
                 >
                   Log in
                 </Link>
                 <Link
                   href="/auth/signup"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-[--bg-elevated]"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-slate-800/60"
                 >
                   Get Started
                 </Link>
