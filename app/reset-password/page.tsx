@@ -27,31 +27,45 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
 
-    const res = await fetch("/api/auth/update-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+    try {
+      const res = await fetch("/api/auth/update-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      if (data.error === "reused") {
-        setError(
-          "You cannot reuse your last 3 passwords. Please choose a different one."
-        );
-      } else {
-        setError(data.error || "Something went wrong.");
+      let data: { error?: string; ok?: boolean };
+      try {
+        data = await res.json();
+      } catch {
+        setError("Server returned an unexpected response. Please try again.");
+        setLoading(false);
+        return;
       }
+
+      if (!res.ok) {
+        if (data.error === "reused") {
+          setError(
+            "You cannot reuse your last 3 passwords. Please choose a different one."
+          );
+        } else if (res.status === 401) {
+          setError("Your session has expired. Please request a new reset link.");
+        } else {
+          setError(data.error || "Something went wrong.");
+        }
+        setLoading(false);
+        return;
+      }
+
+      setSuccess(true);
       setLoading(false);
-      return;
+
+      // Full page reload to login so the server Navbar re-renders
+      setTimeout(() => (window.location.href = "/auth/login"), 3000);
+    } catch {
+      setError("Network error — please check your connection and try again.");
+      setLoading(false);
     }
-
-    setSuccess(true);
-    setLoading(false);
-
-    // Full page reload to login so the server Navbar re-renders
-    setTimeout(() => (window.location.href = "/auth/login"), 3000);
   };
 
   if (success) {
