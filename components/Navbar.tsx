@@ -14,20 +14,21 @@ async function getNavData() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return { role: null, verificationStatus: null };
+    if (!user) return { role: null, verificationStatus: null, fullName: null };
 
     const { data: profile } = await supabase
       .from("profiles")
-      .select("role, verification_status")
+      .select("role, verification_status, full_name")
       .eq("id", user.id)
       .single();
 
     return {
       role: profile?.role ?? "investor",
       verificationStatus: profile?.verification_status ?? "unverified",
+      fullName: profile?.full_name ?? null,
     };
   } catch {
-    return { role: null, verificationStatus: null };
+    return { role: null, verificationStatus: null, fullName: null };
   }
 }
 
@@ -74,7 +75,7 @@ function getLinks(role: string | null, verificationStatus: string | null): NavLi
 }
 
 export default async function Navbar() {
-  const { role, verificationStatus } = await getNavData();
+  const { role, verificationStatus, fullName } = await getNavData();
   const links = getLinks(role, verificationStatus);
 
   return (
@@ -88,7 +89,7 @@ export default async function Navbar() {
           <span className="text-lg font-bold tracking-tight font-[family-name:var(--font-heading)]">
             Deal<span className="text-teal-400">Bridge</span>
           </span>
-          <span className="text-[10px] font-semibold uppercase tracking-wider bg-teal-500/15 text-teal-400 border border-teal-500/30 px-1.5 py-0.5 rounded-full">
+          <span className="hidden md:inline text-[10px] font-semibold uppercase tracking-wider bg-teal-500/15 text-teal-400 border border-teal-500/30 px-1.5 py-0.5 rounded-full">
             Beta
           </span>
         </Link>
@@ -114,26 +115,30 @@ export default async function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          {/* Theme toggle: desktop only */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+          {/* Notification bell: always visible when logged in */}
           {role && <NotificationBell />}
           {role ? (
             <>
               <div className="hidden md:block">
                 <UserMenu />
               </div>
-              <NavMobile links={links} showMessages />
+              <NavMobile links={links} showMessages userName={fullName} userRole={role} />
             </>
           ) : (
             <>
               <Link
                 href="/auth/login"
-                className="text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] transition hidden sm:block"
+                className="text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] transition hidden md:block"
               >
                 Log in
               </Link>
               <Link
                 href="/auth/signup"
-                className="rounded-xl bg-teal-500 text-white px-4 py-2 text-sm font-semibold hover:bg-teal-600 transition-all"
+                className="rounded-xl bg-teal-500 text-white px-4 py-2 text-sm font-semibold hover:bg-teal-600 transition-all hidden md:block"
               >
                 Get Started
               </Link>
