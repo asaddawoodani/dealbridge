@@ -76,6 +76,13 @@ export default function NotificationBell() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  // Close when mobile nav opens
+  useEffect(() => {
+    const handler = () => setOpen(false);
+    window.addEventListener("nav-mobile-open", handler);
+    return () => window.removeEventListener("nav-mobile-open", handler);
+  }, []);
+
   const handleMarkAllRead = async () => {
     await fetch("/api/notifications/read", {
       method: "PATCH",
@@ -89,7 +96,13 @@ export default function NotificationBell() {
   return (
     <div ref={ref} className="relative">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen((prev) => {
+            const next = !prev;
+            if (next) window.dispatchEvent(new Event("notification-bell-open"));
+            return next;
+          });
+        }}
         className="relative flex items-center justify-center h-9 w-9 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] transition-all"
         aria-label="Notifications"
       >

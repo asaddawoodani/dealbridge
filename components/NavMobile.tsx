@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -27,11 +28,32 @@ export default function NavMobile({
 }) {
   const [open, setOpen] = useState(false);
   const isLoggedIn = links.length > 0;
+  const pathname = usePathname();
+
+  // Close menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Close menu when notification bell opens
+  useEffect(() => {
+    const handler = () => setOpen(false);
+    window.addEventListener("notification-bell-open", handler);
+    return () => window.removeEventListener("notification-bell-open", handler);
+  }, []);
+
+  const toggle = useCallback(() => {
+    setOpen((prev) => {
+      const next = !prev;
+      if (next) window.dispatchEvent(new Event("nav-mobile-open"));
+      return next;
+    });
+  }, []);
 
   return (
     <div className="md:hidden">
       <button
-        onClick={() => setOpen(!open)}
+        onClick={toggle}
         className="p-2.5 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
