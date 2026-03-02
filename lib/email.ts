@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
-export const ADMIN_EMAIL = "asadd1993@gmail.com";
+export const ADMIN_EMAIL = "asad@dealbridge.io";
 export const FROM_EMAIL = "DealBridge <onboarding@resend.dev>";
 
 // ---- send helper ----------------------------------------------------------
