@@ -74,14 +74,14 @@ export default function ValuePropTabs() {
   return (
     <>
       <div className="flex justify-center mb-12">
-        <div className="inline-flex rounded-xl p-1 bg-[--bg-elevated]">
+        <div className="inline-flex rounded-xl p-1 bg-slate-800">
           <button
             onClick={() => setActiveTab("investor")}
             className={[
               "px-6 py-3 rounded-lg text-sm font-semibold transition-all",
               activeTab === "investor"
-                ? "bg-[--accent] text-white"
-                : "text-[--text-muted] hover:text-[--text-secondary]",
+                ? "bg-teal-500 text-white shadow-md"
+                : "text-slate-400 hover:text-slate-200",
             ].join(" ")}
           >
             For Investors
@@ -91,8 +91,8 @@ export default function ValuePropTabs() {
             className={[
               "px-6 py-3 rounded-lg text-sm font-semibold transition-all",
               activeTab === "operator"
-                ? "bg-[--accent] text-white"
-                : "text-[--text-muted] hover:text-[--text-secondary]",
+                ? "bg-teal-500 text-white shadow-md"
+                : "text-slate-400 hover:text-slate-200",
             ].join(" ")}
           >
             For Operators
