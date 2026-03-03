@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Space_Grotesk, Inter, Instrument_Serif } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -14,6 +14,13 @@ const spaceGrotesk = Space_Grotesk({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -35,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} antialiased min-h-screen flex flex-col`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${instrumentSerif.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider>
           <Navbar />
