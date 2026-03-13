@@ -91,7 +91,8 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/auth/signup?role=investor"
-                className="px-8 py-4 rounded-xl text-base font-semibold bg-[--accent] text-white hover:bg-[--accent-hover] transition-all hover:scale-105"
+                className="px-8 py-4 rounded-xl text-base font-semibold text-white hover:scale-105 hover:[background-color:var(--accent-hover)] transition-all"
+                style={{ backgroundColor: 'var(--accent)' }}
               >
                 Join as Investor →
               </Link>
@@ -222,7 +223,8 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/auth/signup"
-                className="px-8 py-4 rounded-xl text-base font-semibold bg-[--accent] text-white hover:bg-[--accent-hover] transition-all hover:scale-105"
+                className="px-8 py-4 rounded-xl text-base font-semibold text-white hover:scale-105 hover:[background-color:var(--accent-hover)] transition-all"
+                style={{ backgroundColor: 'var(--accent)' }}
               >
                 Get Started →
               </Link>
