@@ -103,14 +103,14 @@ export default function RequestIntro({
     return (
       <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5 text-center space-y-3">
         <ShieldAlert className="h-8 w-8 text-amber-400 mx-auto" />
-        <div className="text-sm font-semibold text-[--text-primary]">
+        <div className="text-sm font-semibold text-[var(--text-primary)]">
           {isPending
             ? "Verification Pending"
             : isRejected
             ? "Verification Rejected"
             : "Verification Required"}
         </div>
-        <div className="text-xs text-[--text-secondary]">
+        <div className="text-xs text-[var(--text-secondary)]">
           {isPending
             ? "Your verification is being reviewed. You'll be able to request introductions once approved."
             : isRejected
@@ -139,14 +139,14 @@ export default function RequestIntro({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name *"
-          className="w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+          className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
         />
 
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email *"
-          className="w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+          className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -154,14 +154,14 @@ export default function RequestIntro({
             value={minCheck}
             onChange={(e) => setMinCheck(e.target.value)}
             placeholder='Check size (optional) e.g. "50k"'
-            className="w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+            className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           />
 
           <input
             value={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
             placeholder="LinkedIn (optional)"
-            className="w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+            className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           />
         </div>
 
@@ -170,21 +170,21 @@ export default function RequestIntro({
           onChange={(e) => setNote(e.target.value)}
           placeholder={`Short note (optional)... e.g. "Interested in ${dealTitle}. Can review CIM this week."`}
           rows={3}
-          className="w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+          className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
         />
 
-        <label className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] px-4 py-3">
+        <label className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3">
           <input
             type="checkbox"
             checked={confirm}
             onChange={(e) => setConfirm(e.target.checked)}
             className="mt-1 h-4 w-4 accent-teal-500"
           />
-          <div className="text-sm text-[--text-secondary]">
-            <div className="font-medium text-[--text-primary]">
+          <div className="text-sm text-[var(--text-secondary)]">
+            <div className="font-medium text-[var(--text-primary)]">
               I&apos;m a qualified investor and agree not to spam operators.
             </div>
-            <div className="text-xs text-[--text-muted] mt-0.5">
+            <div className="text-xs text-[var(--text-muted)] mt-0.5">
               This helps keep the marketplace high-quality.
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function RequestIntro({
           "w-full rounded-xl px-4 py-3 font-semibold transition-all flex items-center justify-center gap-2",
           canSubmit
             ? "bg-teal-500 text-white hover:bg-teal-600"
-            : "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed",
+            : "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed",
         ].join(" ")}
       >
         {loading ? (
@@ -236,7 +236,7 @@ export default function RequestIntro({
       )}
 
       {/* Hint */}
-      <div className="text-xs text-[--text-muted] flex items-center gap-1">
+      <div className="text-xs text-[var(--text-muted)] flex items-center gap-1">
         <Shield className="h-3 w-3" />
         Required: name + valid email.
       </div>

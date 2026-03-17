@@ -126,7 +126,7 @@ export default function AdminInvestmentsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Investment Oversight</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Review and manage all investment commitments.
           </p>
         </div>
@@ -141,9 +141,9 @@ export default function AdminInvestmentsPage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -153,7 +153,7 @@ export default function AdminInvestmentsPage() {
         </div>
 
         {/* List */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
           {/* Status tabs */}
           <div className="flex flex-wrap gap-2 mb-4">
             {STATUS_TABS.map((tab) => (
@@ -164,7 +164,7 @@ export default function AdminInvestmentsPage() {
                   "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
                   statusTab === tab
                     ? "bg-teal-500/10 text-teal-400 border-teal-500/30"
-                    : "border-[--border] text-[--text-secondary] hover:border-[--border-hover]",
+                    : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-hover)]",
                 ].join(" ")}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -178,24 +178,24 @@ export default function AdminInvestmentsPage() {
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="text-lg font-semibold">
               Commitments{" "}
-              <span className="text-[--text-muted] text-sm">({filtered.length})</span>
+              <span className="text-[var(--text-muted)] text-sm">({filtered.length})</span>
             </div>
 
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search..."
-                className="w-full sm:w-72 rounded-xl bg-[--bg-input] border border-[--border] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[--text-primary] placeholder:text-[--text-muted]"
+                className="w-full sm:w-72 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-[--text-secondary]">Loading...</div>
+            <div className="text-[var(--text-secondary)]">Loading...</div>
           ) : filtered.length === 0 ? (
-            <div className="text-[--text-muted]">No commitments found.</div>
+            <div className="text-[var(--text-muted)]">No commitments found.</div>
           ) : (
             <div className="space-y-3">
               {filtered.map((c) => {
@@ -203,7 +203,7 @@ export default function AdminInvestmentsPage() {
                 return (
                   <div
                     key={c.id}
-                    className="rounded-xl border border-[--border] bg-[--bg-input] overflow-hidden"
+                    className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] overflow-hidden"
                   >
                     {/* Summary row */}
                     <div className="p-4 flex items-start justify-between gap-4">
@@ -215,7 +215,7 @@ export default function AdminInvestmentsPage() {
                           <span
                             className={[
                               "text-xs px-2 py-1 rounded-full border",
-                              STATUS_BADGE[c.status] ?? "border-[--border] text-[--text-muted]",
+                              STATUS_BADGE[c.status] ?? "border-[var(--border)] text-[var(--text-muted)]",
                             ].join(" ")}
                           >
                             {c.status}
@@ -232,7 +232,7 @@ export default function AdminInvestmentsPage() {
                           )}
                         </div>
 
-                        <div className="text-sm text-[--text-muted] mt-1">
+                        <div className="text-sm text-[var(--text-muted)] mt-1">
                           {c.deals?.title ?? "Unknown Deal"} &middot; {formatCurrency(c.amount)} &middot; {new Date(c.commitment_date).toLocaleDateString()}
                         </div>
                       </div>
@@ -241,7 +241,7 @@ export default function AdminInvestmentsPage() {
                         <div className="text-lg font-bold">{formatCurrency(c.amount)}</div>
                         <button
                           onClick={() => setExpandedId(isExpanded ? null : c.id)}
-                          className="px-2 py-2 rounded-xl border border-[--border] text-[--text-muted] hover:text-[--text-primary] transition"
+                          className="px-2 py-2 rounded-xl border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
                         >
                           {isExpanded ? (
                             <ChevronUp className="h-4 w-4" />
@@ -254,31 +254,31 @@ export default function AdminInvestmentsPage() {
 
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div className="border-t border-[--border] p-4 space-y-3 text-sm">
+                      <div className="border-t border-[var(--border)] p-4 space-y-3 text-sm">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
-                            <span className="text-[--text-muted]">Investor:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Investor:</span>{" "}
                             {c.profiles?.full_name ?? "N/A"} ({c.profiles?.email ?? "N/A"})
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Deal:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Deal:</span>{" "}
                             {c.deals?.title ?? "Unknown"}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Amount:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Amount:</span>{" "}
                             {formatCurrency(c.amount)}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Status:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Status:</span>{" "}
                             {c.status}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Committed:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Committed:</span>{" "}
                             {new Date(c.commitment_date).toLocaleString()}
                           </div>
                           {c.funded_date && (
                             <div>
-                              <span className="text-[--text-muted]">Funded:</span>{" "}
+                              <span className="text-[var(--text-muted)]">Funded:</span>{" "}
                               {new Date(c.funded_date).toLocaleString()}
                             </div>
                           )}
@@ -286,7 +286,7 @@ export default function AdminInvestmentsPage() {
 
                         {c.notes && (
                           <div>
-                            <span className="text-[--text-muted]">Notes:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Notes:</span>{" "}
                             {c.notes}
                           </div>
                         )}
@@ -342,7 +342,7 @@ export default function AdminInvestmentsPage() {
         </section>
 
         {/* Escrow Transactions */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mt-8">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mt-8">
           <AdminEscrowPanel />
         </section>
 

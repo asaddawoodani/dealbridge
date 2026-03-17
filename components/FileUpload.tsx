@@ -181,7 +181,7 @@ export default function FileUpload({
 
   return (
     <div className="space-y-4">
-      <label className="text-sm text-[--text-secondary]">Documents</label>
+      <label className="text-sm text-[var(--text-secondary)]">Documents</label>
 
       {/* Drop zone */}
       <div
@@ -196,14 +196,14 @@ export default function FileUpload({
           "border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-colors",
           dragOver
             ? "border-teal-500 bg-teal-500/5"
-            : "border-[--border] hover:border-[--border-hover]",
+            : "border-[var(--border)] hover:border-[var(--border-hover)]",
         ].join(" ")}
       >
-        <Upload className="h-8 w-8 mx-auto text-[--text-muted] mb-2" />
-        <p className="text-sm text-[--text-secondary]">
+        <Upload className="h-8 w-8 mx-auto text-[var(--text-muted)] mb-2" />
+        <p className="text-sm text-[var(--text-secondary)]">
           Drag & drop or click to browse
         </p>
-        <p className="text-xs text-[--text-muted] mt-1">
+        <p className="text-xs text-[var(--text-muted)] mt-1">
           PDF, DOCX, XLSX, PPTX, PNG, JPG — max 10 MB
         </p>
       </div>
@@ -232,19 +232,19 @@ export default function FileUpload({
           {queue.map((qf) => (
             <div
               key={qf.id}
-              className="flex items-center gap-3 rounded-xl border border-[--border] bg-[--bg-input] px-4 py-3"
+              className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3"
             >
               <FileText className="h-4 w-4 text-teal-400 shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm truncate">{qf.file.name}</p>
-                <p className="text-xs text-[--text-muted]">
+                <p className="text-xs text-[var(--text-muted)]">
                   {formatSize(qf.file.size)}
                 </p>
               </div>
               <select
                 value={qf.label}
                 onChange={(e) => updateQueueLabel(qf.id, e.target.value)}
-                className="text-xs rounded-lg bg-[--bg-card] border border-[--border] px-2 py-1.5 text-[--text-primary]"
+                className="text-xs rounded-lg bg-[var(--bg-card)] border border-[var(--border)] px-2 py-1.5 text-[var(--text-primary)]"
               >
                 {LABELS.map((l) => (
                   <option key={l} value={l}>
@@ -255,7 +255,7 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={() => removeQueued(qf.id)}
-                className="text-[--text-muted] hover:text-red-400 transition"
+                className="text-[var(--text-muted)] hover:text-red-400 transition"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -266,7 +266,7 @@ export default function FileUpload({
 
       {/* Uploading indicators (immediate mode) */}
       {uploading.size > 0 && (
-        <div className="flex items-center gap-2 text-sm text-[--text-muted]">
+        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
           <Loader2 className="h-4 w-4 animate-spin" />
           Uploading...
         </div>
@@ -278,7 +278,7 @@ export default function FileUpload({
           {existingDocuments.map((doc) => (
             <div
               key={doc.id}
-              className="flex items-center gap-3 rounded-xl border border-[--border] bg-[--bg-input] px-4 py-3"
+              className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3"
             >
               <FileText className="h-4 w-4 text-teal-400 shrink-0" />
               <div className="flex-1 min-w-0">
@@ -287,7 +287,7 @@ export default function FileUpload({
                   <span className="text-[11px] px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400">
                     {doc.file_label}
                   </span>
-                  <span className="text-xs text-[--text-muted]">
+                  <span className="text-xs text-[var(--text-muted)]">
                     {formatSize(doc.file_size)}
                   </span>
                 </div>
@@ -295,7 +295,7 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={() => downloadDoc(doc)}
-                className="text-[--text-muted] hover:text-teal-400 transition"
+                className="text-[var(--text-muted)] hover:text-teal-400 transition"
                 title="Download"
               >
                 <Download className="h-4 w-4" />
@@ -303,7 +303,7 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={() => deleteDoc(doc)}
-                className="text-[--text-muted] hover:text-red-400 transition"
+                className="text-[var(--text-muted)] hover:text-red-400 transition"
                 title="Delete"
               >
                 <Trash2 className="h-4 w-4" />

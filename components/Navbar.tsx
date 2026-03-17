@@ -79,7 +79,7 @@ export default async function Navbar() {
   const links = getLinks(role, verificationStatus);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[--border] bg-[--bg-page]/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg-page)]/80 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl flex items-center justify-between px-6 h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -104,7 +104,7 @@ export default async function Navbar() {
                 "px-4 py-2 rounded-lg text-sm font-medium transition-all",
                 l.highlight
                   ? "text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
-                  : "text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]",
+                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]",
               ].join(" ")}
             >
               {l.label}
@@ -132,7 +132,7 @@ export default async function Navbar() {
             <>
               <Link
                 href="/auth/login"
-                className="text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] transition hidden md:block"
+                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition hidden md:block"
               >
                 Log in
               </Link>

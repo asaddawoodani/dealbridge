@@ -47,13 +47,13 @@ export default function PasswordInput({
           required={required}
           value={value}
           onChange={onChange}
-          className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 pr-11 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+          className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 pr-11 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           placeholder={placeholder}
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 mt-1 -translate-y-1/2 text-[--text-muted] hover:text-[--text-primary] transition-colors"
+          className="absolute right-3 top-1/2 mt-1 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
           tabIndex={-1}
         >
           {showPassword ? (
@@ -66,13 +66,13 @@ export default function PasswordInput({
 
       {showStrength && value.length > 0 && (
         <div className="mt-2 flex items-center gap-2">
-          <div className="flex-1 h-1.5 rounded-full bg-[--border]">
+          <div className="flex-1 h-1.5 rounded-full bg-[var(--border)]">
             <div
               className={`h-full rounded-full ${strength.color} transition-all duration-300`}
               style={{ width: strength.width }}
             />
           </div>
-          <span className="text-xs text-[--text-muted]">{strength.label}</span>
+          <span className="text-xs text-[var(--text-muted)]">{strength.label}</span>
         </div>
       )}
     </div>

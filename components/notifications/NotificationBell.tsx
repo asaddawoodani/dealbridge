@@ -103,7 +103,7 @@ export default function NotificationBell() {
             return next;
           });
         }}
-        className="relative flex items-center justify-center h-9 w-9 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] transition-all"
+        className="relative flex items-center justify-center h-9 w-9 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all"
         aria-label="Notifications"
       >
         <Bell className="h-4 w-4" />

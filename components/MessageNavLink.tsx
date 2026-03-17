@@ -35,7 +35,7 @@ export default function MessageNavLink() {
   return (
     <Link
       href="/messages"
-      className="px-4 py-2 rounded-lg text-sm font-medium transition-all text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] relative"
+      className="px-4 py-2 rounded-lg text-sm font-medium transition-all text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] relative"
     >
       Messages
       {unread > 0 && (

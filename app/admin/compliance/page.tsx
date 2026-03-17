@@ -147,7 +147,7 @@ export default function AdminCompliancePage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Compliance Dashboard</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Review and manage KYC verification submissions.
           </p>
         </div>
@@ -162,9 +162,9 @@ export default function AdminCompliancePage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -174,7 +174,7 @@ export default function AdminCompliancePage() {
         </div>
 
         {/* List */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
           {/* Status tabs */}
           <div className="flex flex-wrap gap-2 mb-4">
             {STATUS_TABS.map((tab) => (
@@ -185,7 +185,7 @@ export default function AdminCompliancePage() {
                   "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
                   statusTab === tab
                     ? "bg-teal-500/10 text-teal-400 border-teal-500/30"
-                    : "border-[--border] text-[--text-secondary] hover:border-[--border-hover]",
+                    : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-hover)]",
                 ].join(" ")}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -199,24 +199,24 @@ export default function AdminCompliancePage() {
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="text-lg font-semibold">
               Submissions{" "}
-              <span className="text-[--text-muted] text-sm">({filtered.length})</span>
+              <span className="text-[var(--text-muted)] text-sm">({filtered.length})</span>
             </div>
 
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search..."
-                className="w-full sm:w-72 rounded-xl bg-[--bg-input] border border-[--border] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[--text-primary] placeholder:text-[--text-muted]"
+                className="w-full sm:w-72 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-[--text-secondary]">Loading...</div>
+            <div className="text-[var(--text-secondary)]">Loading...</div>
           ) : filtered.length === 0 ? (
-            <div className="text-[--text-muted]">No KYC submissions found.</div>
+            <div className="text-[var(--text-muted)]">No KYC submissions found.</div>
           ) : (
             <div className="space-y-3">
               {filtered.map((sub) => {
@@ -224,7 +224,7 @@ export default function AdminCompliancePage() {
                 return (
                   <div
                     key={sub.id}
-                    className="rounded-xl border border-[--border] bg-[--bg-input] overflow-hidden"
+                    className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] overflow-hidden"
                   >
                     {/* Summary row */}
                     <div className="p-4 flex items-start justify-between gap-4">
@@ -236,13 +236,13 @@ export default function AdminCompliancePage() {
                           <span
                             className={[
                               "text-xs px-2 py-1 rounded-full border",
-                              STATUS_BADGE[sub.status] ?? "border-[--border] text-[--text-muted]",
+                              STATUS_BADGE[sub.status] ?? "border-[var(--border)] text-[var(--text-muted)]",
                             ].join(" ")}
                           >
                             {sub.status}
                           </span>
                           {sub.risk_level && (
-                            <span className="text-xs px-2 py-1 rounded-full border border-[--border] text-[--text-muted]">
+                            <span className="text-xs px-2 py-1 rounded-full border border-[var(--border)] text-[var(--text-muted)]">
                               Risk: {sub.risk_level}
                             </span>
                           )}
@@ -253,7 +253,7 @@ export default function AdminCompliancePage() {
                           )}
                         </div>
 
-                        <div className="text-sm text-[--text-muted] mt-1">
+                        <div className="text-sm text-[var(--text-muted)] mt-1">
                           {sub.profiles?.email ?? "---"} &middot; {sub.nationality} &middot; {sub.source_of_funds}
                         </div>
 
@@ -264,7 +264,7 @@ export default function AdminCompliancePage() {
                           </div>
                         )}
 
-                        <div className="text-xs text-[--text-muted] mt-2">
+                        <div className="text-xs text-[var(--text-muted)] mt-2">
                           {new Date(sub.created_at).toLocaleString()}
                         </div>
                       </div>
@@ -290,7 +290,7 @@ export default function AdminCompliancePage() {
                         )}
                         <button
                           onClick={() => setExpandedId(isExpanded ? null : sub.id)}
-                          className="px-2 py-2 rounded-xl border border-[--border] text-[--text-muted] hover:text-[--text-primary] transition"
+                          className="px-2 py-2 rounded-xl border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
                         >
                           {isExpanded ? (
                             <ChevronUp className="h-4 w-4" />
@@ -303,45 +303,45 @@ export default function AdminCompliancePage() {
 
                     {/* Expanded details */}
                     {isExpanded && (
-                      <div className="border-t border-[--border] p-4 space-y-3 text-sm">
+                      <div className="border-t border-[var(--border)] p-4 space-y-3 text-sm">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
-                            <span className="text-[--text-muted]">Date of Birth:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Date of Birth:</span>{" "}
                             {sub.date_of_birth}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Nationality:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Nationality:</span>{" "}
                             {sub.nationality}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Tax ID Type:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Tax ID Type:</span>{" "}
                             {sub.tax_id_type ?? "Not provided"}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">ID Document:</span>{" "}
+                            <span className="text-[var(--text-muted)]">ID Document:</span>{" "}
                             {sub.id_document_type.replace("_", " ")}
                           </div>
                         </div>
 
                         <div>
-                          <span className="text-[--text-muted]">Address:</span>{" "}
+                          <span className="text-[var(--text-muted)]">Address:</span>{" "}
                           {[sub.address_line1, sub.address_line2, sub.city, sub.state_province, sub.postal_code, sub.country].filter(Boolean).join(", ")}
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
-                            <span className="text-[--text-muted]">Source of Funds:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Source of Funds:</span>{" "}
                             {sub.source_of_funds}
                           </div>
                           <div>
-                            <span className="text-[--text-muted]">Expected Range:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Expected Range:</span>{" "}
                             {sub.expected_investment_range ?? "Not specified"}
                           </div>
                         </div>
 
                         {sub.source_details && (
                           <div>
-                            <span className="text-[--text-muted]">Fund Details:</span>{" "}
+                            <span className="text-[var(--text-muted)]">Fund Details:</span>{" "}
                             {sub.source_details}
                           </div>
                         )}
@@ -349,11 +349,11 @@ export default function AdminCompliancePage() {
                         {sub.pep_status && (
                           <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3">
                             <div className="font-medium text-red-400 mb-1">Politically Exposed Person</div>
-                            <div className="text-[--text-secondary]">{sub.pep_details ?? "No details provided"}</div>
+                            <div className="text-[var(--text-secondary)]">{sub.pep_details ?? "No details provided"}</div>
                           </div>
                         )}
 
-                        <div className="flex items-center gap-4 text-xs text-[--text-muted]">
+                        <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
                           <div className="flex items-center gap-1">
                             <FileText className="h-3.5 w-3.5" />
                             ID: {sub.id_document_path.split("/").pop()}
@@ -367,7 +367,7 @@ export default function AdminCompliancePage() {
                         </div>
 
                         {sub.expires_at && (
-                          <div className="text-xs text-[--text-muted]">
+                          <div className="text-xs text-[var(--text-muted)]">
                             Expires: {new Date(sub.expires_at).toLocaleDateString()}
                           </div>
                         )}

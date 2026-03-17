@@ -34,7 +34,7 @@ const STATUS_TABS = ["all", "pending", "active", "inactive"] as const;
 const STATUS_BADGE: Record<string, string> = {
   pending: "border-amber-500/30 text-amber-400 bg-amber-500/10",
   active: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
-  inactive: "border-[--border] text-[--text-muted]",
+  inactive: "border-[var(--border)] text-[var(--text-muted)]",
 };
 
 export default function AdminDealsPage() {
@@ -232,14 +232,14 @@ export default function AdminDealsPage() {
         <div className="flex items-start justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold">Admin Deals</h1>
-            <p className="text-[--text-secondary] mt-2">
+            <p className="text-[var(--text-secondary)] mt-2">
               Create, approve, activate/deactivate, and delete deals.
             </p>
 
             <div className="flex items-center gap-4 mt-3">
               <Link
                 href="/deals"
-                className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4 text-sm transition"
+                className="text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4 text-sm transition"
               >
                 Public Deals
               </Link>
@@ -256,9 +256,9 @@ export default function AdminDealsPage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -268,7 +268,7 @@ export default function AdminDealsPage() {
         </div>
 
         {/* Create */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4 mb-8">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4 mb-8">
           <div className="text-lg font-semibold flex items-center gap-2">
             <Plus className="h-5 w-5 text-teal-400" />
             Create new deal
@@ -276,32 +276,32 @@ export default function AdminDealsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label className="text-sm text-[--text-secondary]">Title *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Title *</label>
               <input
                 value={form.title}
                 onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder="e.g., Dani's Market Expansion — New Store Buildout"
               />
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-sm text-[--text-secondary]">Description</label>
+              <label className="text-sm text-[var(--text-secondary)]">Description</label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 rows={3}
                 placeholder="Quick summary..."
               />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Category</label>
+              <label className="text-sm text-[var(--text-secondary)]">Category</label>
               <select
                 value={form.category}
                 onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="real-estate">Real Estate</option>
                 <option value="small-business">Small Business</option>
@@ -313,41 +313,41 @@ export default function AdminDealsPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Min check</label>
+              <label className="text-sm text-[var(--text-secondary)]">Min check</label>
               <input
                 value={form.min_check}
                 onChange={(e) => setForm((p) => ({ ...p, min_check: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder='e.g., "50k"'
               />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Location</label>
+              <label className="text-sm text-[var(--text-secondary)]">Location</label>
               <input
                 value={form.location}
                 onChange={(e) => setForm((p) => ({ ...p, location: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder='e.g., "Rensselaer, NY"'
               />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Target Raise ($)</label>
+              <label className="text-sm text-[var(--text-secondary)]">Target Raise ($)</label>
               <input
                 value={form.target_raise}
                 onChange={(e) => setForm((p) => ({ ...p, target_raise: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder='e.g., "500000"'
               />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Status</label>
+              <label className="text-sm text-[var(--text-secondary)]">Status</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm((p) => ({ ...p, status: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -362,7 +362,7 @@ export default function AdminDealsPage() {
               className={[
                 "rounded-xl px-6 py-3 font-semibold transition-all",
                 saving
-                  ? "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed"
+                  ? "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed"
                   : "bg-teal-500 text-white hover:bg-teal-600",
               ].join(" ")}
             >
@@ -372,7 +372,7 @@ export default function AdminDealsPage() {
         </section>
 
         {/* List */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
           {/* Status tabs */}
           <div className="flex flex-wrap gap-2 mb-4">
             {STATUS_TABS.map((tab) => (
@@ -383,7 +383,7 @@ export default function AdminDealsPage() {
                   "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
                   statusTab === tab
                     ? "bg-teal-500/10 text-teal-400 border-teal-500/30"
-                    : "border-[--border] text-[--text-secondary] hover:border-[--border-hover]",
+                    : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-hover)]",
                 ].join(" ")}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -397,30 +397,30 @@ export default function AdminDealsPage() {
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="text-lg font-semibold">
               Deals{" "}
-              <span className="text-[--text-muted] text-sm">({filtered.length})</span>
+              <span className="text-[var(--text-muted)] text-sm">({filtered.length})</span>
             </div>
 
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search..."
-                className="w-full sm:w-72 rounded-xl bg-[--bg-input] border border-[--border] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[--text-primary] placeholder:text-[--text-muted]"
+                className="w-full sm:w-72 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-[--text-secondary]">Loading...</div>
+            <div className="text-[var(--text-secondary)]">Loading...</div>
           ) : filtered.length === 0 ? (
-            <div className="text-[--text-muted]">No deals found.</div>
+            <div className="text-[var(--text-muted)]">No deals found.</div>
           ) : (
             <div className="space-y-3">
               {filtered.map((d) => (
                 <div
                   key={d.id}
-                  className="rounded-xl border border-[--border] bg-[--bg-input] p-4 flex items-start justify-between gap-4"
+                  className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4 flex items-start justify-between gap-4"
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -429,7 +429,7 @@ export default function AdminDealsPage() {
                         className={[
                           "text-xs px-2 py-1 rounded-full border",
                           STATUS_BADGE[d.status ?? ""] ??
-                            "border-[--border] text-[--text-muted]",
+                            "border-[var(--border)] text-[var(--text-muted)]",
                         ].join(" ")}
                       >
                         {d.status ?? "---"}
@@ -441,18 +441,18 @@ export default function AdminDealsPage() {
                       )}
                     </div>
 
-                    <div className="text-sm text-[--text-muted] mt-1">
+                    <div className="text-sm text-[var(--text-muted)] mt-1">
                       {d.category ?? "---"} / {d.location ?? "---"} /{" "}
                       {d.min_check ?? "---"}
                     </div>
 
                     {d.description && (
-                      <div className="text-sm text-[--text-secondary] mt-2 line-clamp-2">
+                      <div className="text-sm text-[var(--text-secondary)] mt-2 line-clamp-2">
                         {d.description}
                       </div>
                     )}
 
-                    <div className="text-xs text-[--text-muted] mt-2">
+                    <div className="text-xs text-[var(--text-muted)] mt-2">
                       {new Date(d.created_at).toLocaleString()}
                     </div>
                   </div>
@@ -460,7 +460,7 @@ export default function AdminDealsPage() {
                   <div className="flex flex-col sm:flex-row gap-2 shrink-0">
                     <Link
                       href={`/deals/${d.id}`}
-                      className="px-3 py-2 rounded-xl border border-[--border] text-sm hover:border-[--border-hover] text-center flex items-center gap-1.5 transition"
+                      className="px-3 py-2 rounded-xl border border-[var(--border)] text-sm hover:border-[var(--border-hover)] text-center flex items-center gap-1.5 transition"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       View
@@ -488,7 +488,7 @@ export default function AdminDealsPage() {
                     {d.status !== "pending" && (
                       <button
                         onClick={() => toggleStatus(d)}
-                        className="px-3 py-2 rounded-xl border border-[--border] text-sm hover:border-[--border-hover] flex items-center gap-1.5 transition"
+                        className="px-3 py-2 rounded-xl border border-[var(--border)] text-sm hover:border-[var(--border-hover)] flex items-center gap-1.5 transition"
                       >
                         <AlertTriangle className="h-3.5 w-3.5" />
                         {d.status === "active" ? "Deactivate" : "Activate"}

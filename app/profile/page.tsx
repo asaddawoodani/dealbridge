@@ -231,7 +231,7 @@ export default function ProfileEditPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-6 w-6 animate-spin text-[--text-muted]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[var(--text-muted)]" />
       </div>
     );
   }
@@ -252,20 +252,20 @@ export default function ProfileEditPage() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setShowPreview(false)}
-                className="text-sm text-[--text-muted] hover:text-[--text-primary] transition"
+                className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
               >
                 &larr; Back to Edit
               </button>
-              <span className="text-sm text-[--text-muted]">|</span>
+              <span className="text-sm text-[var(--text-muted)]">|</span>
               <span className="text-sm font-medium">Preview Mode</span>
             </div>
-            <div className="flex items-center gap-1 bg-[--bg-elevated] rounded-lg p-1 border border-[--border]">
+            <div className="flex items-center gap-1 bg-[var(--bg-elevated)] rounded-lg p-1 border border-[var(--border)]">
               <button
                 onClick={() => setPreviewMode("limited")}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                   previewMode === "limited"
                     ? "bg-teal-500 text-white"
-                    : "text-[--text-muted] hover:text-[--text-primary]"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 }`}
               >
                 Limited
@@ -275,7 +275,7 @@ export default function ProfileEditPage() {
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                   previewMode === "full"
                     ? "bg-teal-500 text-white"
-                    : "text-[--text-muted] hover:text-[--text-primary]"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 }`}
               >
                 Full
@@ -285,7 +285,7 @@ export default function ProfileEditPage() {
 
           <div className="space-y-6">
             {/* Header */}
-            <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+            <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-1">
                 <h1 className="text-2xl font-bold">{displayName}</h1>
                 {isVerified && (
@@ -296,10 +296,10 @@ export default function ProfileEditPage() {
                 )}
               </div>
               {previewMode === "full" && headline && (
-                <p className="text-[--text-secondary] mt-1">{headline}</p>
+                <p className="text-[var(--text-secondary)] mt-1">{headline}</p>
               )}
               {memberSince && (
-                <p className="text-sm text-[--text-muted] mt-2 flex items-center gap-1.5">
+                <p className="text-sm text-[var(--text-muted)] mt-2 flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
                   Member since{" "}
                   {new Date(memberSince).toLocaleDateString(undefined, {
@@ -312,16 +312,16 @@ export default function ProfileEditPage() {
 
             {/* Stat cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                <div className="text-xs text-[--text-muted] mb-1">
+              <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                <div className="text-xs text-[var(--text-muted)] mb-1">
                   Check Size
                 </div>
                 <div className="text-lg font-semibold">
                   {formatCheckSize(checkSize)}
                 </div>
               </div>
-              <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                <div className="text-xs text-[--text-muted] mb-1">
+              <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                <div className="text-xs text-[var(--text-muted)] mb-1">
                   Timeline
                 </div>
                 <div className="text-lg font-semibold">
@@ -330,16 +330,16 @@ export default function ProfileEditPage() {
               </div>
               {previewMode === "limited" ? (
                 <>
-                  <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                    <div className="text-xs text-[--text-muted] mb-1">
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                    <div className="text-xs text-[var(--text-muted)] mb-1">
                       Involvement
                     </div>
                     <div className="text-lg font-semibold">
                       {formatInvolvement(involvement)}
                     </div>
                   </div>
-                  <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                    <div className="text-xs text-[--text-muted] mb-1">
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                    <div className="text-xs text-[var(--text-muted)] mb-1">
                       Sectors
                     </div>
                     <div className="text-lg font-semibold">
@@ -349,14 +349,14 @@ export default function ProfileEditPage() {
                 </>
               ) : (
                 <>
-                  <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                    <div className="text-xs text-[--text-muted] mb-1">
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                    <div className="text-xs text-[var(--text-muted)] mb-1">
                       Deals Committed
                     </div>
                     <div className="text-lg font-semibold">—</div>
                   </div>
-                  <div className="bg-[--bg-card] border border-[--border] rounded-xl p-4">
-                    <div className="text-xs text-[--text-muted] mb-1">
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4">
+                    <div className="text-xs text-[var(--text-muted)] mb-1">
                       Total Invested
                     </div>
                     <div className="text-lg font-semibold">—</div>
@@ -367,22 +367,22 @@ export default function ProfileEditPage() {
 
             {/* Bio */}
             {previewMode === "full" && bio && (
-              <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+              <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
                 <h2 className="text-lg font-semibold mb-3">About</h2>
-                <p className="text-[--text-secondary] whitespace-pre-wrap">
+                <p className="text-[var(--text-secondary)] whitespace-pre-wrap">
                   {bio}
                 </p>
               </div>
             )}
 
             {/* Preferences */}
-            <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+            <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
               <h2 className="text-lg font-semibold mb-4">
                 Investment Preferences
               </h2>
               {selectedCategories.length > 0 && (
                 <div className="mb-4">
-                  <div className="text-sm text-[--text-muted] mb-2">
+                  <div className="text-sm text-[var(--text-muted)] mb-2">
                     Preferred Sectors
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -399,14 +399,14 @@ export default function ProfileEditPage() {
               )}
               {previewMode === "full" && selectedSubcategoryKeys.length > 0 && (
                 <div className="mb-4">
-                  <div className="text-sm text-[--text-muted] mb-2">
+                  <div className="text-sm text-[var(--text-muted)] mb-2">
                     Subcategories
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedSubcategoryKeys.map((sub) => (
                       <span
                         key={sub}
-                        className="px-3 py-1.5 rounded-full bg-[--bg-elevated] border border-[--border] text-sm text-[--text-secondary]"
+                        className="px-3 py-1.5 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-sm text-[var(--text-secondary)]"
                       >
                         {subcategoryLabel(sub)}
                       </span>
@@ -416,7 +416,7 @@ export default function ProfileEditPage() {
               )}
               {tags.length > 0 && (
                 <div className="mb-4">
-                  <div className="text-sm text-[--text-muted] mb-2">
+                  <div className="text-sm text-[var(--text-muted)] mb-2">
                     Custom Tags
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -435,12 +435,12 @@ export default function ProfileEditPage() {
 
             {/* Locked section for limited preview */}
             {previewMode === "limited" && (
-              <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 text-center">
-                <Lock className="h-8 w-8 text-[--text-muted] mx-auto mb-3" />
+              <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 text-center">
+                <Lock className="h-8 w-8 text-[var(--text-muted)] mx-auto mb-3" />
                 <h3 className="text-lg font-semibold mb-1">
                   Full Profile Locked
                 </h3>
-                <p className="text-sm text-[--text-muted]">
+                <p className="text-sm text-[var(--text-muted)]">
                   Operators must accept an introduction to see your full profile.
                 </p>
               </div>
@@ -458,13 +458,13 @@ export default function ProfileEditPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Edit Profile</h1>
-            <p className="text-[--text-secondary] mt-2">
+            <p className="text-[var(--text-secondary)] mt-2">
               Manage how you appear to operators and other users.
             </p>
           </div>
           <button
             onClick={() => setShowPreview(true)}
-            className="flex items-center gap-2 rounded-lg bg-[--bg-elevated] border border-[--border] px-4 py-2 text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:border-[--border-hover] transition-all"
+            className="flex items-center gap-2 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all"
           >
             <Eye className="h-4 w-4" />
             Preview
@@ -472,46 +472,46 @@ export default function ProfileEditPage() {
         </div>
 
         {/* Personal Info */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Personal Info</h2>
           <div className="space-y-4">
             <div>
-              <label className="text-sm text-[--text-secondary]">
+              <label className="text-sm text-[var(--text-secondary)]">
                 Full Name
               </label>
               <input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Your full name"
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
             <div>
-              <label className="text-sm text-[--text-secondary]">
+              <label className="text-sm text-[var(--text-secondary)]">
                 Headline
               </label>
               <input
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="e.g. Angel Investor | Real Estate & SaaS"
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
             <div>
-              <label className="text-sm text-[--text-secondary]">Bio</label>
+              <label className="text-sm text-[var(--text-secondary)]">Bio</label>
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Tell operators about yourself, your background, and what you're looking for..."
                 rows={4}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted] resize-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] resize-none"
               />
             </div>
           </div>
         </section>
 
         {/* Categories */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">
             Investment Categories
           </h2>
@@ -527,7 +527,7 @@ export default function ProfileEditPage() {
                     "text-left px-4 py-3.5 rounded-xl border transition-all",
                     selected
                       ? "bg-teal-500/10 border-teal-500/30 text-teal-400"
-                      : "bg-[--bg-input] border-[--border] hover:border-[--border-hover] text-[--text-primary]",
+                      : "bg-[var(--bg-input)] border-[var(--border)] hover:border-[var(--border-hover)] text-[var(--text-primary)]",
                   ].join(" ")}
                 >
                   <div className="font-semibold flex items-center gap-2">
@@ -542,13 +542,13 @@ export default function ProfileEditPage() {
 
         {/* Subcategories */}
         {selectedCategories.length > 0 && (
-          <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+          <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4">Subcategories</h2>
             <div className="space-y-5">
               {selectedCategories.map((catKey) => (
                 <div
                   key={catKey}
-                  className="border border-[--border] rounded-2xl p-4 bg-[--bg-input]"
+                  className="border border-[var(--border)] rounded-2xl p-4 bg-[var(--bg-input)]"
                 >
                   <div className="font-semibold mb-3 text-teal-400">
                     {TAXONOMY[catKey].label}
@@ -563,7 +563,7 @@ export default function ProfileEditPage() {
                             "flex items-center gap-3 px-3 py-2.5 rounded-xl border cursor-pointer select-none transition-all",
                             checked
                               ? "bg-teal-500/10 border-teal-500/30 text-teal-400"
-                              : "border-[--border] hover:border-[--border-hover] text-[--text-secondary]",
+                              : "border-[var(--border)] hover:border-[var(--border-hover)] text-[var(--text-secondary)]",
                           ].join(" ")}
                         >
                           <input
@@ -584,9 +584,9 @@ export default function ProfileEditPage() {
         )}
 
         {/* Tags */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-2">Custom Tags</h2>
-          <p className="text-[--text-secondary] mb-4">
+          <p className="text-[var(--text-secondary)] mb-4">
             Add keywords like &quot;coffee&quot;, &quot;gas station&quot;,
             &quot;self-storage&quot;.
           </p>
@@ -601,7 +601,7 @@ export default function ProfileEditPage() {
                 }
               }}
               placeholder="Type a tag and press Enter"
-              className="flex-1 rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="flex-1 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
             <button
               type="button"
@@ -631,17 +631,17 @@ export default function ProfileEditPage() {
         </section>
 
         {/* Preferences */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-8">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Preferences</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-[--text-secondary]">
+              <label className="text-sm text-[var(--text-secondary)]">
                 Typical check size
               </label>
               <select
                 value={checkSize}
                 onChange={(e) => setCheckSize(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="<25k">&lt;$25k</option>
                 <option value="25-50k">$25k-$50k</option>
@@ -652,13 +652,13 @@ export default function ProfileEditPage() {
               </select>
             </div>
             <div>
-              <label className="text-sm text-[--text-secondary]">
+              <label className="text-sm text-[var(--text-secondary)]">
                 Timeline
               </label>
               <select
                 value={timeline}
                 onChange={(e) => setTimeline(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="ready_now">Ready now</option>
                 <option value="30-90_days">30-90 days</option>
@@ -667,13 +667,13 @@ export default function ProfileEditPage() {
               </select>
             </div>
             <div>
-              <label className="text-sm text-[--text-secondary]">
+              <label className="text-sm text-[var(--text-secondary)]">
                 Involvement
               </label>
               <select
                 value={involvement}
                 onChange={(e) => setInvolvement(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="passive">Passive</option>
                 <option value="advisory">Advisory</option>
@@ -688,7 +688,7 @@ export default function ProfileEditPage() {
                   onChange={(e) => setVerifiedOnly(e.target.checked)}
                   className="h-4 w-4 accent-teal-500"
                 />
-                <span className="text-sm text-[--text-secondary]">
+                <span className="text-sm text-[var(--text-secondary)]">
                   Only show verified issuers
                 </span>
               </label>
@@ -700,7 +700,7 @@ export default function ProfileEditPage() {
         <div className="flex items-center justify-between gap-4">
           <a
             href="/dashboard"
-            className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4"
           >
             Cancel
           </a>

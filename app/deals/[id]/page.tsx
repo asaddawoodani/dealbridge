@@ -122,7 +122,7 @@ export default async function DealDetailPage({
         <div className="flex items-center justify-between gap-4 mb-8">
           <Link
             href="/deals"
-            className="text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1.5 transition text-sm"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition text-sm"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to deals
@@ -133,7 +133,7 @@ export default async function DealDetailPage({
               "text-xs px-3 py-1.5 rounded-full border font-medium",
               deal.status === "active"
                 ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/10"
-                : "border-[--border] text-[--text-muted]",
+                : "border-[var(--border)] text-[var(--text-muted)]",
             ].join(" ")}
           >
             {deal.status ?? "\u2014"}
@@ -141,16 +141,16 @@ export default async function DealDetailPage({
         </div>
 
         {/* Hero container */}
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-4 sm:p-8 shadow-lg">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4 sm:p-8 shadow-lg">
           <div className="flex flex-col gap-6">
             {/* Title block */}
             <div>
-              <div className="text-xs text-[--text-muted] uppercase tracking-wider font-medium">Deal Details</div>
+              <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-medium">Deal Details</div>
               <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mt-2">
                 {deal.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-[--text-secondary] mt-3">
+              <div className="flex flex-wrap items-center gap-4 text-[var(--text-secondary)] mt-3">
                 <span className="flex items-center gap-1.5 text-sm">
                   <Tag className="h-3.5 w-3.5 text-teal-400" />
                   {prettyCategory(deal.category)}
@@ -168,8 +168,8 @@ export default async function DealDetailPage({
 
             {/* Summary cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-[--border] bg-[--bg-input] p-5">
-                <div className="text-xs text-[--text-muted] flex items-center gap-1.5">
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-5">
+                <div className="text-xs text-[var(--text-muted)] flex items-center gap-1.5">
                   <Tag className="h-3 w-3" />
                   Category
                 </div>
@@ -178,8 +178,8 @@ export default async function DealDetailPage({
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[--border] bg-[--bg-input] p-5">
-                <div className="text-xs text-[--text-muted] flex items-center gap-1.5">
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-5">
+                <div className="text-xs text-[var(--text-muted)] flex items-center gap-1.5">
                   <Wallet className="h-3 w-3" />
                   Minimum check
                 </div>
@@ -188,8 +188,8 @@ export default async function DealDetailPage({
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[--border] bg-[--bg-input] p-5">
-                <div className="text-xs text-[--text-muted] flex items-center gap-1.5">
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-5">
+                <div className="text-xs text-[var(--text-muted)] flex items-center gap-1.5">
                   <MapPin className="h-3 w-3" />
                   Location
                 </div>
@@ -213,17 +213,17 @@ export default async function DealDetailPage({
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main */}
               <div className="lg:col-span-2 space-y-6">
-                <section className="rounded-xl border border-[--border] bg-[--bg-input] p-6">
+                <section className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-6">
                   <div className="text-sm font-semibold flex items-center gap-1.5">
                     <FileText className="h-4 w-4 text-teal-400" />
                     Overview
                   </div>
                   {deal.description ? (
-                    <div className="text-[--text-secondary] mt-3 whitespace-pre-wrap leading-relaxed">
+                    <div className="text-[var(--text-secondary)] mt-3 whitespace-pre-wrap leading-relaxed">
                       {deal.description}
                     </div>
                   ) : (
-                    <div className="text-[--text-muted] mt-3">No description provided.</div>
+                    <div className="text-[var(--text-muted)] mt-3">No description provided.</div>
                   )}
                 </section>
 
@@ -238,7 +238,7 @@ export default async function DealDetailPage({
               <aside className="space-y-5 lg:sticky lg:top-24 h-fit">
                 {/* Invest CTA */}
                 {userRole !== "operator" ? (
-                  <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5">
+                  <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[var(--bg-card)] p-5">
                     <InvestButton
                       dealId={deal.id}
                       dealMinCheck={deal.min_check}
@@ -249,9 +249,9 @@ export default async function DealDetailPage({
                 ) : null}
 
                 {/* Premium CTA */}
-                <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5">
+                <div className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[var(--bg-card)] p-5">
                   <div className="flex items-center justify-between">
-                    <div className="text-xs text-[--text-muted]">Private Access</div>
+                    <div className="text-xs text-[var(--text-muted)]">Private Access</div>
                     <span className="text-[11px] px-2 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-medium">
                       Verified flow
                     </span>
@@ -260,11 +260,11 @@ export default async function DealDetailPage({
                   <div className="text-base font-semibold mt-2">
                     Request an introduction
                   </div>
-                  <div className="text-sm text-[--text-secondary] mt-2">
+                  <div className="text-sm text-[var(--text-secondary)] mt-2">
                     Send a short note. We&apos;ll connect you with the vetted operator and follow up.
                   </div>
 
-                  <ul className="mt-4 space-y-2 text-sm text-[--text-secondary]">
+                  <ul className="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-teal-400 shrink-0 mt-0.5" />
                       <span>Direct communication with vetted operators</span>
@@ -283,36 +283,36 @@ export default async function DealDetailPage({
                     <RequestIntro dealId={deal.id} dealTitle={deal.title} verificationStatus={verificationStatus} />
                   </div>
 
-                  <div className="text-[11px] text-[--text-muted] mt-3">
+                  <div className="text-[11px] text-[var(--text-muted)] mt-3">
                     Response times vary. Serious inquiries only.
                   </div>
                 </div>
 
                 {/* Meta */}
-                <div className="rounded-xl border border-[--border] bg-[--bg-input] p-5 space-y-4">
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-5 space-y-4">
                   <div>
-                    <div className="text-xs text-[--text-muted] flex items-center gap-1">
+                    <div className="text-xs text-[var(--text-muted)] flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       Posted
                     </div>
-                    <div className="text-sm text-[--text-secondary] mt-1">
+                    <div className="text-sm text-[var(--text-secondary)] mt-1">
                       {fmtDateTime(deal.created_at)}
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-xs text-[--text-muted] flex items-center gap-1">
+                    <div className="text-xs text-[var(--text-muted)] flex items-center gap-1">
                       <Shield className="h-3 w-3" />
                       Deal ID
                     </div>
-                    <div className="text-sm text-[--text-secondary] mt-1 break-all font-mono text-xs">
+                    <div className="text-sm text-[var(--text-secondary)] mt-1 break-all font-mono text-xs">
                       {deal.id}
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-xs text-[--text-muted]">Next step</div>
-                    <div className="text-sm text-[--text-secondary] mt-1">
+                    <div className="text-xs text-[var(--text-muted)]">Next step</div>
+                    <div className="text-sm text-[var(--text-secondary)] mt-1">
                       Request the CIM / details from the vetted operator.
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export default async function DealDetailPage({
 
                 <Link
                   href="/deals"
-                  className="block text-center rounded-xl border border-[--border] px-4 py-3 font-semibold hover:border-[--border-hover] transition-all text-sm flex items-center justify-center gap-2"
+                  className="block text-center rounded-xl border border-[var(--border)] px-4 py-3 font-semibold hover:border-[var(--border-hover)] transition-all text-sm flex items-center justify-center gap-2"
                 >
                   Browse more deals
                   <ArrowRight className="h-4 w-4" />

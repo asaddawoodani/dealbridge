@@ -142,7 +142,7 @@ export default function AdminEscrowPanel() {
         <h2 className="text-xl font-bold">Escrow Transactions</h2>
         <button
           onClick={loadData}
-          className="flex items-center gap-1.5 text-sm text-[--text-muted] hover:text-[--text-primary] transition"
+          className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           Refresh
@@ -159,9 +159,9 @@ export default function AdminEscrowPanel() {
         ].map((s) => (
           <div
             key={s.label}
-            className="rounded-xl border border-[--border] bg-[--bg-input] p-4"
+            className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4"
           >
-            <div className="text-xs text-[--text-muted] mb-1">{s.label}</div>
+            <div className="text-xs text-[var(--text-muted)] mb-1">{s.label}</div>
             <div className="text-lg font-bold">{s.value}</div>
           </div>
         ))}
@@ -178,7 +178,7 @@ export default function AdminEscrowPanel() {
                 "px-3 py-1.5 rounded-xl text-sm font-medium border transition-all",
                 statusTab === tab
                   ? "bg-teal-500/10 text-teal-400 border-teal-500/30"
-                  : "border-[--border] text-[--text-secondary] hover:border-[--border-hover]",
+                  : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-hover)]",
               ].join(" ")}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -186,22 +186,22 @@ export default function AdminEscrowPanel() {
           ))}
         </div>
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by deal, investor, or PI..."
-            className="w-full rounded-xl bg-[--bg-input] border border-[--border] pl-9 pr-4 py-2 text-sm outline-none focus:border-teal-500"
+            className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-9 pr-4 py-2 text-sm outline-none focus:border-teal-500"
           />
         </div>
       </div>
 
       {/* Table */}
       {loading ? (
-        <div className="text-[--text-secondary] py-8 text-center">Loading...</div>
+        <div className="text-[var(--text-secondary)] py-8 text-center">Loading...</div>
       ) : filtered.length === 0 ? (
-        <div className="text-[--text-muted] py-8 text-center">No transactions found</div>
+        <div className="text-[var(--text-muted)] py-8 text-center">No transactions found</div>
       ) : (
         <div className="space-y-2">
           {filtered.map((row) => {
@@ -209,11 +209,11 @@ export default function AdminEscrowPanel() {
             return (
               <div
                 key={row.id}
-                className="rounded-xl border border-[--border] bg-[--bg-input] overflow-hidden"
+                className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] overflow-hidden"
               >
                 <button
                   onClick={() => setExpanded(isExpanded ? null : row.id)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[--bg-elevated]/50 transition"
+                  className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[var(--bg-elevated)]/50 transition"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <DollarSign className="h-4 w-4 text-teal-400 shrink-0" />
@@ -221,7 +221,7 @@ export default function AdminEscrowPanel() {
                       <div className="font-medium text-sm truncate">
                         {row.commitment?.deal_title ?? "Unknown Deal"}
                       </div>
-                      <div className="text-xs text-[--text-muted]">
+                      <div className="text-xs text-[var(--text-muted)]">
                         {row.commitment?.investor_name ?? "Unknown"} &middot;{" "}
                         {formatCurrency(row.amount)}
                       </div>
@@ -237,29 +237,29 @@ export default function AdminEscrowPanel() {
                       {row.payment_status}
                     </span>
                     {isExpanded ? (
-                      <ChevronDown className="h-4 w-4 text-[--text-muted]" />
+                      <ChevronDown className="h-4 w-4 text-[var(--text-muted)]" />
                     ) : (
-                      <ChevronRight className="h-4 w-4 text-[--text-muted]" />
+                      <ChevronRight className="h-4 w-4 text-[var(--text-muted)]" />
                     )}
                   </div>
                 </button>
 
                 {isExpanded && (
-                  <div className="px-4 pb-4 pt-1 border-t border-[--border] space-y-3">
+                  <div className="px-4 pb-4 pt-1 border-t border-[var(--border)] space-y-3">
                     <div className="grid grid-cols-2 gap-3 text-sm">
                       <div>
-                        <div className="text-xs text-[--text-muted]">Investor</div>
+                        <div className="text-xs text-[var(--text-muted)]">Investor</div>
                         <div>{row.commitment?.investor_name ?? "—"}</div>
-                        <div className="text-xs text-[--text-muted]">
+                        <div className="text-xs text-[var(--text-muted)]">
                           {row.commitment?.investor_email ?? "—"}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-[--text-muted]">Amount</div>
+                        <div className="text-xs text-[var(--text-muted)]">Amount</div>
                         <div className="font-semibold">{formatCurrency(row.amount)}</div>
                       </div>
                       <div>
-                        <div className="text-xs text-[--text-muted]">Paid At</div>
+                        <div className="text-xs text-[var(--text-muted)]">Paid At</div>
                         <div>
                           {row.paid_at
                             ? new Date(row.paid_at).toLocaleDateString()
@@ -267,19 +267,19 @@ export default function AdminEscrowPanel() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-[--text-muted]">Stripe PI</div>
+                        <div className="text-xs text-[var(--text-muted)]">Stripe PI</div>
                         <div className="text-xs font-mono break-all">
                           {row.stripe_payment_intent_id ?? "—"}
                         </div>
                       </div>
                       {row.refund_amount > 0 && (
                         <div>
-                          <div className="text-xs text-[--text-muted]">Refunded</div>
+                          <div className="text-xs text-[var(--text-muted)]">Refunded</div>
                           <div>{formatCurrency(row.refund_amount)}</div>
                         </div>
                       )}
                       <div>
-                        <div className="text-xs text-[--text-muted]">Funding Status</div>
+                        <div className="text-xs text-[var(--text-muted)]">Funding Status</div>
                         <PaymentStatusBadge status={row.commitment?.funding_status ?? null} />
                       </div>
                     </div>

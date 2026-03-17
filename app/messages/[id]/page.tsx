@@ -175,7 +175,7 @@ export default function ConversationPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-6 w-6 animate-spin text-[--text-muted]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[var(--text-muted)]" />
       </div>
     );
   }
@@ -183,10 +183,10 @@ export default function ConversationPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       {/* Header */}
-      <div className="border-b border-[--border] bg-[--bg-card] px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 shrink-0">
+      <div className="border-b border-[var(--border)] bg-[var(--bg-card)] px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-3 sm:gap-4 shrink-0">
         <button
           onClick={() => router.push("/messages")}
-          className="text-[--text-muted] hover:text-[--text-primary] transition"
+          className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
@@ -206,7 +206,7 @@ export default function ConversationPage() {
         {convo && userId && userId === convo.operator_id && (
           <Link
             href={`/investors/${convo.investor_id}`}
-            className="shrink-0 rounded-lg bg-[--bg-elevated] border border-[--border] px-3 py-1.5 text-xs font-medium text-[--text-secondary] hover:text-[--text-primary] hover:border-[--border-hover] transition-all hidden sm:block"
+            className="shrink-0 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all hidden sm:block"
           >
             View Profile
           </Link>
@@ -228,7 +228,7 @@ export default function ConversationPage() {
             <div key={msg.id}>
               {showDate && (
                 <div className="flex items-center justify-center my-4">
-                  <span className="text-[11px] text-[--text-muted] bg-[--bg-elevated] px-3 py-1 rounded-full">
+                  <span className="text-[11px] text-[var(--text-muted)] bg-[var(--bg-elevated)] px-3 py-1 rounded-full">
                     {formatDate(msg.created_at)}
                   </span>
                 </div>
@@ -244,7 +244,7 @@ export default function ConversationPage() {
                     "max-w-[75%] rounded-2xl px-4 py-2.5",
                     isMine
                       ? "bg-teal-500 text-white rounded-br-md"
-                      : "bg-[--bg-input] border border-[--border] text-[--text-primary] rounded-bl-md",
+                      : "bg-[var(--bg-input)] border border-[var(--border)] text-[var(--text-primary)] rounded-bl-md",
                   ].join(" ")}
                 >
                   <p className="text-sm whitespace-pre-wrap break-words">
@@ -253,7 +253,7 @@ export default function ConversationPage() {
                   <p
                     className={[
                       "text-[10px] mt-1",
-                      isMine ? "text-teal-100/70" : "text-[--text-muted]",
+                      isMine ? "text-teal-100/70" : "text-[var(--text-muted)]",
                     ].join(" ")}
                   >
                     {formatTime(msg.created_at)}
@@ -267,7 +267,7 @@ export default function ConversationPage() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-[--border] bg-[--bg-card] px-4 sm:px-6 py-3 sm:py-4 shrink-0">
+      <div className="border-t border-[var(--border)] bg-[var(--bg-card)] px-4 sm:px-6 py-3 sm:py-4 shrink-0">
         <div className="flex items-end gap-3">
           <textarea
             value={input}
@@ -275,7 +275,7 @@ export default function ConversationPage() {
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
             rows={1}
-            className="flex-1 rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted] resize-none max-h-32"
+            className="flex-1 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] resize-none max-h-32"
           />
           <button
             onClick={sendMessage}
@@ -284,7 +284,7 @@ export default function ConversationPage() {
               "rounded-xl p-3 transition-all shrink-0",
               input.trim() && !sending
                 ? "bg-teal-500 text-white hover:bg-teal-600"
-                : "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed",
+                : "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed",
             ].join(" ")}
           >
             {sending ? (

@@ -343,21 +343,21 @@ function DealsContent() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Deals</h1>
-        <p className="text-[--text-secondary] mt-2">
+        <p className="text-[var(--text-secondary)] mt-2">
           Browse opportunities from vetted operators and groups on DealBridge.
         </p>
       </div>
 
       {/* Filters */}
-      <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-5 mb-8 space-y-4">
+      <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-5 mb-8 space-y-4">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
           <input
             type="text"
             value={search}
             onChange={(e) => updateSearch(e.target.value)}
             placeholder="Search deals by title, description, or location..."
-            className="w-full rounded-xl bg-[--bg-input] border border-[--border] pl-11 pr-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+            className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-11 pr-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
           />
         </div>
 
@@ -365,7 +365,7 @@ function DealsContent() {
           <select
             value={category}
             onChange={(e) => updateCategory(e.target.value)}
-            className="rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+            className="rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
           >
             <option value="">All categories</option>
             {CATEGORIES.map((c) => (
@@ -378,7 +378,7 @@ function DealsContent() {
           <select
             value={checkSize}
             onChange={(e) => updateCheckSize(e.target.value)}
-            className="rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+            className="rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
           >
             <option value="">Any investment size</option>
             {CHECK_SIZES.map((s) => (
@@ -391,7 +391,7 @@ function DealsContent() {
           <select
             value={statusFilter}
             onChange={(e) => updateStatus(e.target.value)}
-            className="rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+            className="rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
           >
             <option value="active">Active only</option>
             <option value="all">All statuses</option>
@@ -401,13 +401,13 @@ function DealsContent() {
 
         {hasFilters && (
           <div className="flex items-center justify-between">
-            <div className="text-sm text-[--text-muted] flex items-center gap-1.5">
+            <div className="text-sm text-[var(--text-muted)] flex items-center gap-1.5">
               <SlidersHorizontal className="h-3.5 w-3.5" />
               {filtered.length} deal{filtered.length !== 1 ? "s" : ""} found
             </div>
             <button
               onClick={clearFilters}
-              className="text-sm text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1 transition py-1 px-2 -mr-2"
+              className="text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1 transition py-1 px-2 -mr-2"
             >
               <X className="h-3.5 w-3.5" />
               Clear filters
@@ -425,7 +425,7 @@ function DealsContent() {
                 <Sparkles className="h-5 w-5 text-teal-400" />
                 Recommended for You
               </h2>
-              <p className="text-[--text-secondary] mt-1 text-sm">
+              <p className="text-[var(--text-secondary)] mt-1 text-sm">
                 Complete your investor profile to get personalized deal recommendations.
               </p>
             </div>
@@ -448,7 +448,7 @@ function DealsContent() {
               <Sparkles className="h-5 w-5 text-teal-400" />
               Recommended for You
             </h2>
-            <span className="text-sm text-[--text-muted]">Based on your investor profile</span>
+            <span className="text-sm text-[var(--text-muted)]">Based on your investor profile</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -456,12 +456,12 @@ function DealsContent() {
               <Link
                 key={d.id}
                 href={`/deals/${d.id}`}
-                className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[--bg-card] p-5 hover:border-teal-500/40 transition-all block"
+                className="rounded-2xl border border-teal-500/20 bg-gradient-to-b from-teal-500/5 to-[var(--bg-card)] p-5 hover:border-teal-500/40 transition-all block"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="text-lg font-semibold truncate">{d.title}</div>
-                    <div className="text-sm text-[--text-muted] mt-1">
+                    <div className="text-sm text-[var(--text-muted)] mt-1">
                       {labelCategory(d.category)} / {d.location ?? "---"} /{" "}
                       {d.min_check ?? "---"}
                     </div>
@@ -474,7 +474,7 @@ function DealsContent() {
                         "text-xs px-2 py-1 rounded-full border",
                         d.status === "active"
                           ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/10"
-                          : "border-[--border] text-[--text-muted]",
+                          : "border-[var(--border)] text-[var(--text-muted)]",
                       ].join(" ")}
                     >
                       {d.status ?? "---"}
@@ -483,10 +483,10 @@ function DealsContent() {
                 </div>
 
                 {d.description && (
-                  <p className="text-sm text-[--text-secondary] mt-3 line-clamp-3">{d.description}</p>
+                  <p className="text-sm text-[var(--text-secondary)] mt-3 line-clamp-3">{d.description}</p>
                 )}
 
-                <div className="mt-4 flex items-center justify-between text-xs text-[--text-muted]">
+                <div className="mt-4 flex items-center justify-between text-xs text-[var(--text-muted)]">
                   <span>Posted {fmtDate(d.created_at)}</span>
                   <span className="text-teal-400 flex items-center gap-1">
                     View details <ArrowRight className="h-3 w-3" />
@@ -501,21 +501,21 @@ function DealsContent() {
       {/* Divider */}
       {!loading && !profileLoading && investorProfile && recommendedDeals.length > 0 && filtered.length > 0 && (
         <div className="flex items-center gap-4 mb-8">
-          <div className="h-px flex-1 bg-[--border]" />
-          <span className="text-sm text-[--text-muted]">All Deals</span>
-          <div className="h-px flex-1 bg-[--border]" />
+          <div className="h-px flex-1 bg-[var(--border)]" />
+          <span className="text-sm text-[var(--text-muted)]">All Deals</span>
+          <div className="h-px flex-1 bg-[var(--border)]" />
         </div>
       )}
 
       {/* Results */}
       {loading ? (
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-[--text-secondary]">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-[var(--text-secondary)]">
           Loading deals...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-center">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center">
           <div className="text-xl font-semibold mb-2">No deals match your filters</div>
-          <p className="text-[--text-secondary]">Try broadening your search or clearing filters.</p>
+          <p className="text-[var(--text-secondary)]">Try broadening your search or clearing filters.</p>
           {hasFilters && (
             <button
               onClick={clearFilters}
@@ -531,12 +531,12 @@ function DealsContent() {
             <Link
               key={d.id}
               href={`/deals/${d.id}`}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all block"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-hover)] transition-all block"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="text-lg font-semibold truncate">{d.title}</div>
-                  <div className="text-sm text-[--text-muted] mt-1">
+                  <div className="text-sm text-[var(--text-muted)] mt-1">
                     {labelCategory(d.category)} / {d.location ?? "---"} /{" "}
                     {d.min_check ?? "---"}
                   </div>
@@ -551,7 +551,7 @@ function DealsContent() {
                       "text-xs px-2 py-1 rounded-full border",
                       d.status === "active"
                         ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/10"
-                        : "border-[--border] text-[--text-muted]",
+                        : "border-[var(--border)] text-[var(--text-muted)]",
                     ].join(" ")}
                   >
                     {d.status ?? "---"}
@@ -560,7 +560,7 @@ function DealsContent() {
               </div>
 
               {d.description && (
-                <p className="text-sm text-[--text-secondary] mt-3 line-clamp-3">{d.description}</p>
+                <p className="text-sm text-[var(--text-secondary)] mt-3 line-clamp-3">{d.description}</p>
               )}
 
               <FundingProgress
@@ -569,7 +569,7 @@ function DealsContent() {
                 compact
               />
 
-              <div className="mt-4 flex items-center justify-between text-xs text-[--text-muted]">
+              <div className="mt-4 flex items-center justify-between text-xs text-[var(--text-muted)]">
                 <span>Posted {fmtDate(d.created_at)}</span>
                 <span className="text-teal-400 flex items-center gap-1">
                   View details <ArrowRight className="h-3 w-3" />
@@ -586,7 +586,7 @@ function DealsContent() {
 export default function DealsPage() {
   return (
     <div className="px-4 sm:px-6 py-10">
-      <Suspense fallback={<div className="mx-auto max-w-6xl text-[--text-muted]">Loading...</div>}>
+      <Suspense fallback={<div className="mx-auto max-w-6xl text-[var(--text-muted)]">Loading...</div>}>
         <DealsContent />
       </Suspense>
     </div>

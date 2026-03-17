@@ -106,7 +106,7 @@ export default function AdminAnalyticsPage() {
     return (
       <div className="px-6 py-10">
         <div className="mx-auto max-w-7xl">
-          <div className="text-[--text-secondary]">Loading analytics...</div>
+          <div className="text-[var(--text-secondary)]">Loading analytics...</div>
         </div>
       </div>
     );
@@ -116,10 +116,10 @@ export default function AdminAnalyticsPage() {
     return (
       <div className="px-6 py-10">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-2xl border border-[--border-error] bg-[--bg-error] p-6">
+          <div className="rounded-2xl border border-[var(--border-error)] bg-[var(--bg-error)] p-6">
             <div className="font-semibold text-red-400 mb-2">Failed to load analytics</div>
-            <div className="text-sm text-[--text-error]">{error}</div>
-            <div className="text-xs text-[--text-muted] mt-3">Check the browser console and terminal for details.</div>
+            <div className="text-sm text-[var(--text-error)]">{error}</div>
+            <div className="text-xs text-[var(--text-muted)] mt-3">Check the browser console and terminal for details.</div>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@ export default function AdminAnalyticsPage() {
       case "verification":
         return <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />;
       default:
-        return <Activity className="h-3.5 w-3.5 text-[--text-muted]" />;
+        return <Activity className="h-3.5 w-3.5 text-[var(--text-muted)]" />;
     }
   };
 
@@ -160,7 +160,7 @@ export default function AdminAnalyticsPage() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold">Platform Analytics</h1>
-          <p className="text-[--text-secondary] mt-1">Overview of platform activity and growth</p>
+          <p className="text-[var(--text-secondary)] mt-1">Overview of platform activity and growth</p>
         </div>
 
         {/* Overview stat cards */}
@@ -168,9 +168,9 @@ export default function AdminAnalyticsPage() {
           {statCards.map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -182,11 +182,11 @@ export default function AdminAnalyticsPage() {
         {/* Charts row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* User Growth */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-4 w-4 text-teal-400" />
               <h2 className="font-semibold">User Growth</h2>
-              <span className="text-xs text-[--text-muted]">Last 30 days</span>
+              <span className="text-xs text-[var(--text-muted)]">Last 30 days</span>
             </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -227,11 +227,11 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Deal Activity */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <Briefcase className="h-4 w-4 text-blue-400" />
               <h2 className="font-semibold">Deal Activity</h2>
-              <span className="text-xs text-[--text-muted]">Last 30 days</span>
+              <span className="text-xs text-[var(--text-muted)]">Last 30 days</span>
             </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -269,7 +269,7 @@ export default function AdminAnalyticsPage() {
         {/* Category + Verification row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Category Breakdown */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <Briefcase className="h-4 w-4 text-teal-400" />
               <h2 className="font-semibold">Deals by Category</h2>
@@ -306,7 +306,7 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Verification Stats */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <ShieldCheck className="h-4 w-4 text-amber-400" />
               <h2 className="font-semibold">Verification Status</h2>
@@ -317,21 +317,21 @@ export default function AdminAnalyticsPage() {
                 <div className="text-2xl font-bold text-amber-400">
                   {data.verificationStats.pending}
                 </div>
-                <div className="text-xs text-[--text-muted] mt-1">Pending</div>
+                <div className="text-xs text-[var(--text-muted)] mt-1">Pending</div>
               </div>
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5 text-center">
                 <ShieldCheck className="h-6 w-6 text-emerald-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-emerald-400">
                   {data.verificationStats.verified}
                 </div>
-                <div className="text-xs text-[--text-muted] mt-1">Verified</div>
+                <div className="text-xs text-[var(--text-muted)] mt-1">Verified</div>
               </div>
               <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-5 text-center">
                 <ShieldX className="h-6 w-6 text-red-400 mx-auto mb-2" />
                 <div className="text-2xl font-bold text-red-400">
                   {data.verificationStats.rejected}
                 </div>
-                <div className="text-xs text-[--text-muted] mt-1">Rejected</div>
+                <div className="text-xs text-[var(--text-muted)] mt-1">Rejected</div>
               </div>
             </div>
           </div>
@@ -340,19 +340,19 @@ export default function AdminAnalyticsPage() {
         {/* Top Deals + Recent Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Deals */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-4 w-4 text-emerald-400" />
               <h2 className="font-semibold">Top Deals by Interest</h2>
             </div>
             {data.topDeals.length === 0 ? (
-              <div className="text-sm text-[--text-muted]">No interest data yet.</div>
+              <div className="text-sm text-[var(--text-muted)]">No interest data yet.</div>
             ) : (
               <div className="space-y-3">
                 {data.topDeals.map((deal, i) => (
                   <div
                     key={deal.id}
-                    className="flex items-center gap-3 rounded-xl border border-[--border] bg-[--bg-input] p-3"
+                    className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-3"
                   >
                     <div className="h-7 w-7 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center text-xs font-bold shrink-0">
                       {i + 1}
@@ -370,24 +370,24 @@ export default function AdminAnalyticsPage() {
           </div>
 
           {/* Recent Activity */}
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center gap-2 mb-4">
               <Activity className="h-4 w-4 text-purple-400" />
               <h2 className="font-semibold">Recent Activity</h2>
             </div>
             {data.recentActivity.length === 0 ? (
-              <div className="text-sm text-[--text-muted]">No recent activity.</div>
+              <div className="text-sm text-[var(--text-muted)]">No recent activity.</div>
             ) : (
               <div className="space-y-3">
                 {data.recentActivity.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] p-3"
+                    className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-3"
                   >
                     <div className="mt-0.5">{activityIcon(item.type)}</div>
                     <div className="min-w-0 flex-1">
                       <div className="text-sm">{item.description}</div>
-                      <div className="text-xs text-[--text-muted] mt-1">
+                      <div className="text-xs text-[var(--text-muted)] mt-1">
                         {new Date(item.created_at).toLocaleString()}
                       </div>
                     </div>

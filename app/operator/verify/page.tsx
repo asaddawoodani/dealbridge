@@ -115,7 +115,7 @@ export default function OperatorVerifyPage() {
   if (loading) {
     return (
       <div className="px-6 py-10">
-        <div className="mx-auto max-w-2xl text-[--text-secondary]">Loading...</div>
+        <div className="mx-auto max-w-2xl text-[var(--text-secondary)]">Loading...</div>
       </div>
     );
   }
@@ -127,7 +127,7 @@ export default function OperatorVerifyPage() {
           <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8 text-center">
             <Clock className="h-12 w-12 text-amber-400 mx-auto mb-4" />
             <h1 className="text-2xl font-bold mb-2">Verification Pending</h1>
-            <p className="text-[--text-secondary]">
+            <p className="text-[var(--text-secondary)]">
               Your verification request is being reviewed. We&apos;ll notify you by email once it&apos;s been processed.
             </p>
           </div>
@@ -143,13 +143,13 @@ export default function OperatorVerifyPage() {
         <div className="mb-8">
           <a
             href="/operator/dashboard"
-            className="text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1.5 text-sm transition"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 text-sm transition"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to dashboard
           </a>
           <h1 className="text-3xl font-bold mt-4">Verify Your Business</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Complete business verification to submit deals on the platform.
           </p>
         </div>
@@ -160,41 +160,41 @@ export default function OperatorVerifyPage() {
               <ShieldAlert className="h-4 w-4" />
               Previous Verification Rejected
             </div>
-            <p className="text-sm text-[--text-secondary]">
+            <p className="text-sm text-[var(--text-secondary)]">
               Your previous verification was not approved. Please resubmit with updated information.
             </p>
           </div>
         )}
 
         {/* Form */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
           <div>
-            <label className="text-sm text-[--text-secondary]">Full Legal Name *</label>
+            <label className="text-sm text-[var(--text-secondary)]">Full Legal Name *</label>
             <input
               value={form.full_legal_name}
               onChange={(e) => setForm((p) => ({ ...p, full_legal_name: e.target.value }))}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               placeholder="Your full legal name"
             />
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Business Name *</label>
+            <label className="text-sm text-[var(--text-secondary)]">Business Name *</label>
             <input
               value={form.business_name}
               onChange={(e) => setForm((p) => ({ ...p, business_name: e.target.value }))}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               placeholder="Registered business name"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-[--text-secondary]">Business Type *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Business Type *</label>
               <select
                 value={form.business_type}
                 onChange={(e) => setForm((p) => ({ ...p, business_type: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 {BUSINESS_TYPES.map((t) => (
                   <option key={t.value} value={t.value}>
@@ -205,43 +205,43 @@ export default function OperatorVerifyPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">EIN / Registration #</label>
+              <label className="text-sm text-[var(--text-secondary)]">EIN / Registration #</label>
               <input
                 value={form.ein_registration}
                 onChange={(e) => setForm((p) => ({ ...p, ein_registration: e.target.value }))}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder="XX-XXXXXXX"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Business Address</label>
+            <label className="text-sm text-[var(--text-secondary)]">Business Address</label>
             <input
               value={form.business_address}
               onChange={(e) => setForm((p) => ({ ...p, business_address: e.target.value }))}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               placeholder="Full business address"
             />
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Business Description *</label>
+            <label className="text-sm text-[var(--text-secondary)]">Business Description *</label>
             <textarea
               value={form.business_description}
               onChange={(e) => setForm((p) => ({ ...p, business_description: e.target.value }))}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               rows={4}
               placeholder="Describe your business, operations, and the types of deals you plan to submit..."
             />
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Years in Operation</label>
+            <label className="text-sm text-[var(--text-secondary)]">Years in Operation</label>
             <input
               value={form.years_in_operation}
               onChange={(e) => setForm((p) => ({ ...p, years_in_operation: e.target.value }))}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               placeholder='e.g., "3 years", "10+"'
             />
           </div>
@@ -254,7 +254,7 @@ export default function OperatorVerifyPage() {
               className={[
                 "rounded-xl px-6 py-3 font-semibold transition-all flex items-center gap-2",
                 saving
-                  ? "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed"
+                  ? "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed"
                   : "bg-teal-500 text-white hover:bg-teal-600",
               ].join(" ")}
             >

@@ -145,7 +145,7 @@ export default function AdminVerificationsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Verifications</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Review and manage investor and operator verification requests.
           </p>
         </div>
@@ -159,9 +159,9 @@ export default function AdminVerificationsPage() {
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -171,7 +171,7 @@ export default function AdminVerificationsPage() {
         </div>
 
         {/* List */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
           {/* Status tabs */}
           <div className="flex flex-wrap gap-2 mb-4">
             {STATUS_TABS.map((tab) => (
@@ -182,7 +182,7 @@ export default function AdminVerificationsPage() {
                   "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
                   statusTab === tab
                     ? "bg-teal-500/10 text-teal-400 border-teal-500/30"
-                    : "border-[--border] text-[--text-secondary] hover:border-[--border-hover]",
+                    : "border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--border-hover)]",
                 ].join(" ")}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -196,30 +196,30 @@ export default function AdminVerificationsPage() {
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="text-lg font-semibold">
               Requests{" "}
-              <span className="text-[--text-muted] text-sm">({filtered.length})</span>
+              <span className="text-[var(--text-muted)] text-sm">({filtered.length})</span>
             </div>
 
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[--text-muted]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search..."
-                className="w-full sm:w-72 rounded-xl bg-[--bg-input] border border-[--border] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[--text-primary] placeholder:text-[--text-muted]"
+                className="w-full sm:w-72 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-10 pr-4 py-2.5 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-[--text-secondary]">Loading...</div>
+            <div className="text-[var(--text-secondary)]">Loading...</div>
           ) : filtered.length === 0 ? (
-            <div className="text-[--text-muted]">No verification requests found.</div>
+            <div className="text-[var(--text-muted)]">No verification requests found.</div>
           ) : (
             <div className="space-y-3">
               {filtered.map((v) => (
                 <div
                   key={v.id}
-                  className="rounded-xl border border-[--border] bg-[--bg-input] p-4 flex items-start justify-between gap-4"
+                  className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4 flex items-start justify-between gap-4"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -229,7 +229,7 @@ export default function AdminVerificationsPage() {
                       <span
                         className={[
                           "text-xs px-2 py-1 rounded-full border",
-                          STATUS_BADGE[v.status] ?? "border-[--border] text-[--text-muted]",
+                          STATUS_BADGE[v.status] ?? "border-[var(--border)] text-[var(--text-muted)]",
                         ].join(" ")}
                       >
                         {v.status}
@@ -246,28 +246,28 @@ export default function AdminVerificationsPage() {
                       </span>
                     </div>
 
-                    <div className="text-sm text-[--text-muted] mt-1">
+                    <div className="text-sm text-[var(--text-muted)] mt-1">
                       {v.profiles?.email ?? "---"}
                     </div>
 
                     {/* Submitted fields */}
-                    <div className="mt-3 space-y-1 text-sm text-[--text-secondary]">
+                    <div className="mt-3 space-y-1 text-sm text-[var(--text-secondary)]">
                       {v.role === "investor" && (
                         <>
-                          {v.phone && <div><span className="text-[--text-muted]">Phone:</span> {v.phone}</div>}
-                          {v.accreditation_type && <div><span className="text-[--text-muted]">Accreditation:</span> {v.accreditation_type}</div>}
-                          {v.proof_description && <div><span className="text-[--text-muted]">Proof:</span> {v.proof_description}</div>}
-                          <div><span className="text-[--text-muted]">Self-certified:</span> {v.self_certified ? "Yes" : "No"}</div>
+                          {v.phone && <div><span className="text-[var(--text-muted)]">Phone:</span> {v.phone}</div>}
+                          {v.accreditation_type && <div><span className="text-[var(--text-muted)]">Accreditation:</span> {v.accreditation_type}</div>}
+                          {v.proof_description && <div><span className="text-[var(--text-muted)]">Proof:</span> {v.proof_description}</div>}
+                          <div><span className="text-[var(--text-muted)]">Self-certified:</span> {v.self_certified ? "Yes" : "No"}</div>
                         </>
                       )}
                       {v.role === "operator" && (
                         <>
-                          {v.business_name && <div><span className="text-[--text-muted]">Business:</span> {v.business_name}</div>}
-                          {v.business_type && <div><span className="text-[--text-muted]">Type:</span> {v.business_type}</div>}
-                          {v.ein_registration && <div><span className="text-[--text-muted]">EIN:</span> {v.ein_registration}</div>}
-                          {v.business_address && <div><span className="text-[--text-muted]">Address:</span> {v.business_address}</div>}
-                          {v.business_description && <div className="line-clamp-2"><span className="text-[--text-muted]">Description:</span> {v.business_description}</div>}
-                          {v.years_in_operation && <div><span className="text-[--text-muted]">Years:</span> {v.years_in_operation}</div>}
+                          {v.business_name && <div><span className="text-[var(--text-muted)]">Business:</span> {v.business_name}</div>}
+                          {v.business_type && <div><span className="text-[var(--text-muted)]">Type:</span> {v.business_type}</div>}
+                          {v.ein_registration && <div><span className="text-[var(--text-muted)]">EIN:</span> {v.ein_registration}</div>}
+                          {v.business_address && <div><span className="text-[var(--text-muted)]">Address:</span> {v.business_address}</div>}
+                          {v.business_description && <div className="line-clamp-2"><span className="text-[var(--text-muted)]">Description:</span> {v.business_description}</div>}
+                          {v.years_in_operation && <div><span className="text-[var(--text-muted)]">Years:</span> {v.years_in_operation}</div>}
                         </>
                       )}
                     </div>
@@ -279,7 +279,7 @@ export default function AdminVerificationsPage() {
                       </div>
                     )}
 
-                    <div className="text-xs text-[--text-muted] mt-2">
+                    <div className="text-xs text-[var(--text-muted)] mt-2">
                       {new Date(v.created_at).toLocaleString()}
                     </div>
                   </div>

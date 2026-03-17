@@ -31,7 +31,7 @@ export default function KycBanner({ kycStatus }: { kycStatus: string }) {
         <ShieldAlert className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
         <div className="min-w-0">
           <div className="font-semibold text-amber-400">{msg.title}</div>
-          <div className="text-sm text-[--text-secondary] mt-1">{msg.body}</div>
+          <div className="text-sm text-[var(--text-secondary)] mt-1">{msg.body}</div>
           {kycStatus !== "pending" && (
             <Link
               href="/kyc"

@@ -79,7 +79,7 @@ function CheckoutForm({
       <div className="text-center py-6 space-y-3">
         <CheckCircle className="h-10 w-10 text-emerald-400 mx-auto" />
         <div className="text-lg font-semibold">Payment Successful</div>
-        <p className="text-sm text-[--text-secondary]">
+        <p className="text-sm text-[var(--text-secondary)]">
           Your funds are now held securely in escrow.
         </p>
       </div>
@@ -102,7 +102,7 @@ function CheckoutForm({
         className={[
           "w-full rounded-xl px-6 py-3 font-semibold transition-all text-sm flex items-center justify-center gap-2",
           !stripe || processing
-            ? "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed"
+            ? "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed"
             : "bg-teal-500 text-white hover:bg-teal-600",
         ].join(" ")}
       >

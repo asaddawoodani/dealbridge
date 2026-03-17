@@ -81,24 +81,24 @@ export default function UserMenu() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2.5 rounded-xl border border-[--border] px-3 py-2 hover:border-[--border-hover] transition-all outline-none"
+        className="flex items-center gap-2.5 rounded-xl border border-[var(--border)] px-3 py-2 hover:border-[var(--border-hover)] transition-all outline-none"
       >
         <div className="h-8 w-8 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold">
           {initials}
         </div>
-        <span className="text-sm font-medium text-[--text-primary] hidden sm:block max-w-[120px] truncate">
+        <span className="text-sm font-medium text-[var(--text-primary)] hidden sm:block max-w-[120px] truncate">
           {profile.full_name ?? "User"}
         </span>
-        <ChevronDown className="h-4 w-4 text-[--text-muted]" />
+        <ChevronDown className="h-4 w-4 text-[var(--text-muted)]" />
       </button>
 
       {open && (
         <div
-          className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-[--border] shadow-xl z-50"
+          className="absolute right-0 mt-2 w-48 sm:w-56 rounded-xl border border-[var(--border)] shadow-xl z-50"
           style={{ backgroundColor: 'var(--bg-card)' }}
         >
           <div className="p-3">
-            <div className="text-sm font-medium truncate text-[--text-primary]">{profile.full_name ?? "User"}</div>
+            <div className="text-sm font-medium truncate text-[var(--text-primary)]">{profile.full_name ?? "User"}</div>
             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
               <span
                 className={`inline-block text-[11px] px-2 py-0.5 rounded-full font-medium ${
@@ -119,7 +119,7 @@ export default function UserMenu() {
           <div className="py-1">
             <a
               href="/dashboard"
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated] outline-none"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] outline-none"
             >
               <User className="h-4 w-4" />
               Dashboard
@@ -127,7 +127,7 @@ export default function UserMenu() {
             {!isAdmin && !isVerified && (
               <a
                 href={verifyHref}
-                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[--bg-elevated] outline-none"
+                className="flex items-center gap-2.5 px-4 py-2 text-sm text-amber-400 hover:text-amber-300 hover:bg-[var(--bg-elevated)] outline-none"
               >
                 <ShieldAlert className="h-4 w-4" />
                 Verify Account
@@ -137,7 +137,7 @@ export default function UserMenu() {
           <div className="py-1">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-500 hover:text-red-400 hover:bg-[--bg-elevated] w-full text-left outline-none"
+              className="flex items-center gap-2.5 px-4 py-2 text-sm text-red-500 hover:text-red-400 hover:bg-[var(--bg-elevated)] w-full text-left outline-none"
             >
               <LogOut className="h-4 w-4" />
               Sign out

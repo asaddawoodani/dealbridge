@@ -103,14 +103,14 @@ export default function ValuePropTabs() {
       <div className="grid md:grid-cols-2 gap-8">
         {cards.map((card, i) => (
           <FadeIn key={`${activeTab}-${i}`} delay={i * 100}>
-            <div className="rounded-2xl p-8 bg-[--bg-card] border border-[--border] hover:border-[--border-hover] transition-all">
+            <div className="rounded-2xl p-8 bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-hover)] transition-all">
               <div className="mb-5 text-teal-400">
                 <card.icon className="h-10 w-10" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold mb-3 text-[--text-primary]">
+              <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">
                 {card.title}
               </h3>
-              <p className="text-[--text-secondary] leading-relaxed">
+              <p className="text-[var(--text-secondary)] leading-relaxed">
                 {card.description}
               </p>
             </div>

@@ -137,7 +137,7 @@ export default function EditDealPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="text-[--text-muted]">Loading...</div>
+        <div className="text-[var(--text-muted)]">Loading...</div>
       </div>
     );
   }
@@ -147,7 +147,7 @@ export default function EditDealPage() {
       <div className="flex items-center justify-center px-6 py-20">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-3">Cannot edit this deal</h1>
-          <p className="text-[--text-secondary] mb-6">
+          <p className="text-[var(--text-secondary)] mb-6">
             Only pending deals you own can be edited.
           </p>
           <a
@@ -168,38 +168,38 @@ export default function EditDealPage() {
         <div className="mb-8">
           <a
             href="/operator/dashboard"
-            className="text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1.5 text-sm transition"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 text-sm transition"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to dashboard
           </a>
           <h1 className="text-3xl font-bold mt-4">Edit Deal</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Update your deal details. It will remain pending until approved.
           </p>
         </div>
 
         {/* Form */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
           <div>
-            <label className="text-sm text-[--text-secondary]">Title *</label>
+            <label className="text-sm text-[var(--text-secondary)]">Title *</label>
             <input
               value={form.title}
               onChange={(e) =>
                 setForm((p) => ({ ...p, title: e.target.value }))
               }
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Category</label>
+            <label className="text-sm text-[var(--text-secondary)]">Category</label>
             <select
               value={form.category}
               onChange={(e) =>
                 setForm((p) => ({ ...p, category: e.target.value }))
               }
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
             >
               {CATEGORIES.map((c) => (
                 <option key={c.value} value={c.value}>
@@ -210,54 +210,54 @@ export default function EditDealPage() {
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Description</label>
+            <label className="text-sm text-[var(--text-secondary)]">Description</label>
             <textarea
               value={form.description}
               onChange={(e) =>
                 setForm((p) => ({ ...p, description: e.target.value }))
               }
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               rows={5}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-[--text-secondary]">Location</label>
+              <label className="text-sm text-[var(--text-secondary)]">Location</label>
               <input
                 value={form.location}
                 onChange={(e) =>
                   setForm((p) => ({ ...p, location: e.target.value }))
                 }
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Investment Size</label>
+              <label className="text-sm text-[var(--text-secondary)]">Investment Size</label>
               <input
                 value={form.min_check}
                 onChange={(e) =>
                   setForm((p) => ({ ...p, min_check: e.target.value }))
                 }
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Timeline</label>
+            <label className="text-sm text-[var(--text-secondary)]">Timeline</label>
             <input
               value={form.timeline}
               onChange={(e) =>
                 setForm((p) => ({ ...p, timeline: e.target.value }))
               }
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
           </div>
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Tags</label>
+            <label className="text-sm text-[var(--text-secondary)]">Tags</label>
             <div className="mt-2 flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <span
@@ -280,13 +280,13 @@ export default function EditDealPage() {
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={handleTagKeyDown}
-                className="flex-1 rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+                className="flex-1 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
                 placeholder="Type a tag and press Enter"
               />
               <button
                 type="button"
                 onClick={addTag}
-                className="rounded-xl border border-[--border] px-4 py-3 text-sm hover:border-[--border-hover] flex items-center gap-1 transition"
+                className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm hover:border-[var(--border-hover)] flex items-center gap-1 transition"
               >
                 <Plus className="h-3.5 w-3.5" />
                 Add
@@ -310,7 +310,7 @@ export default function EditDealPage() {
               className={[
                 "rounded-xl px-6 py-3 font-semibold transition-all",
                 saving
-                  ? "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed"
+                  ? "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed"
                   : "bg-teal-500 text-white hover:bg-teal-600",
               ].join(" ")}
             >

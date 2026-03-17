@@ -33,14 +33,14 @@ export default function ForgotPasswordPage() {
     return (
       <div className="flex items-center justify-center px-4 sm:px-6 py-10 sm:py-20">
         <div className="w-full max-w-md text-center">
-          <div className="bg-[--bg-card] border border-[--border] rounded-xl p-6">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6">
             <h1 className="text-2xl font-bold mb-3">Check your email</h1>
-            <p className="text-[--text-secondary]">
-              If an account exists for <span className="text-[--text-primary]">{email}</span>, you&apos;ll receive a password reset link.
+            <p className="text-[var(--text-secondary)]">
+              If an account exists for <span className="text-[var(--text-primary)]">{email}</span>, you&apos;ll receive a password reset link.
             </p>
             <a
               href="/auth/login"
-              className="inline-block mt-6 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4"
+              className="inline-block mt-6 text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4"
             >
               Back to sign in
             </a>
@@ -55,24 +55,24 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold">Reset password</h1>
-          <p className="text-[--text-secondary] mt-2">Enter your email to receive a reset link</p>
+          <p className="text-[var(--text-secondary)] mt-2">Enter your email to receive a reset link</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-[--bg-card] border border-[--border] rounded-xl p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6 space-y-4">
           {error && (
-            <div className="rounded-xl bg-[--bg-error] border border-[--border-error] px-4 py-3 text-sm text-[--text-error]">
+            <div className="rounded-xl bg-[var(--bg-error)] border border-[var(--border-error)] px-4 py-3 text-sm text-[var(--text-error)]">
               {error}
             </div>
           )}
 
           <div>
-            <label className="text-sm text-[--text-secondary]">Email</label>
+            <label className="text-sm text-[var(--text-secondary)]">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               placeholder="you@example.com"
             />
           </div>
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
           </button>
 
           <div className="text-center text-sm">
-            <a href="/auth/login" className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
+            <a href="/auth/login" className="text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4">
               Back to sign in
             </a>
           </div>

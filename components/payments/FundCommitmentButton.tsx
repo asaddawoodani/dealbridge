@@ -93,14 +93,14 @@ export default function FundCommitmentButton({
           >
             <button
               onClick={() => setShowPayment(false)}
-              className="absolute top-4 right-4 text-[--text-muted] hover:text-[--text-primary] transition"
+              className="absolute top-4 right-4 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition"
             >
               <X className="h-5 w-5" />
             </button>
 
             <div className="mb-5">
               <div className="text-lg font-semibold">Fund Commitment</div>
-              <div className="text-sm text-[--text-secondary] mt-1">
+              <div className="text-sm text-[var(--text-secondary)] mt-1">
                 Securely pay ${amount.toLocaleString()} via Stripe
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function FundCommitmentButton({
               onSuccess={handleSuccess}
             />
 
-            <div className="text-[11px] text-[--text-muted] mt-4 text-center">
+            <div className="text-[11px] text-[var(--text-muted)] mt-4 text-center">
               Funds are held in escrow until released by the platform.
             </div>
           </div>

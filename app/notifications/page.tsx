@@ -121,21 +121,21 @@ export default function NotificationsPage() {
               <Bell className="h-7 w-7 text-teal-400" />
               Notifications
             </h1>
-            <p className="text-[--text-secondary] mt-1">
+            <p className="text-[var(--text-secondary)] mt-1">
               Stay updated on your deals, messages, and account activity
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={handleMarkAllRead}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[--border] text-xs font-medium text-[--text-secondary] hover:text-[--text-primary] hover:border-[--border-hover] transition-all"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border)] text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] transition-all"
             >
               <CheckCheck className="h-3.5 w-3.5" />
               Mark all read
             </button>
             <button
               onClick={handleClearAll}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[--border] text-xs font-medium text-red-400 hover:text-red-300 hover:border-red-500/30 transition-all"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border)] text-xs font-medium text-red-400 hover:text-red-300 hover:border-red-500/30 transition-all"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Clear all
@@ -153,7 +153,7 @@ export default function NotificationsPage() {
                 "px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0",
                 tab === t.key
                   ? "bg-teal-500/10 text-teal-400 border border-teal-500/30"
-                  : "text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]",
+                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]",
               ].join(" ")}
             >
               {t.label}
@@ -163,23 +163,23 @@ export default function NotificationsPage() {
 
         {/* List */}
         {loading ? (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-center text-[--text-muted]">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center text-[var(--text-muted)]">
             Loading notifications...
           </div>
         ) : filtered.length === 0 ? (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-center">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center">
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-teal-500/10 text-teal-400 mb-4">
               <Bell className="h-6 w-6" />
             </div>
             <h2 className="text-lg font-semibold mb-2">No notifications</h2>
-            <p className="text-[--text-secondary] text-sm">
+            <p className="text-[var(--text-secondary)] text-sm">
               {tab === "unread"
                 ? "You're all caught up!"
                 : "Nothing here yet. Activity will show up as it happens."}
             </p>
           </div>
         ) : (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] divide-y divide-[--border]">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] divide-y divide-[var(--border)]">
             {filtered.map((n) => (
               <NotificationItem
                 key={n.id}

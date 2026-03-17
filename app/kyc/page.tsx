@@ -138,7 +138,7 @@ export default function KycPage() {
   if (loading) {
     return (
       <div className="px-6 py-20 text-center">
-        <div className="text-[--text-muted]">Loading...</div>
+        <div className="text-[var(--text-muted)]">Loading...</div>
       </div>
     );
   }
@@ -151,7 +151,7 @@ export default function KycPage() {
             <ShieldCheck className="h-8 w-8" />
           </div>
           <h1 className="text-2xl font-bold mb-3">KYC Submitted</h1>
-          <p className="text-[--text-secondary]">
+          <p className="text-[var(--text-secondary)]">
             Your KYC documents have been submitted. Our compliance team will review your submission and you&apos;ll be notified once it&apos;s complete.
           </p>
           <a
@@ -174,17 +174,17 @@ export default function KycPage() {
             <Clock className="h-8 w-8" />
           </div>
           <h1 className="text-2xl font-bold mb-3">KYC Under Review</h1>
-          <p className="text-[--text-secondary]">
+          <p className="text-[var(--text-secondary)]">
             Your KYC submission is being reviewed by our compliance team. You&apos;ll receive an email once the review is complete.
           </p>
           {kycData.submission?.created_at && (
-            <p className="text-sm text-[--text-muted] mt-3">
+            <p className="text-sm text-[var(--text-muted)] mt-3">
               Submitted {new Date(kycData.submission.created_at).toLocaleDateString()}
             </p>
           )}
           <a
             href="/dashboard"
-            className="inline-block mt-6 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4"
+            className="inline-block mt-6 text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4"
           >
             Back to Dashboard
           </a>
@@ -201,11 +201,11 @@ export default function KycPage() {
             <ShieldCheck className="h-8 w-8" />
           </div>
           <h1 className="text-2xl font-bold mb-3">KYC Approved</h1>
-          <p className="text-[--text-secondary]">
+          <p className="text-[var(--text-secondary)]">
             Your identity has been verified. You have full access to all deals on the platform.
           </p>
           {kycData.submission?.expires_at && (
-            <p className="text-sm text-[--text-muted] mt-3">
+            <p className="text-sm text-[var(--text-muted)] mt-3">
               Expires {new Date(kycData.submission.expires_at).toLocaleDateString()}
             </p>
           )}
@@ -224,9 +224,9 @@ export default function KycPage() {
   const showRejection = kycData?.kyc_status === "rejected" && kycData.submission?.rejection_reason;
 
   const inputCls =
-    "mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]";
+    "mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]";
   const selectCls =
-    "mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none";
+    "mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none";
 
   return (
     <div className="px-6 py-10">
@@ -234,7 +234,7 @@ export default function KycPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">KYC Verification</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Complete your identity verification to access all deals on the platform.
           </p>
         </div>
@@ -245,7 +245,7 @@ export default function KycPage() {
               <ShieldX className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
               <div>
                 <div className="font-semibold text-red-400">Previous submission rejected</div>
-                <div className="text-sm text-[--text-secondary] mt-1">
+                <div className="text-sm text-[var(--text-secondary)] mt-1">
                   {kycData?.submission?.rejection_reason}
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function KycPage() {
         <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-2">
           {STEPS.map((s, i) => (
             <div key={s.key} className="flex items-center gap-2 shrink-0">
-              {i > 0 && <div className="h-px w-4 bg-[--border]" />}
+              {i > 0 && <div className="h-px w-4 bg-[var(--border)]" />}
               <button
                 type="button"
                 onClick={() => {
@@ -268,8 +268,8 @@ export default function KycPage() {
                   i < step
                     ? "bg-teal-500/10 text-teal-400 border border-teal-500/20 cursor-pointer"
                     : i === step
-                    ? "bg-[--bg-elevated] text-[--text-primary] border border-[--border]"
-                    : "bg-[--bg-elevated] text-[--text-muted] border border-[--border] cursor-default",
+                    ? "bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border)]"
+                    : "bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)] cursor-default",
                 ].join(" ")}
               >
                 {i < step ? <Check className="h-3 w-3" /> : i + 1}
@@ -280,38 +280,38 @@ export default function KycPage() {
         </div>
 
         {error && (
-          <div className="rounded-xl bg-[--bg-error] border border-[--border-error] px-4 py-3 text-sm text-[--text-error] mb-6">
+          <div className="rounded-xl bg-[var(--bg-error)] border border-[var(--border-error)] px-4 py-3 text-sm text-[var(--text-error)] mb-6">
             {error}
           </div>
         )}
 
         {/* Step 1: Personal Info */}
         {step === 0 && (
-          <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <ShieldAlert className="h-5 w-5 text-teal-400" />
               Personal Information
             </h2>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Full legal name *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Full legal name *</label>
               <input type="text" required value={fullLegalName} onChange={(e) => setFullLegalName(e.target.value)} className={inputCls} placeholder="As it appears on your ID" />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm text-[--text-secondary]">Date of birth *</label>
+                <label className="text-sm text-[var(--text-secondary)]">Date of birth *</label>
                 <input type="date" required value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} className={inputCls} />
               </div>
               <div>
-                <label className="text-sm text-[--text-secondary]">Nationality *</label>
+                <label className="text-sm text-[var(--text-secondary)]">Nationality *</label>
                 <input type="text" required value={nationality} onChange={(e) => setNationality(e.target.value)} className={inputCls} placeholder="e.g. United States" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm text-[--text-secondary]">Tax ID type</label>
+                <label className="text-sm text-[var(--text-secondary)]">Tax ID type</label>
                 <select value={taxIdType} onChange={(e) => setTaxIdType(e.target.value)} className={selectCls}>
                   <option value="">None</option>
                   <option value="ssn">SSN</option>
@@ -321,36 +321,36 @@ export default function KycPage() {
                 </select>
               </div>
               <div>
-                <label className="text-sm text-[--text-secondary]">Tax ID number</label>
+                <label className="text-sm text-[var(--text-secondary)]">Tax ID number</label>
                 <input type="password" value={taxId} onChange={(e) => setTaxId(e.target.value)} className={inputCls} placeholder="Will be encrypted" />
               </div>
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Address line 1 *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Address line 1 *</label>
               <input type="text" required value={addressLine1} onChange={(e) => setAddressLine1(e.target.value)} className={inputCls} placeholder="Street address" />
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Address line 2</label>
+              <label className="text-sm text-[var(--text-secondary)]">Address line 2</label>
               <input type="text" value={addressLine2} onChange={(e) => setAddressLine2(e.target.value)} className={inputCls} placeholder="Apt, suite, unit (optional)" />
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
-                <label className="text-sm text-[--text-secondary]">City *</label>
+                <label className="text-sm text-[var(--text-secondary)]">City *</label>
                 <input type="text" required value={city} onChange={(e) => setCity(e.target.value)} className={inputCls} />
               </div>
               <div>
-                <label className="text-sm text-[--text-secondary]">State/Province *</label>
+                <label className="text-sm text-[var(--text-secondary)]">State/Province *</label>
                 <input type="text" required value={stateProvince} onChange={(e) => setStateProvince(e.target.value)} className={inputCls} />
               </div>
               <div>
-                <label className="text-sm text-[--text-secondary]">Postal code *</label>
+                <label className="text-sm text-[var(--text-secondary)]">Postal code *</label>
                 <input type="text" required value={postalCode} onChange={(e) => setPostalCode(e.target.value)} className={inputCls} />
               </div>
               <div>
-                <label className="text-sm text-[--text-secondary]">Country *</label>
+                <label className="text-sm text-[var(--text-secondary)]">Country *</label>
                 <input type="text" required value={country} onChange={(e) => setCountry(e.target.value)} className={inputCls} placeholder="e.g. US" />
               </div>
             </div>
@@ -359,14 +359,14 @@ export default function KycPage() {
 
         {/* Step 2: Identity Document */}
         {step === 1 && (
-          <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <Upload className="h-5 w-5 text-teal-400" />
               Identity Document
             </h2>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Document type *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Document type *</label>
               <select value={idDocumentType} onChange={(e) => setIdDocumentType(e.target.value)} className={selectCls}>
                 <option value="passport">Passport</option>
                 <option value="drivers_license">Driver&apos;s License</option>
@@ -375,11 +375,11 @@ export default function KycPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Upload ID document *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Upload ID document *</label>
               <div className="mt-2">
-                <label className="flex items-center justify-center gap-3 rounded-xl border-2 border-dashed border-[--border] hover:border-teal-500/50 p-8 cursor-pointer transition-all">
-                  <Upload className="h-5 w-5 text-[--text-muted]" />
-                  <span className="text-sm text-[--text-secondary]">
+                <label className="flex items-center justify-center gap-3 rounded-xl border-2 border-dashed border-[var(--border)] hover:border-teal-500/50 p-8 cursor-pointer transition-all">
+                  <Upload className="h-5 w-5 text-[var(--text-muted)]" />
+                  <span className="text-sm text-[var(--text-secondary)]">
                     {idDocument ? idDocument.name : "Click to upload (PDF, JPG, PNG)"}
                   </span>
                   <input
@@ -393,12 +393,12 @@ export default function KycPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Selfie (optional)</label>
-              <p className="text-xs text-[--text-muted] mt-1">A photo of yourself holding your ID document for liveness verification.</p>
+              <label className="text-sm text-[var(--text-secondary)]">Selfie (optional)</label>
+              <p className="text-xs text-[var(--text-muted)] mt-1">A photo of yourself holding your ID document for liveness verification.</p>
               <div className="mt-2">
-                <label className="flex items-center justify-center gap-3 rounded-xl border-2 border-dashed border-[--border] hover:border-teal-500/50 p-6 cursor-pointer transition-all">
-                  <Upload className="h-5 w-5 text-[--text-muted]" />
-                  <span className="text-sm text-[--text-secondary]">
+                <label className="flex items-center justify-center gap-3 rounded-xl border-2 border-dashed border-[var(--border)] hover:border-teal-500/50 p-6 cursor-pointer transition-all">
+                  <Upload className="h-5 w-5 text-[var(--text-muted)]" />
+                  <span className="text-sm text-[var(--text-secondary)]">
                     {selfie ? selfie.name : "Click to upload (optional)"}
                   </span>
                   <input
@@ -415,11 +415,11 @@ export default function KycPage() {
 
         {/* Step 3: Source of Funds */}
         {step === 2 && (
-          <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
             <h2 className="text-xl font-semibold">Source of Funds</h2>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Primary source of investment funds *</label>
+              <label className="text-sm text-[var(--text-secondary)]">Primary source of investment funds *</label>
               <select value={sourceOfFunds} onChange={(e) => setSourceOfFunds(e.target.value)} className={selectCls}>
                 <option value="employment">Employment / Salary</option>
                 <option value="business">Business Income</option>
@@ -430,7 +430,7 @@ export default function KycPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Additional details</label>
+              <label className="text-sm text-[var(--text-secondary)]">Additional details</label>
               <textarea
                 value={sourceDetails}
                 onChange={(e) => setSourceDetails(e.target.value)}
@@ -440,7 +440,7 @@ export default function KycPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Expected investment range</label>
+              <label className="text-sm text-[var(--text-secondary)]">Expected investment range</label>
               <select value={expectedRange} onChange={(e) => setExpectedRange(e.target.value)} className={selectCls}>
                 <option value="">Select range</option>
                 <option value="<50k">Less than $50K</option>
@@ -455,39 +455,39 @@ export default function KycPage() {
 
         {/* Step 4: Review & Declaration */}
         {step === 3 && (
-          <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-6">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-6">
             <h2 className="text-xl font-semibold">Review & Declaration</h2>
 
             {/* Summary */}
-            <div className="rounded-xl border border-[--border] bg-[--bg-input] p-4 space-y-2 text-sm">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4 space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">Name</span>
+                <span className="text-[var(--text-muted)]">Name</span>
                 <span>{fullLegalName}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">Date of Birth</span>
+                <span className="text-[var(--text-muted)]">Date of Birth</span>
                 <span>{dateOfBirth}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">Nationality</span>
+                <span className="text-[var(--text-muted)]">Nationality</span>
                 <span>{nationality}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">Address</span>
+                <span className="text-[var(--text-muted)]">Address</span>
                 <span className="text-right">{addressLine1}, {city}, {stateProvince} {postalCode}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">ID Document</span>
+                <span className="text-[var(--text-muted)]">ID Document</span>
                 <span>{idDocumentType.replace("_", " ")} — {idDocument?.name ?? "uploaded"}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[--text-muted]">Source of Funds</span>
+                <span className="text-[var(--text-muted)]">Source of Funds</span>
                 <span>{sourceOfFunds}</span>
               </div>
             </div>
 
             {/* PEP */}
-            <div className="rounded-xl border border-[--border] bg-[--bg-input] p-4">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4">
               <label className="flex items-start gap-3 select-none cursor-pointer">
                 <input
                   type="checkbox"
@@ -497,7 +497,7 @@ export default function KycPage() {
                 />
                 <div>
                   <span className="text-sm font-medium">Politically Exposed Person (PEP)</span>
-                  <p className="text-xs text-[--text-muted] mt-1">
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
                     Are you, or any of your immediate family members, a current or former senior political figure, senior government official, or senior executive of a state-owned enterprise?
                   </p>
                 </div>
@@ -556,7 +556,7 @@ export default function KycPage() {
             className={[
               "text-sm font-medium transition-all",
               step > 0
-                ? "text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4"
+                ? "text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4"
                 : "invisible",
             ].join(" ")}
           >

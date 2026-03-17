@@ -143,7 +143,7 @@ export default function OnboardingPage() {
   if (loadingProfile) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="text-[--text-muted]">Loading...</div>
+        <div className="text-[var(--text-muted)]">Loading...</div>
       </div>
     );
   }
@@ -154,7 +154,7 @@ export default function OnboardingPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Investor Onboarding</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Tell DealBridge what you&apos;re interested in so we can match you with the right deals.
           </p>
         </div>
@@ -164,29 +164,29 @@ export default function OnboardingPage() {
           <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium ${
             selectedCategories.length > 0
               ? "bg-teal-500/10 text-teal-400 border border-teal-500/20"
-              : "bg-[--bg-elevated] text-[--text-muted] border border-[--border]"
+              : "bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]"
           }`}>
             {selectedCategories.length > 0 ? <Check className="h-3 w-3" /> : "1"}
             <span>Categories</span>
           </div>
-          <div className="h-px w-6 bg-[--border]" />
+          <div className="h-px w-6 bg-[var(--border)]" />
           <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium ${
             selectedSubcategoryKeys.length > 0
               ? "bg-teal-500/10 text-teal-400 border border-teal-500/20"
-              : "bg-[--bg-elevated] text-[--text-muted] border border-[--border]"
+              : "bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]"
           }`}>
             {selectedSubcategoryKeys.length > 0 ? <Check className="h-3 w-3" /> : "2"}
             <span>Details</span>
           </div>
-          <div className="h-px w-6 bg-[--border]" />
-          <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium bg-[--bg-elevated] text-[--text-muted] border border-[--border]">
+          <div className="h-px w-6 bg-[var(--border)]" />
+          <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
             3
             <span>Preferences</span>
           </div>
         </div>
 
         {/* Categories */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">What are you interested in?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {(Object.keys(TAXONOMY) as CategoryKey[]).map((key) => {
@@ -200,14 +200,14 @@ export default function OnboardingPage() {
                     "text-left px-4 py-3.5 rounded-xl border transition-all",
                     selected
                       ? "bg-teal-500/10 border-teal-500/30 text-teal-400"
-                      : "bg-[--bg-input] border-[--border] hover:border-[--border-hover] text-[--text-primary]",
+                      : "bg-[var(--bg-input)] border-[var(--border)] hover:border-[var(--border-hover)] text-[var(--text-primary)]",
                   ].join(" ")}
                 >
                   <div className="font-semibold flex items-center gap-2">
                     {selected && <Check className="h-4 w-4" />}
                     {TAXONOMY[key].label}
                   </div>
-                  <div className={`text-sm mt-0.5 ${selected ? "text-teal-400/70" : "text-[--text-muted]"}`}>
+                  <div className={`text-sm mt-0.5 ${selected ? "text-teal-400/70" : "text-[var(--text-muted)]"}`}>
                     Choose subcategories next
                   </div>
                 </button>
@@ -218,15 +218,15 @@ export default function OnboardingPage() {
 
         {/* Subcategories */}
         {selectedCategories.length > 0 && (
-          <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+          <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
             <h2 className="text-xl font-semibold mb-2">Get specific</h2>
-            <p className="text-[--text-secondary] mb-4">
+            <p className="text-[var(--text-secondary)] mb-4">
               Select at least one subcategory. This is what makes matching feel &quot;smart.&quot;
             </p>
 
             <div className="space-y-5">
               {selectedCategories.map((catKey) => (
-                <div key={catKey} className="border border-[--border] rounded-2xl p-4 bg-[--bg-input]">
+                <div key={catKey} className="border border-[var(--border)] rounded-2xl p-4 bg-[var(--bg-input)]">
                   <div className="font-semibold mb-3 text-teal-400">{TAXONOMY[catKey].label}</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {TAXONOMY[catKey].subcategories.map((s) => {
@@ -238,7 +238,7 @@ export default function OnboardingPage() {
                             "flex items-center gap-3 px-3 py-2.5 rounded-xl border cursor-pointer select-none transition-all",
                             checked
                               ? "bg-teal-500/10 border-teal-500/30 text-teal-400"
-                              : "border-[--border] hover:border-[--border-hover] text-[--text-secondary]",
+                              : "border-[var(--border)] hover:border-[var(--border-hover)] text-[var(--text-secondary)]",
                           ].join(" ")}
                         >
                           <input
@@ -259,12 +259,12 @@ export default function OnboardingPage() {
         )}
 
         {/* Tags */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-2">Any specifics? (optional)</h2>
-          <p className="text-[--text-secondary] mb-4">
-            Add keywords like <span className="text-[--text-primary] font-medium">&quot;coffee&quot;</span>,{" "}
-            <span className="text-[--text-primary] font-medium">&quot;gas station&quot;</span>,{" "}
-            <span className="text-[--text-primary] font-medium">&quot;self-storage&quot;</span>.
+          <p className="text-[var(--text-secondary)] mb-4">
+            Add keywords like <span className="text-[var(--text-primary)] font-medium">&quot;coffee&quot;</span>,{" "}
+            <span className="text-[var(--text-primary)] font-medium">&quot;gas station&quot;</span>,{" "}
+            <span className="text-[var(--text-primary)] font-medium">&quot;self-storage&quot;</span>.
           </p>
 
           <div className="flex gap-2">
@@ -278,7 +278,7 @@ export default function OnboardingPage() {
                 }
               }}
               placeholder="Type a tag and press Enter"
-              className="flex-1 rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="flex-1 rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             />
             <button
               type="button"
@@ -309,16 +309,16 @@ export default function OnboardingPage() {
         </section>
 
         {/* Preferences */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-8">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Preferences</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm text-[--text-secondary]">Typical check size</label>
+              <label className="text-sm text-[var(--text-secondary)]">Typical check size</label>
               <select
                 value={checkSize}
                 onChange={(e) => setCheckSize(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="<25k">&lt;$25k</option>
                 <option value="25-50k">$25k-$50k</option>
@@ -330,11 +330,11 @@ export default function OnboardingPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Timeline</label>
+              <label className="text-sm text-[var(--text-secondary)]">Timeline</label>
               <select
                 value={timeline}
                 onChange={(e) => setTimeline(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="ready_now">Ready now</option>
                 <option value="30-90_days">30-90 days</option>
@@ -344,11 +344,11 @@ export default function OnboardingPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[--text-secondary]">Involvement</label>
+              <label className="text-sm text-[var(--text-secondary)]">Involvement</label>
               <select
                 value={involvement}
                 onChange={(e) => setInvolvement(e.target.value)}
-                className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 text-[--text-primary] focus:border-teal-500 outline-none"
+                className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 text-[var(--text-primary)] focus:border-teal-500 outline-none"
               >
                 <option value="passive">Passive</option>
                 <option value="advisory">Advisory</option>
@@ -364,7 +364,7 @@ export default function OnboardingPage() {
                   onChange={(e) => setVerifiedOnly(e.target.checked)}
                   className="h-4 w-4 accent-teal-500"
                 />
-                <span className="text-sm text-[--text-secondary]">Only show verified issuers</span>
+                <span className="text-sm text-[var(--text-secondary)]">Only show verified issuers</span>
               </label>
             </div>
           </div>
@@ -374,7 +374,7 @@ export default function OnboardingPage() {
         <div className="flex items-center justify-between gap-4">
           <a
             href="/dashboard"
-            className="text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4"
           >
             Back
           </a>
@@ -387,7 +387,7 @@ export default function OnboardingPage() {
               "rounded-xl px-6 py-3 font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed",
               canContinue
                 ? "bg-teal-500 text-white hover:bg-teal-600"
-                : "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed",
+                : "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed",
             ].join(" ")}
           >
             {saving ? "Saving..." : "Continue"}
@@ -395,7 +395,7 @@ export default function OnboardingPage() {
         </div>
 
         {!canContinue && (
-          <p className="text-sm text-[--text-muted] mt-3 text-right">
+          <p className="text-sm text-[var(--text-muted)] mt-3 text-right">
             Select at least one subcategory to continue.
           </p>
         )}

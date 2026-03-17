@@ -100,7 +100,7 @@ export default function DashboardPage() {
         <div className="flex items-start justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold">Investor Dashboard</h1>
-            <p className="text-[--text-secondary] mt-2">
+            <p className="text-[var(--text-secondary)] mt-2">
               {userName ? `Welcome back, ${userName}` : "Your investment profile overview."}
             </p>
           </div>
@@ -110,58 +110,58 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <Link
             href="/deals"
-            className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-hover)] transition-all group flex items-center gap-4"
           >
             <div className="h-10 w-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center shrink-0">
               <Search className="h-5 w-5" />
             </div>
             <div>
               <div className="font-semibold text-sm">Browse Deals</div>
-              <div className="text-xs text-[--text-muted]">Find opportunities</div>
+              <div className="text-xs text-[var(--text-muted)]">Find opportunities</div>
             </div>
-            <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
+            <ArrowRight className="h-4 w-4 text-[var(--text-muted)] ml-auto group-hover:text-[var(--text-primary)] transition" />
           </Link>
 
           <Link
             href="/portfolio"
-            className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-hover)] transition-all group flex items-center gap-4"
           >
             <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
               <Wallet className="h-5 w-5" />
             </div>
             <div>
               <div className="font-semibold text-sm">My Portfolio</div>
-              <div className="text-xs text-[--text-muted]">Track investments</div>
+              <div className="text-xs text-[var(--text-muted)]">Track investments</div>
             </div>
-            <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
+            <ArrowRight className="h-4 w-4 text-[var(--text-muted)] ml-auto group-hover:text-[var(--text-primary)] transition" />
           </Link>
 
           <Link
             href="/onboarding"
-            className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-hover)] transition-all group flex items-center gap-4"
           >
             <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
               <Settings className="h-5 w-5" />
             </div>
             <div>
               <div className="font-semibold text-sm">Edit Preferences</div>
-              <div className="text-xs text-[--text-muted]">Update matching</div>
+              <div className="text-xs text-[var(--text-muted)]">Update matching</div>
             </div>
-            <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
+            <ArrowRight className="h-4 w-4 text-[var(--text-muted)] ml-auto group-hover:text-[var(--text-primary)] transition" />
           </Link>
 
           <Link
             href="/deals"
-            className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 hover:border-[--border-hover] transition-all group flex items-center gap-4"
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-hover)] transition-all group flex items-center gap-4"
           >
             <div className="h-10 w-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
               <Eye className="h-5 w-5" />
             </div>
             <div>
               <div className="font-semibold text-sm">Matched Deals</div>
-              <div className="text-xs text-[--text-muted]">Your recommendations</div>
+              <div className="text-xs text-[var(--text-muted)]">Your recommendations</div>
             </div>
-            <ArrowRight className="h-4 w-4 text-[--text-muted] ml-auto group-hover:text-[--text-primary] transition" />
+            <ArrowRight className="h-4 w-4 text-[var(--text-muted)] ml-auto group-hover:text-[var(--text-primary)] transition" />
           </Link>
         </div>
 
@@ -176,9 +176,9 @@ export default function DashboardPage() {
               ].map((s) => (
                 <div
                   key={s.label}
-                  className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
                 >
-                  <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+                  <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                     <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                     {s.label}
                   </div>
@@ -189,7 +189,7 @@ export default function DashboardPage() {
 
             {/* Recent Activity */}
             {analytics.recentActivity.length > 0 && (
-              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Activity className="h-4 w-4 text-purple-400" />
                   <h2 className="font-semibold text-sm">Recent Activity</h2>
@@ -198,7 +198,7 @@ export default function DashboardPage() {
                   {analytics.recentActivity.map((item, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] p-3"
+                      className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-3"
                     >
                       <div className="mt-0.5">
                         {item.type === "intro" ? (
@@ -209,7 +209,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="text-sm">{item.description}</div>
-                        <div className="text-xs text-[--text-muted] mt-1">
+                        <div className="text-xs text-[var(--text-muted)] mt-1">
                           {new Date(item.created_at).toLocaleString()}
                         </div>
                       </div>
@@ -222,25 +222,25 @@ export default function DashboardPage() {
         )}
 
         {loading && (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-[--text-secondary]">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-[var(--text-secondary)]">
             Loading profile...
           </div>
         )}
 
         {!loading && error && (
-          <div className="rounded-2xl border border-[--border-error] bg-[--bg-error] p-6">
+          <div className="rounded-2xl border border-[var(--border-error)] bg-[var(--bg-error)] p-6">
             <div className="font-semibold mb-2">Couldn&apos;t load profile</div>
-            <div className="text-sm text-[--text-error]">{error}</div>
+            <div className="text-sm text-[var(--text-error)]">{error}</div>
           </div>
         )}
 
         {!loading && !error && !profile && (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-center">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center">
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-teal-500/10 text-teal-400 mb-4">
               <Settings className="h-6 w-6" />
             </div>
             <h2 className="text-xl font-bold mb-2">Complete your profile</h2>
-            <p className="text-[--text-secondary] mb-6">
+            <p className="text-[var(--text-secondary)] mb-6">
               Set your investment preferences to get matched with the right deals.
             </p>
             <Link
@@ -257,32 +257,32 @@ export default function DashboardPage() {
           <div className="space-y-6">
             {/* Stats row */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
-                <div className="flex items-center gap-2 text-[--text-muted] text-xs mb-2">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5">
+                <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs mb-2">
                   <Wallet className="h-3.5 w-3.5" />
                   Check size
                 </div>
                 <div className="font-bold text-lg">{profile.check_size ?? "---"}</div>
               </div>
 
-              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
-                <div className="flex items-center gap-2 text-[--text-muted] text-xs mb-2">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5">
+                <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs mb-2">
                   <Clock className="h-3.5 w-3.5" />
                   Timeline
                 </div>
                 <div className="font-bold text-lg">{profile.timeline?.replace(/_/g, " ") ?? "---"}</div>
               </div>
 
-              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
-                <div className="flex items-center gap-2 text-[--text-muted] text-xs mb-2">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5">
+                <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs mb-2">
                   <Settings className="h-3.5 w-3.5" />
                   Involvement
                 </div>
                 <div className="font-bold text-lg capitalize">{profile.involvement?.replace(/_/g, " ") ?? "---"}</div>
               </div>
 
-              <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5">
-                <div className="flex items-center gap-2 text-[--text-muted] text-xs mb-2">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5">
+                <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs mb-2">
                   <Eye className="h-3.5 w-3.5" />
                   Verified only
                 </div>
@@ -291,16 +291,16 @@ export default function DashboardPage() {
             </div>
 
             {/* Profile details */}
-            <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6 space-y-6">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold">Your Preferences</h2>
-                <div className="text-xs text-[--text-muted]">
+                <div className="text-xs text-[var(--text-muted)]">
                   Updated: {new Date(profile.created_at).toLocaleDateString()}
                 </div>
               </div>
 
               <div>
-                <div className="text-sm font-medium text-[--text-secondary] mb-2">Categories</div>
+                <div className="text-sm font-medium text-[var(--text-secondary)] mb-2">Categories</div>
                 <div className="flex flex-wrap gap-2">
                   {profile.categories.map((c) => (
                     <span
@@ -314,12 +314,12 @@ export default function DashboardPage() {
               </div>
 
               <div>
-                <div className="text-sm font-medium text-[--text-secondary] mb-2">Subcategories</div>
+                <div className="text-sm font-medium text-[var(--text-secondary)] mb-2">Subcategories</div>
                 <div className="flex flex-wrap gap-2">
                   {profile.subcategories.map((s) => (
                     <span
                       key={s}
-                      className="px-3 py-1.5 rounded-full bg-[--bg-elevated] border border-[--border] text-sm text-[--text-secondary]"
+                      className="px-3 py-1.5 rounded-full bg-[var(--bg-elevated)] border border-[var(--border)] text-sm text-[var(--text-secondary)]"
                     >
                       {s.replace(/_/g, " ")}
                     </span>
@@ -329,7 +329,7 @@ export default function DashboardPage() {
 
               {profile.tags.length > 0 && (
                 <div>
-                  <div className="text-sm font-medium text-[--text-secondary] mb-2 flex items-center gap-1.5">
+                  <div className="text-sm font-medium text-[var(--text-secondary)] mb-2 flex items-center gap-1.5">
                     <Tag className="h-3.5 w-3.5" />
                     Tags
                   </div>

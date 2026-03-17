@@ -87,7 +87,7 @@ export default function DealDocuments({
             <h3 className="font-semibold text-sm">
               Verify to access documents
             </h3>
-            <p className="text-sm text-[--text-secondary] mt-1">
+            <p className="text-sm text-[var(--text-secondary)] mt-1">
               Deal documents are available to verified investors. Complete
               verification to view and download files.
             </p>
@@ -106,8 +106,8 @@ export default function DealDocuments({
 
   if (loading) {
     return (
-      <section className="rounded-xl border border-[--border] bg-[--bg-input] p-6">
-        <div className="flex items-center gap-2 text-[--text-muted]">
+      <section className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-6">
+        <div className="flex items-center gap-2 text-[var(--text-muted)]">
           <Loader2 className="h-4 w-4 animate-spin" />
           <span className="text-sm">Loading documents...</span>
         </div>
@@ -120,20 +120,20 @@ export default function DealDocuments({
   }
 
   return (
-    <section className="rounded-xl border border-[--border] bg-[--bg-input] p-6">
+    <section className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-6">
       <div className="text-sm font-semibold flex items-center gap-1.5 mb-4">
         <FileText className="h-4 w-4 text-teal-400" />
         Documents
       </div>
 
       {docs.length === 0 ? (
-        <p className="text-sm text-[--text-muted]">No documents available.</p>
+        <p className="text-sm text-[var(--text-muted)]">No documents available.</p>
       ) : (
         <div className="space-y-2">
           {docs.map((doc) => (
             <div
               key={doc.id}
-              className="flex items-center gap-3 rounded-lg border border-[--border] bg-[--bg-card] px-4 py-3"
+              className="flex items-center gap-3 rounded-lg border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3"
             >
               <FileText className="h-4 w-4 text-teal-400 shrink-0" />
               <div className="flex-1 min-w-0">
@@ -142,14 +142,14 @@ export default function DealDocuments({
                   <span className="text-[11px] px-2 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400">
                     {doc.file_label}
                   </span>
-                  <span className="text-xs text-[--text-muted]">
+                  <span className="text-xs text-[var(--text-muted)]">
                     {formatSize(doc.file_size)}
                   </span>
                 </div>
               </div>
               <button
                 onClick={() => downloadDoc(doc)}
-                className="text-[--text-muted] hover:text-teal-400 transition"
+                className="text-[var(--text-muted)] hover:text-teal-400 transition"
                 title="Download"
               >
                 <Download className="h-4 w-4" />

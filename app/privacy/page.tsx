@@ -3,22 +3,22 @@ export default function PrivacyPage() {
     <div className="px-4 sm:px-6 py-10">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-3xl font-bold mb-2">Privacy Policy</h1>
-        <p className="text-sm text-[--text-muted] mb-8">Last updated: February 2026</p>
+        <p className="text-sm text-[var(--text-muted)] mb-8">Last updated: February 2026</p>
 
-        <div className="prose-custom space-y-8 text-[--text-secondary] text-sm leading-relaxed">
+        <div className="prose-custom space-y-8 text-[var(--text-secondary)] text-sm leading-relaxed">
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">1. Data We Collect</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">1. Data We Collect</h2>
             <p>We collect the following categories of personal information:</p>
             <ul className="list-disc pl-5 space-y-2 mt-2">
-              <li><strong className="text-[--text-primary]">Account Information:</strong> Name, email address, password, and role (investor or operator).</li>
-              <li><strong className="text-[--text-primary]">Verification Data:</strong> Legal name, phone number, accreditation type, business details (for operators).</li>
-              <li><strong className="text-[--text-primary]">KYC Data:</strong> Date of birth, nationality, tax identification numbers (stored as hashed values), address, government-issued ID documents, selfie images, source of funds information, and PEP status.</li>
-              <li><strong className="text-[--text-primary]">Usage Data:</strong> Pages visited, deals viewed, introductions requested, messages sent.</li>
+              <li><strong className="text-[var(--text-primary)]">Account Information:</strong> Name, email address, password, and role (investor or operator).</li>
+              <li><strong className="text-[var(--text-primary)]">Verification Data:</strong> Legal name, phone number, accreditation type, business details (for operators).</li>
+              <li><strong className="text-[var(--text-primary)]">KYC Data:</strong> Date of birth, nationality, tax identification numbers (stored as hashed values), address, government-issued ID documents, selfie images, source of funds information, and PEP status.</li>
+              <li><strong className="text-[var(--text-primary)]">Usage Data:</strong> Pages visited, deals viewed, introductions requested, messages sent.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">2. KYC Data Handling</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">2. KYC Data Handling</h2>
             <p>
               KYC data is collected for regulatory compliance purposes. We take special care to protect this sensitive information:
             </p>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">3. How We Use Your Data</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">3. How We Use Your Data</h2>
             <ul className="list-disc pl-5 space-y-2">
               <li>To create and manage your account.</li>
               <li>To verify your identity and accreditation status.</li>
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">4. Data Retention</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">4. Data Retention</h2>
             <p>
               We retain your personal data for as long as your account is active or as needed to provide services.
               KYC records and identity verification documents are retained for a minimum of 5 years after account closure,
@@ -53,17 +53,17 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">5. Third-Party Sharing</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">5. Third-Party Sharing</h2>
             <p>We do not sell your personal information. We may share data with:</p>
             <ul className="list-disc pl-5 space-y-2 mt-2">
-              <li><strong className="text-[--text-primary]">Service Providers:</strong> Email delivery (Resend), hosting (Vercel), database (Supabase), and file storage services that help us operate the Platform.</li>
-              <li><strong className="text-[--text-primary]">Regulatory Authorities:</strong> When required by law, regulation, or legal process.</li>
-              <li><strong className="text-[--text-primary]">Operators:</strong> Limited contact information shared only when you request an introduction to a specific deal.</li>
+              <li><strong className="text-[var(--text-primary)]">Service Providers:</strong> Email delivery (Resend), hosting (Vercel), database (Supabase), and file storage services that help us operate the Platform.</li>
+              <li><strong className="text-[var(--text-primary)]">Regulatory Authorities:</strong> When required by law, regulation, or legal process.</li>
+              <li><strong className="text-[var(--text-primary)]">Operators:</strong> Limited contact information shared only when you request an introduction to a specific deal.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">6. Your Rights</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">6. Your Rights</h2>
             <p>Depending on your jurisdiction, you may have the right to:</p>
             <ul className="list-disc pl-5 space-y-2 mt-2">
               <li>Access the personal data we hold about you.</li>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">7. Security</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">7. Security</h2>
             <p>
               We implement industry-standard security measures including encryption in transit (TLS),
               encryption at rest, access controls, and regular security reviews. However, no method of
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-[--text-primary] mb-3">8. Contact</h2>
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-3">8. Contact</h2>
             <p>
               For privacy-related questions or requests, contact us at{" "}
               <span className="text-teal-400">privacy@dealbridge.com</span>.

@@ -47,7 +47,7 @@ function Divider() {
 
 export default function Home() {
   return (
-    <div className="text-[--text-primary]">
+    <div className="text-[var(--text-primary)]">
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden">
         <div
@@ -80,7 +80,7 @@ export default function Home() {
           </FadeIn>
 
           <FadeIn delay={300}>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-[--text-secondary]">
+            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-[var(--text-secondary)]">
               DealBridge connects qualified investors with vetted private
               businesses. Smart matching, verified operators, and
               escrow-protected payments — all in one platform.
@@ -98,7 +98,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/auth/signup?role=operator"
-                className="px-8 py-4 rounded-xl text-base font-semibold border border-[--border-hover] text-[--text-primary] bg-[--bg-elevated]/50 hover:border-[--text-muted] transition-all hover:scale-105"
+                className="px-8 py-4 rounded-xl text-base font-semibold border border-[var(--border-hover)] text-[var(--text-primary)] bg-[var(--bg-elevated)]/50 hover:border-[var(--text-muted)] transition-all hover:scale-105"
               >
                 List Your Deal
               </Link>
@@ -118,7 +118,7 @@ export default function Home() {
           >
             Built for Both Sides
           </h2>
-          <p className="text-center mb-12 text-[--text-muted]">
+          <p className="text-center mb-12 text-[var(--text-muted)]">
             Whether you&apos;re investing or raising — DealBridge works for you.
           </p>
         </FadeIn>
@@ -139,7 +139,7 @@ export default function Home() {
           >
             How It Works
           </h2>
-          <p className="text-center mb-16 text-[--text-muted]">
+          <p className="text-center mb-16 text-[var(--text-muted)]">
             From profile to portfolio in three steps.
           </p>
         </FadeIn>
@@ -147,7 +147,7 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           {STEPS.map((item, i) => (
             <FadeIn key={item.step} delay={i * 150}>
-              <div className="rounded-2xl p-8 bg-[--bg-card] border border-[--border] hover:border-[--border-hover] transition-all">
+              <div className="rounded-2xl p-8 bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-hover)] transition-all">
                 <span
                   className="text-5xl font-bold text-teal-400/15"
                   style={{
@@ -157,7 +157,7 @@ export default function Home() {
                   {item.step}
                 </span>
                 <h3 className="text-xl font-bold mt-4 mb-3">{item.title}</h3>
-                <p className="text-[--text-secondary] leading-relaxed">
+                <p className="text-[var(--text-secondary)] leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -177,7 +177,7 @@ export default function Home() {
           >
             Invest with Confidence
           </h2>
-          <p className="text-center mb-16 text-[--text-muted]">
+          <p className="text-center mb-16 text-[var(--text-muted)]">
             Security and transparency at every step.
           </p>
         </FadeIn>
@@ -185,12 +185,12 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {TRUST_SIGNALS.map((item, i) => (
             <FadeIn key={item.label} delay={i * 100}>
-              <div className="text-center rounded-2xl p-6 bg-[--bg-card] border border-[--border] hover:border-[--border-hover] transition-all">
+              <div className="text-center rounded-2xl p-6 bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-hover)] transition-all">
                 <div className="flex justify-center mb-3 text-teal-400">
                   <item.icon className="h-8 w-8" strokeWidth={1.5} />
                 </div>
                 <h4 className="font-bold mb-1">{item.label}</h4>
-                <p className="text-sm text-[--text-muted]">{item.desc}</p>
+                <p className="text-sm text-[var(--text-muted)]">{item.desc}</p>
               </div>
             </FadeIn>
           ))}
@@ -216,7 +216,7 @@ export default function Home() {
               <br />
               <span className="text-teal-400">Investment?</span>
             </h2>
-            <p className="text-lg mb-10 text-[--text-secondary]">
+            <p className="text-lg mb-10 text-[var(--text-secondary)]">
               Join DealBridge today and get access to vetted private deals
               matched to your investment preferences.
             </p>
@@ -230,7 +230,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/deals"
-                className="px-8 py-4 rounded-xl text-base font-semibold border border-[--border-hover] text-[--text-primary] bg-[--bg-elevated]/50 hover:border-[--text-muted] transition-all hover:scale-105"
+                className="px-8 py-4 rounded-xl text-base font-semibold border border-[var(--border-hover)] text-[var(--text-primary)] bg-[var(--bg-elevated)]/50 hover:border-[var(--text-muted)] transition-all hover:scale-105"
               >
                 Browse Deals
               </Link>

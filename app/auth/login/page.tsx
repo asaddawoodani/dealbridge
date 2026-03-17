@@ -61,30 +61,30 @@ function LoginForm() {
           <LogIn className="h-6 w-6" />
         </div>
         <h1 className="text-3xl font-bold">Sign in</h1>
-        <p className="text-[--text-secondary] mt-2">Welcome back to DealBridge</p>
+        <p className="text-[var(--text-secondary)] mt-2">Welcome back to DealBridge</p>
       </div>
 
-      <form onSubmit={handleLogin} className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 space-y-4">
+      <form onSubmit={handleLogin} className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 space-y-4">
         {error && (
-          <div className="rounded-xl bg-[--bg-error] border border-[--border-error] px-4 py-3 text-sm text-[--text-error]">
+          <div className="rounded-xl bg-[var(--bg-error)] border border-[var(--border-error)] px-4 py-3 text-sm text-[var(--text-error)]">
             {error}
           </div>
         )}
 
         <div>
-          <label className="text-sm text-[--text-secondary]">Email</label>
+          <label className="text-sm text-[var(--text-secondary)]">Email</label>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+            className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
             placeholder="you@example.com"
           />
         </div>
 
         <div>
-          <label className="text-sm text-[--text-secondary]">Password</label>
+          <label className="text-sm text-[var(--text-secondary)]">Password</label>
           <PasswordInput
             required
             value={password}
@@ -102,10 +102,10 @@ function LoginForm() {
         </button>
 
         <div className="flex items-center justify-between text-sm">
-          <a href="/auth/forgot-password" className="py-2 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
+          <a href="/auth/forgot-password" className="py-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4">
             Forgot password?
           </a>
-          <a href="/auth/signup" className="py-2 text-[--text-muted] hover:text-[--text-primary] underline underline-offset-4">
+          <a href="/auth/signup" className="py-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] underline underline-offset-4">
             Create account
           </a>
         </div>
@@ -117,7 +117,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <div className="flex items-center justify-center px-4 sm:px-6 py-10 sm:py-20">
-      <Suspense fallback={<div className="text-[--text-muted]">Loading...</div>}>
+      <Suspense fallback={<div className="text-[var(--text-muted)]">Loading...</div>}>
         <LoginForm />
       </Suspense>
     </div>

@@ -54,7 +54,7 @@ export default function NavMobile({
     <div className="md:hidden">
       <button
         onClick={toggle}
-        className="p-2.5 rounded-lg text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+        className="p-2.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
@@ -70,13 +70,13 @@ export default function NavMobile({
 
           {/* Menu */}
           <div
-            className="fixed top-16 left-0 right-0 border-b border-[--border] p-4 space-y-1 z-50"
+            className="fixed top-16 left-0 right-0 border-b border-[var(--border)] p-4 space-y-1 z-50"
             style={{ backgroundColor: 'var(--bg-card)' }}
           >
             {/* User info header (logged in) */}
             {isLoggedIn && userName && (
               <div className="px-4 py-3 mb-1">
-                <div className="text-sm font-semibold text-[--text-primary]">{userName}</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)]">{userName}</div>
                 {userRole && (
                   <span className={`inline-block text-[11px] px-2 py-0.5 rounded-full font-medium mt-1.5 ${ROLE_COLORS[userRole] ?? ROLE_COLORS.investor}`}>
                     {userRole}
@@ -88,7 +88,7 @@ export default function NavMobile({
             {/* Brand line (logged out) */}
             {!isLoggedIn && (
               <div className="flex items-center gap-2 px-4 py-3 mb-1">
-                <span className="text-sm font-bold text-[--text-primary] font-[family-name:var(--font-heading)]">
+                <span className="text-sm font-bold text-[var(--text-primary)] font-[family-name:var(--font-heading)]">
                   Deal<span className="text-teal-400">Bridge</span>
                 </span>
                 <span className="text-[10px] font-semibold uppercase tracking-wider bg-teal-500/15 text-teal-400 border border-teal-500/30 px-1.5 py-0.5 rounded-full">
@@ -98,7 +98,7 @@ export default function NavMobile({
             )}
 
             {(isLoggedIn || !isLoggedIn) && (
-              <div className="border-t border-[--border] my-2" />
+              <div className="border-t border-[var(--border)] my-2" />
             )}
 
             {/* Nav links */}
@@ -108,10 +108,10 @@ export default function NavMobile({
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className={[
-                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-[--bg-elevated]",
+                  "block px-4 py-3 rounded-xl text-sm font-medium hover:bg-[var(--bg-elevated)]",
                   l.highlight
                     ? "text-amber-400 hover:text-amber-300"
-                    : "text-[--text-secondary] hover:text-[--text-primary]",
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]",
                 ].join(" ")}
               >
                 {l.label}
@@ -121,23 +121,23 @@ export default function NavMobile({
               <Link
                 href="/messages"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+                className="block px-4 py-3 rounded-xl text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
               >
                 Messages
               </Link>
             )}
 
             {/* Theme toggle */}
-            <div className="border-t border-[--border] my-2" />
+            <div className="border-t border-[var(--border)] my-2" />
             <div className="flex items-center justify-between px-4 py-2">
-              <span className="text-sm text-[--text-muted]">Theme</span>
+              <span className="text-sm text-[var(--text-muted)]">Theme</span>
               <ThemeToggle />
             </div>
 
             {/* Sign out (logged in) */}
             {isLoggedIn && (
               <>
-                <div className="border-t border-[--border] my-2" />
+                <div className="border-t border-[var(--border)] my-2" />
                 <button
                   onClick={async () => {
                     const supabase = createClient();
@@ -145,7 +145,7 @@ export default function NavMobile({
                     setOpen(false);
                     window.location.href = "/auth/login";
                   }}
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:text-red-400 hover:bg-[--bg-elevated]"
+                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:text-red-400 hover:bg-[var(--bg-elevated)]"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -156,18 +156,18 @@ export default function NavMobile({
             {/* Auth links (logged out) */}
             {!isLoggedIn && (
               <>
-                <div className="border-t border-[--border] my-2" />
+                <div className="border-t border-[var(--border)] my-2" />
                 <Link
                   href="/auth/login"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-[--text-secondary] hover:text-[--text-primary] hover:bg-[--bg-elevated]"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
                 >
                   Log in
                 </Link>
                 <Link
                   href="/auth/signup"
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-[--bg-elevated]"
+                  className="block px-4 py-3 rounded-xl text-sm font-medium text-teal-400 hover:text-teal-300 hover:bg-[var(--bg-elevated)]"
                 >
                   Get Started
                 </Link>

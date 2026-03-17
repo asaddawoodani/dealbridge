@@ -31,7 +31,7 @@ export default function InvestButton({
     return (
       <Link
         href="/auth/login"
-        className="w-full rounded-xl bg-[--bg-elevated] text-[--text-secondary] px-4 py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[--bg-input] transition-all"
+        className="w-full rounded-xl bg-[var(--bg-elevated)] text-[var(--text-secondary)] px-4 py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[var(--bg-input)] transition-all"
       >
         <LogIn className="h-4 w-4" />
         Log in to invest

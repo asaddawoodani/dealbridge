@@ -43,7 +43,7 @@ type Toast = { type: "success" | "error"; message: string } | null;
 const STATUS_BADGE: Record<string, string> = {
   pending: "border-amber-500/30 text-amber-400 bg-amber-500/10",
   active: "border-emerald-500/30 text-emerald-400 bg-emerald-500/10",
-  inactive: "border-[--border] text-[--text-muted]",
+  inactive: "border-[var(--border)] text-[var(--text-muted)]",
 };
 
 export default function OperatorDashboard() {
@@ -109,7 +109,7 @@ export default function OperatorDashboard() {
           <div>
             <h1 className="text-3xl font-bold">My Deals</h1>
             {userName && (
-              <p className="text-[--text-secondary] mt-1">Welcome back, {userName}</p>
+              <p className="text-[var(--text-secondary)] mt-1">Welcome back, {userName}</p>
             )}
           </div>
 
@@ -141,9 +141,9 @@ export default function OperatorDashboard() {
           ].map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
             >
-              <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                 <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                 {s.label}
               </div>
@@ -162,9 +162,9 @@ export default function OperatorDashboard() {
             ].map((s) => (
               <div
                 key={s.label}
-                className="rounded-2xl border border-[--border] bg-[--bg-card] p-5"
+                className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5"
               >
-                <div className="flex items-center gap-2 text-xs text-[--text-muted] mb-2">
+                <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-2">
                   <s.icon className={`h-3.5 w-3.5 ${s.color}`} />
                   {s.label}
                 </div>
@@ -176,7 +176,7 @@ export default function OperatorDashboard() {
 
         {/* Deal Performance */}
         {analytics && analytics.dealPerformance.length > 0 && (
-          <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6 mb-8">
+          <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6 mb-8">
             <div className="text-lg font-semibold mb-4">Deal Performance</div>
             <div className="space-y-3">
               {analytics.dealPerformance.map((d) => {
@@ -186,11 +186,11 @@ export default function OperatorDashboard() {
                   <div key={d.id} className="flex items-center gap-4">
                     <div className="min-w-0 w-28 sm:w-40 shrink-0">
                       <div className="text-sm font-medium truncate">{d.title}</div>
-                      <div className="text-xs text-[--text-muted]">
+                      <div className="text-xs text-[var(--text-muted)]">
                         {d.interestCount} intros &middot; {d.conversationCount} convos
                       </div>
                     </div>
-                    <div className="flex-1 h-5 rounded-full bg-[--bg-input] overflow-hidden">
+                    <div className="flex-1 h-5 rounded-full bg-[var(--bg-input)] overflow-hidden">
                       <div
                         className="h-full rounded-full bg-teal-500/60"
                         style={{ width: `${pct}%`, minWidth: d.interestCount > 0 ? "8px" : "0" }}
@@ -204,16 +204,16 @@ export default function OperatorDashboard() {
         )}
 
         {/* Deal list */}
-        <section className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+        <section className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
           <div className="text-lg font-semibold mb-4">
             Your deals{" "}
-            <span className="text-[--text-muted] text-sm">({deals.length})</span>
+            <span className="text-[var(--text-muted)] text-sm">({deals.length})</span>
           </div>
 
           {loading ? (
-            <div className="text-[--text-secondary]">Loading...</div>
+            <div className="text-[var(--text-secondary)]">Loading...</div>
           ) : deals.length === 0 ? (
-            <div className="text-[--text-secondary]">
+            <div className="text-[var(--text-secondary)]">
               No deals yet.{" "}
               <Link
                 href="/operator/deals/new"
@@ -227,7 +227,7 @@ export default function OperatorDashboard() {
               {deals.map((d) => (
                 <div
                   key={d.id}
-                  className="rounded-xl border border-[--border] bg-[--bg-input] p-4 flex items-start justify-between gap-4"
+                  className="rounded-xl border border-[var(--border)] bg-[var(--bg-input)] p-4 flex items-start justify-between gap-4"
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
@@ -236,20 +236,20 @@ export default function OperatorDashboard() {
                         className={[
                           "text-xs px-2 py-1 rounded-full border",
                           STATUS_BADGE[d.status ?? ""] ??
-                            "border-[--border] text-[--text-muted]",
+                            "border-[var(--border)] text-[var(--text-muted)]",
                         ].join(" ")}
                       >
                         {d.status ?? "---"}
                       </span>
                     </div>
 
-                    <div className="text-sm text-[--text-muted] mt-1">
+                    <div className="text-sm text-[var(--text-muted)] mt-1">
                       {d.category ?? "---"} / {d.location ?? "---"} /{" "}
                       {d.min_check ?? "---"}
                     </div>
 
                     {d.description && (
-                      <div className="text-sm text-[--text-secondary] mt-2 line-clamp-2">
+                      <div className="text-sm text-[var(--text-secondary)] mt-2 line-clamp-2">
                         {d.description}
                       </div>
                     )}
@@ -260,7 +260,7 @@ export default function OperatorDashboard() {
                       compact
                     />
 
-                    <div className="text-xs text-[--text-muted] mt-2">
+                    <div className="text-xs text-[var(--text-muted)] mt-2">
                       {new Date(d.created_at).toLocaleString()}
                     </div>
                   </div>
@@ -268,7 +268,7 @@ export default function OperatorDashboard() {
                   <div className="flex flex-col sm:flex-row gap-2 shrink-0">
                     <Link
                       href={`/deals/${d.id}`}
-                      className="px-3 py-2 rounded-xl border border-[--border] text-sm hover:border-[--border-hover] text-center flex items-center gap-1.5 transition"
+                      className="px-3 py-2 rounded-xl border border-[var(--border)] text-sm hover:border-[var(--border-hover)] text-center flex items-center gap-1.5 transition"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       View
@@ -277,7 +277,7 @@ export default function OperatorDashboard() {
                     {d.status === "pending" && (
                       <Link
                         href={`/operator/deals/${d.id}/edit`}
-                        className="px-3 py-2 rounded-xl border border-[--border] text-sm hover:border-[--border-hover] text-center flex items-center gap-1.5 transition"
+                        className="px-3 py-2 rounded-xl border border-[var(--border)] text-sm hover:border-[var(--border-hover)] text-center flex items-center gap-1.5 transition"
                       >
                         <Pencil className="h-3.5 w-3.5" />
                         Edit

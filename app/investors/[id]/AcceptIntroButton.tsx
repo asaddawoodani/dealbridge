@@ -48,9 +48,9 @@ export default function AcceptIntroButton({
   if (pendingInterests.length === 0) return null;
 
   return (
-    <div className="bg-[--bg-card] border border-[--border] rounded-2xl p-6">
+    <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-6">
       <h3 className="text-lg font-semibold mb-1">Pending Introductions</h3>
-      <p className="text-sm text-[--text-muted] mb-4">
+      <p className="text-sm text-[var(--text-muted)] mb-4">
         Accept to unlock this investor&apos;s full profile and start messaging.
       </p>
 
@@ -62,7 +62,7 @@ export default function AcceptIntroButton({
           return (
             <div
               key={interest.id}
-              className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[--bg-input] border border-[--border]"
+              className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border)]"
             >
               <span className="text-sm font-medium truncate">
                 {interest.deal_title}

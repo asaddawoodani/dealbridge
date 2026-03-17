@@ -140,7 +140,7 @@ export default function InvestPage() {
   if (loading) {
     return (
       <div className="px-6 py-10">
-        <div className="mx-auto max-w-2xl text-[--text-secondary]">Loading...</div>
+        <div className="mx-auto max-w-2xl text-[var(--text-secondary)]">Loading...</div>
       </div>
     );
   }
@@ -160,7 +160,7 @@ export default function InvestPage() {
         <div className="mx-auto max-w-2xl">
           <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8 text-center space-y-4">
             <h1 className="text-2xl font-bold">{g.title}</h1>
-            <p className="text-[--text-secondary]">{g.msg}</p>
+            <p className="text-[var(--text-secondary)]">{g.msg}</p>
             {g.link && (
               <Link
                 href={g.link.href}
@@ -182,11 +182,11 @@ export default function InvestPage() {
           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center space-y-4">
             <CheckCircle className="h-12 w-12 text-emerald-400 mx-auto" />
             <h1 className="text-2xl font-bold">Commitment Confirmed</h1>
-            <p className="text-[--text-secondary]">
+            <p className="text-[var(--text-secondary)]">
               Your investment commitment of <strong>${formatCurrencyInput(amount)}</strong> in{" "}
               <strong>{deal?.title}</strong> has been recorded.
             </p>
-            <p className="text-sm text-[--text-muted]">
+            <p className="text-sm text-[var(--text-muted)]">
               You'll receive a confirmation email shortly. Our team will follow up with next steps.
             </p>
             <div className="flex items-center justify-center gap-4 pt-2">
@@ -198,7 +198,7 @@ export default function InvestPage() {
               </Link>
               <Link
                 href={`/deals/${dealId}`}
-                className="rounded-xl border border-[--border] px-5 py-3 font-semibold hover:border-[--border-hover] transition-all text-sm"
+                className="rounded-xl border border-[var(--border)] px-5 py-3 font-semibold hover:border-[var(--border-hover)] transition-all text-sm"
               >
                 Back to Deal
               </Link>
@@ -215,19 +215,19 @@ export default function InvestPage() {
         {/* Back link */}
         <Link
           href={`/deals/${dealId}`}
-          className="text-[--text-muted] hover:text-[--text-primary] flex items-center gap-1.5 text-sm transition mb-6"
+          className="text-[var(--text-muted)] hover:text-[var(--text-primary)] flex items-center gap-1.5 text-sm transition mb-6"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to deal
         </Link>
 
         <h1 className="text-3xl font-bold mb-2">Invest in {deal?.title}</h1>
-        <p className="text-[--text-secondary] mb-8">Review the deal and submit your commitment.</p>
+        <p className="text-[var(--text-secondary)] mb-8">Review the deal and submit your commitment.</p>
 
         {/* Deal summary */}
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-5 mb-6 space-y-4">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 mb-6 space-y-4">
           <div className="font-semibold text-lg">{deal?.title}</div>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-[--text-secondary]">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--text-secondary)]">
             {deal?.category && (
               <span className="flex items-center gap-1.5">
                 <Tag className="h-3.5 w-3.5 text-teal-400" />
@@ -255,21 +255,21 @@ export default function InvestPage() {
         </div>
 
         {/* Investment form */}
-        <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-6 space-y-5">
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 space-y-5">
           <div className="text-lg font-semibold">Your Investment</div>
 
           {/* Amount */}
           <div>
-            <label className="text-sm text-[--text-secondary]">
+            <label className="text-sm text-[var(--text-secondary)]">
               Investment Amount (USD) *
               {minCheck && (
-                <span className="text-[--text-muted] ml-2">
+                <span className="text-[var(--text-muted)] ml-2">
                   Min: ${minCheck.toLocaleString()}
                 </span>
               )}
             </label>
             <div className="relative mt-2">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[--text-muted]">$</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">$</span>
               <input
                 type="text"
                 value={amount}
@@ -277,7 +277,7 @@ export default function InvestPage() {
                   const raw = e.target.value.replace(/[^0-9.]/g, "");
                   setAmount(raw ? formatCurrencyInput(raw) : "");
                 }}
-                className="w-full rounded-xl bg-[--bg-input] border border-[--border] pl-8 pr-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted] text-lg font-semibold"
+                className="w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] pl-8 pr-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] text-lg font-semibold"
                 placeholder="100,000"
               />
             </div>
@@ -290,27 +290,27 @@ export default function InvestPage() {
 
           {/* Notes */}
           <div>
-            <label className="text-sm text-[--text-secondary]">Notes (optional)</label>
+            <label className="text-sm text-[var(--text-secondary)]">Notes (optional)</label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="mt-2 w-full rounded-xl bg-[--bg-input] border border-[--border] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[--text-primary] placeholder:text-[--text-muted]"
+              className="mt-2 w-full rounded-xl bg-[var(--bg-input)] border border-[var(--border)] px-4 py-3 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
               rows={3}
               placeholder="Any notes about your commitment..."
             />
           </div>
 
           {/* Risk acknowledgment */}
-          <label className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] px-4 py-3 cursor-pointer">
+          <label className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 cursor-pointer">
             <input
               type="checkbox"
               checked={riskAck}
               onChange={(e) => setRiskAck(e.target.checked)}
               className="mt-1 h-4 w-4 accent-teal-500"
             />
-            <div className="text-sm text-[--text-secondary]">
-              <div className="font-medium text-[--text-primary]">Risk Acknowledgment</div>
-              <div className="text-xs text-[--text-muted] mt-0.5">
+            <div className="text-sm text-[var(--text-secondary)]">
+              <div className="font-medium text-[var(--text-primary)]">Risk Acknowledgment</div>
+              <div className="text-xs text-[var(--text-muted)] mt-0.5">
                 I understand that investing carries risk, including the potential loss of my entire investment.
                 I have conducted my own due diligence and am making this commitment based on my own judgment.
               </div>
@@ -318,14 +318,14 @@ export default function InvestPage() {
           </label>
 
           {/* Terms */}
-          <label className="flex items-start gap-3 rounded-xl border border-[--border] bg-[--bg-input] px-4 py-3 cursor-pointer">
+          <label className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 cursor-pointer">
             <input
               type="checkbox"
               checked={termsAck}
               onChange={(e) => setTermsAck(e.target.checked)}
               className="mt-1 h-4 w-4 accent-teal-500"
             />
-            <div className="text-sm text-[--text-secondary]">
+            <div className="text-sm text-[var(--text-secondary)]">
               I agree to the{" "}
               <Link href="/terms" className="text-teal-400 underline underline-offset-2" target="_blank">
                 Terms of Service
@@ -354,7 +354,7 @@ export default function InvestPage() {
               "w-full rounded-xl px-6 py-3 font-semibold transition-all text-sm",
               canSubmit
                 ? "bg-teal-500 text-white hover:bg-teal-600"
-                : "bg-[--bg-elevated] text-[--text-muted] cursor-not-allowed",
+                : "bg-[var(--bg-elevated)] text-[var(--text-muted)] cursor-not-allowed",
             ].join(" ")}
           >
             {submitting ? "Submitting..." : "Submit Commitment"}

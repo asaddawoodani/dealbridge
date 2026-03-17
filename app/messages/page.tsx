@@ -60,20 +60,20 @@ export default function MessagesPage() {
       <div className="mx-auto max-w-2xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Messages</h1>
-          <p className="text-[--text-secondary] mt-2">
+          <p className="text-[var(--text-secondary)] mt-2">
             Your conversations with investors and operators.
           </p>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="h-6 w-6 animate-spin text-[--text-muted]" />
+            <Loader2 className="h-6 w-6 animate-spin text-[var(--text-muted)]" />
           </div>
         ) : conversations.length === 0 ? (
-          <div className="rounded-2xl border border-[--border] bg-[--bg-card] p-8 text-center space-y-4">
-            <MessageSquare className="h-12 w-12 text-[--text-muted] mx-auto" />
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center space-y-4">
+            <MessageSquare className="h-12 w-12 text-[var(--text-muted)] mx-auto" />
             <h2 className="text-lg font-semibold">No conversations yet</h2>
-            <p className="text-[--text-secondary] text-sm">
+            <p className="text-[var(--text-secondary)] text-sm">
               Start by requesting an introduction on a deal.
             </p>
             <Link
@@ -90,7 +90,7 @@ export default function MessagesPage() {
               <button
                 key={c.id}
                 onClick={() => router.push(`/messages/${c.id}`)}
-                className="w-full text-left rounded-xl border border-[--border] bg-[--bg-card] p-4 hover:border-[--border-hover] transition-all flex items-start gap-3"
+                className="w-full text-left rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-4 hover:border-[var(--border-hover)] transition-all flex items-start gap-3"
               >
                 {/* Avatar */}
                 <div className="h-10 w-10 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 font-semibold text-sm shrink-0">
@@ -104,20 +104,20 @@ export default function MessagesPage() {
                       className={[
                         "text-sm font-semibold truncate",
                         c.unread_count > 0
-                          ? "text-[--text-primary]"
-                          : "text-[--text-secondary]",
+                          ? "text-[var(--text-primary)]"
+                          : "text-[var(--text-secondary)]",
                       ].join(" ")}
                     >
                       {c.other_user.name}
                     </span>
                     {c.last_message && (
-                      <span className="text-xs text-[--text-muted] shrink-0">
+                      <span className="text-xs text-[var(--text-muted)] shrink-0">
                         {timeAgo(c.last_message.created_at)}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-xs text-[--text-muted] mt-0.5 truncate">
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5 truncate">
                     {c.deal_title}
                   </p>
 
@@ -126,8 +126,8 @@ export default function MessagesPage() {
                       className={[
                         "text-sm mt-1 truncate",
                         c.unread_count > 0
-                          ? "text-[--text-primary] font-medium"
-                          : "text-[--text-muted]",
+                          ? "text-[var(--text-primary)] font-medium"
+                          : "text-[var(--text-muted)]",
                       ].join(" ")}
                     >
                       {c.last_message.content.slice(0, 80)}
